@@ -1,0 +1,22 @@
+.header-container {
+  text-align: right;
+}
+
+.logo-img {
+  width: 70px;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 961px) {
+  :host ::ng-deep .p-menubar-start {
+    width: 70%;
+  }
+}

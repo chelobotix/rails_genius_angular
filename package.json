@@ -1,5 +1,5 @@
 {
-  "name": "rails-genius2",
+  "name": "rails-genius-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,11 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Rails_Genius2": "node dist/rails-genius2/server/server.mjs"
+    "serve:ssr:Rails_Genius_Angular": "node dist/rails-genius-angular/server/server.mjs"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.1.0",
+    "@angular/animations": "^18.1.2",
+    "@angular/cdk": "^18.1.2",
     "@angular/common": "^18.1.0",
     "@angular/compiler": "^18.1.0",
     "@angular/core": "^18.1.0",
@@ -22,6 +23,9 @@
     "@angular/router": "^18.1.0",
     "@angular/ssr": "^18.1.2",
     "express": "^4.18.2",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -39,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "3.3.3",
     "typescript": "~5.5.2"
   }
 }

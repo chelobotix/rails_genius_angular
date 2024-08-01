@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url(primeflex/primeflex.css);
+@import url(primeng/resources/primeng.css);
+@import url(primeicons/primeicons.css);
+p {
+  padding: 0;
+  margin: 0; }
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0; }
+
+.login-button {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+  width: 10rem; }
+
+/*# sourceMappingURL=styles.css.map */
