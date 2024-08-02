@@ -8,12 +8,10 @@ p {
   align-items: center;
   gap: 2px;
   color: #323232;
-  max-width: 5rem;
 }
 
 .selected {
   background: #ffffff;
   border-radius: 25px;
-  padding: 0 5px;
+  padding: 5px;
 }
-

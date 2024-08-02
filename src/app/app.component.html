@@ -4,6 +4,14 @@
     <app-home />
   </main>
 </div>
-<a (click)="changeTheme('aura-light-cyan')">THEME!</a>
-<a (click)="changeTheme('aura-dark-cyan')">THEME!</a>
-<p-button label="Submit" />
+
+<div
+  [ngStyle]="{
+    backgroundColor: 'var(--rojo-0)',
+    color: 'var(--surface-0)',
+    borderRadius: 'var(--border-radius)',
+    padding: '3rem',
+  }"
+>
+  Highlighted Item
+</div>

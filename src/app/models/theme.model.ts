@@ -1,1 +1,1 @@
-export type Theme = 'Light' | 'Dark' | 'System'
+export type ITheme = 'Light' | 'Dark' | 'System'

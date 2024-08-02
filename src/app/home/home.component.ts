@@ -7,7 +7,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core'
-import { MenuService } from '../header/menu/menu.service'
+import { MenuService } from '../services/menu.service'
 import { Subscription } from 'rxjs'
 
 @Component({
