@@ -1,15 +1,13 @@
 <div class="flex align-items-center">
-  <p-button
-    (onClick)="menu.toggle($event); handleClick()"
-    icon="pi pi-ellipsis-v"
-    [rounded]="true"
-    [text]="true"
-    severity="secondary"
-  />
+  <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary">
+    <i class="pi pi-bars text-xl"></i>
+  </p-button>
   <p-menu
     #menu
     [model]="items"
     [popup]="true"
+    (onShow)="handleMenuStatus('open')"
+    (onHide)="handleMenuStatus('close')"
     styleClass="main-menu"
     showTransitionOptions=".300s cubic-bezier(0, 0, 0.2, 1)"
     hideTransitionOptions=".300s linear"

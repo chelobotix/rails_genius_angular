@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core'
-import { Subject } from 'rxjs'
+import { Injectable, signal } from '@angular/core'
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
-  private clickEvent = new Subject<void>()
-  clickEvent$ = this.clickEvent.asObservable()
+  private menuStatus = signal<'open' | 'close'>('close')
+  actualStatus = this.menuStatus.asReadonly()
 
-  emitClickEvent() {
-    this.clickEvent.next()
+  open() {
+    this.menuStatus.set('open')
+  }
+
+  close() {
+    this.menuStatus.set('close')
   }
 }

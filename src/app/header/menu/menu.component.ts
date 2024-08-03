@@ -41,9 +41,11 @@ export class MenuComponent {
     },
   ]
 
-  handleClick() {
-    this.menuService.emitClickEvent()
+  handleMenuStatus(status: 'open' | 'close') {
+    status === 'open' ? this.menuService.open() : this.menuService.close()
   }
+
+  onHide() {}
 
   themeChange(new_theme: ITheme): void {
     this.themeManagerService.switchTheme(new_theme)
