@@ -1,3 +1,5 @@
+import { ITheme } from './theme.model'
+
 export interface ILocalStorage {
-  theme: string
+  theme: ITheme
 }

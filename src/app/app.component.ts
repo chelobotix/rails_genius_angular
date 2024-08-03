@@ -8,6 +8,7 @@ import { LocalstorageService } from './services/localstorage.service'
 import { SidebarModule } from 'primeng/sidebar'
 import { MenuModule } from 'primeng/menu'
 import { NgStyle } from '@angular/common'
+import { ThemeManagerService } from './services/theme-manager.service'
 
 @Component({
   selector: 'app-root',
@@ -19,9 +20,11 @@ import { NgStyle } from '@angular/common'
 export class AppComponent implements OnInit {
   private primengConfig = inject(PrimeNGConfig)
   private localStorageService = inject(LocalstorageService)
+  private themeManagerService = inject(ThemeManagerService)
 
   ngOnInit(): void {
     this.primengConfig.ripple = true
-    this.localStorageService.initialize()
+    this.localStorageService.exists()
+    this.themeManagerService.switchTheme(this.localStorageService.actualData().theme)
   }
 }

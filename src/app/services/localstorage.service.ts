@@ -6,16 +6,24 @@ import { ITheme } from '../models/theme.model'
   providedIn: 'root',
 })
 export class LocalstorageService {
-  private data = signal<ILocalStorage>({ theme: 'light' })
+  private data = signal<ILocalStorage>({ theme: 'Light' })
   actualData = this.data.asReadonly()
-
-  initialize(): void {
-    this.save()
-  }
 
   updateTheme(theme: ITheme): void {
     this.data.update((prev: ILocalStorage) => ({ ...prev, theme }))
     this.save()
+  }
+
+  exists() {
+    let value = undefined
+    if (typeof window !== 'undefined') {
+      value = localStorage.getItem('rails_genius')
+    }
+    if (value) {
+      this.get(value)
+    } else {
+      this.save()
+    }
   }
 
   private save() {
@@ -24,14 +32,8 @@ export class LocalstorageService {
     }
   }
 
-  private get() {
-    let value = undefined
-    if (typeof window !== 'undefined') {
-      value = localStorage.getItem('rails_genius')
-    }
-    if (value) {
-      const result: ILocalStorage = JSON.parse(value)
-      this.data.set(result)
-    }
+  private get(value: string) {
+    const result: ILocalStorage = JSON.parse(value)
+    this.data.set(result)
   }
 }
