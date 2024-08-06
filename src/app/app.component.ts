@@ -10,11 +10,24 @@ import { MenuModule } from 'primeng/menu'
 import { NgStyle } from '@angular/common'
 import { ThemeManagerService } from './services/theme-manager.service'
 import { SpinnerComponent } from './spinner/spinner.component'
+import { SkeletonComponent } from './home/skeleton/skeleton.component'
+import { SkeletonModule } from 'primeng/skeleton'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, HomeComponent, Button, SidebarModule, MenuModule, NgStyle, SpinnerComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    HomeComponent,
+    Button,
+    SidebarModule,
+    MenuModule,
+    NgStyle,
+    SpinnerComponent,
+    SkeletonComponent,
+    SkeletonModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

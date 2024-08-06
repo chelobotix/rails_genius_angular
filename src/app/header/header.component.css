@@ -4,12 +4,10 @@
   align-items: center;
   margin: 1rem auto 2rem auto;
   padding: 0 1rem;
-  max-width: 1200px;
-}
+  max-width: 1200px; }
 
 .logo-img {
-  width: 70px;
-}
+  width: 70px; }
 
 .logo-text {
   font-weight: 600;
@@ -17,23 +15,19 @@
   font-size: 22px;
   letter-spacing: 1px;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 .hamburger-container {
-  display: block;
-}
+  display: block; }
 
 .desktop-container {
-  display: none;
-}
+  display: none; }
 
 @media only screen and (min-width: 1000px) {
   .hamburger-container {
-    display: none;
-  }
+    display: none; }
 
   .desktop-container {
-    display: block;
-  }
-}
+    display: block; } }
+
+/*# sourceMappingURL=header.component.css.map */

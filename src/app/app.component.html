@@ -1,7 +1,10 @@
-<div>
+<div class="main-container">
   <app-header />
   <main class="px-1">
-    <app-home />
+    @if (true) {
+      <app-skeleton />
+    } @else {
+      <app-home />
+    }
   </main>
 </div>
-<app-spinner />

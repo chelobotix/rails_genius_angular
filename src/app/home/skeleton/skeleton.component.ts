@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
+import { SkeletonModule } from 'primeng/skeleton'
 
 @Component({
   selector: 'app-skeleton',
   standalone: true,
-  imports: [],
+  imports: [SkeletonModule],
   templateUrl: './skeleton.component.html',
-  styleUrl: './skeleton.component.scss'
+  styleUrl: './skeleton.component.scss',
 })
-export class SkeletonComponent {
-
-}
+export class SkeletonComponent {}

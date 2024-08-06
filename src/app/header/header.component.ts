@@ -1,13 +1,14 @@
 import { Component, inject, computed } from '@angular/core'
 import { ThemeManagerService } from '../services/theme-manager.service'
-import { MenuComponent } from './menu/menu.component'
+import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component'
+import { DesktopMenuComponent } from './desktop-menu/desktop-menu.component'
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [MenuComponent],
+  imports: [HamburgerMenuComponent, DesktopMenuComponent],
 })
 export class HeaderComponent {
   private themeManagerService = inject(ThemeManagerService)

@@ -2,6 +2,7 @@
   <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary">
     <i class="pi pi-bars text-xl"></i>
   </p-button>
+  <app-search />
   <p-menu
     #menu
     [model]="items"
@@ -31,21 +32,19 @@
 
     <ng-template pTemplate="item" let-item>
       <a pRipple class="flex justify-content-center align-items-center p-0">
-        <span class="ml-2 text-white text-xl font-semibold">{{ item.label }}</span>
+        <span class="ml-2 text-white text-l font-semibold">{{ item.label }}</span>
       </a>
     </ng-template>
 
     <ng-template pTemplate="end">
       <p-divider />
       <ul class="menu-ul">
-        <li>
-          <p-button label="Log in" styleClass="login-button" [rounded]="true" />
-        </li>
-        <li>
-          <p-button label="Sign up" styleClass="signup-button" [rounded]="true" [outlined]="true" />
-        </li>
+        <p-buttonGroup>
+          <p-button label="Sign Up" severity="danger" size="small" [raised]="true" />
+          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
+        </p-buttonGroup>
       </ul>
-      <p-divider />
+
       <div class="social-icons-container">
         <div>
           <i class="pi pi-linkedin" style="font-size: 1.3rem"></i>

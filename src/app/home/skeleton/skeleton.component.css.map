@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,UAAW;EACT,OAAO,EAAE,IAAI;;AAGf,YAAa;EACX,KAAK,EAAE,GAAG",
+"sources": ["skeleton.component.scss"],
 "names": [],
 "file": "skeleton.component.css"
 }

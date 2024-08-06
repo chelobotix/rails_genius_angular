@@ -1,3 +1,7 @@
+.container {
+  display: flex; }
 
+.main-square {
+  width: 90%; }
 
 /*# sourceMappingURL=skeleton.component.css.map */

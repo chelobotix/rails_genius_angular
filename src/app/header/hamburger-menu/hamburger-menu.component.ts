@@ -11,9 +11,11 @@ import { MenuModule } from 'primeng/menu'
 import { ToggleButtonModule } from 'primeng/togglebutton'
 import { Ripple } from 'primeng/ripple'
 import { NgIf } from '@angular/common'
+import { ButtonGroupModule } from 'primeng/buttongroup'
+import { SearchComponent } from '../search/search.component'
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-hamburger-menu',
   standalone: true,
   imports: [
     DividerModule,
@@ -25,11 +27,13 @@ import { NgIf } from '@angular/common'
     ToggleButtonModule,
     Ripple,
     NgIf,
+    ButtonGroupModule,
+    SearchComponent,
   ],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css',
+  templateUrl: './hamburger-menu.component.html',
+  styleUrl: './hamburger-menu.component.css',
 })
-export class MenuComponent {
+export class HamburgerMenuComponent {
   private menuService = inject(MenuService)
   private themeManagerService = inject(ThemeManagerService)
   items = [
