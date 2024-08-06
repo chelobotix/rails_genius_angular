@@ -9,11 +9,12 @@ import { SidebarModule } from 'primeng/sidebar'
 import { MenuModule } from 'primeng/menu'
 import { NgStyle } from '@angular/common'
 import { ThemeManagerService } from './services/theme-manager.service'
+import { SpinnerComponent } from './spinner/spinner.component'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, HomeComponent, Button, SidebarModule, MenuModule, NgStyle],
+  imports: [RouterOutlet, HeaderComponent, HomeComponent, Button, SidebarModule, MenuModule, NgStyle, SpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

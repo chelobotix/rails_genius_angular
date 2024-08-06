@@ -1,0 +1,57 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden; }
+
+.loader-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  padding: 15px;
+  border-radius: 60%;
+  background-color: #ffffff;
+  box-shadow: 3px 10px 5px -1px #cccccc; }
+
+.dots {
+  width: 20px;
+  margin: auto;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #ffffff 90%, #ffffff);
+  background: var(--_g) 0 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1s infinite linear; }
+
+@keyframes l3 {
+  20% {
+    background-position: 0 0, 50% 50%, 100% 50%; }
+  40% {
+    background-position: 0 100%, 50% 0, 100% 50%; }
+  60% {
+    background-position: 0 50%, 50% 100%, 100% 0; }
+  80% {
+    background-position: 0 50%, 50% 50%, 100% 100%; } }
+.gelatine {
+  width: 80px;
+  animation: gelatine 0.8s infinite; }
+
+@keyframes gelatine {
+  from,
+  to {
+    transform: scale(1, 1); }
+  25% {
+    transform: scale(0.9, 1.1); }
+  50% {
+    transform: scale(1.1, 0.9); }
+  75% {
+    transform: scale(0.95, 1.05); } }
+
+/*# sourceMappingURL=spinner.component.css.map */
