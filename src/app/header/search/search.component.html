@@ -1,3 +1,11 @@
-<p-button severity="secondary" [rounded]="true" [text]="true">
+<p-button (click)="showDialog()" severity="secondary" [rounded]="true" [text]="true">
   <i class="pi pi-search" style="font-size: 1.1rem"></i>
 </p-button>
+<p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <div class="flex justify-content-end gap-2">
+    <input type="text" [(ngModel)]="searchData" />
+  </div>
+  @for (post of posts; track post.id | filter: searchData) {
+    <p>{{ post['title'] }}</p>
+  }
+</p-dialog>
