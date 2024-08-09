@@ -1,7 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core'
 import { NgClass } from '@angular/common'
-import { ThemeManagerService } from '../../../services/theme-manager.service'
-
+import { ThemeManagerService } from '../../../../services/theme-manager.service'
 
 @Component({
   selector: 'app-theme-button',

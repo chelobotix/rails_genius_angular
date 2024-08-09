@@ -1,17 +1,17 @@
 import { Button } from 'primeng/button'
 import { Component, inject, OnInit } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { HeaderComponent } from './header/header.component'
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './components/home/home.component'
 import { PrimeNGConfig } from 'primeng/api'
 import { LocalstorageService } from './services/localstorage.service'
 import { SidebarModule } from 'primeng/sidebar'
 import { MenuModule } from 'primeng/menu'
 import { NgStyle } from '@angular/common'
 import { ThemeManagerService } from './services/theme-manager.service'
-import { SpinnerComponent } from './spinner/spinner.component'
-import { SkeletonComponent } from './home/skeleton/skeleton.component'
+import { SpinnerComponent } from './components/spinner/spinner.component'
+import { SkeletonComponent } from './components/home/skeleton/skeleton.component'
 import { SkeletonModule } from 'primeng/skeleton'
+import { HeaderComponent } from './components/header/header.component'
 
 @Component({
   selector: 'app-root',

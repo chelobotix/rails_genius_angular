@@ -1,8 +1,8 @@
 <div class="flex align-items-center">
-  <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary">
+  <app-search />
+  <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary" styleClass="no-padding">
     <i class="pi pi-bars text-xl"></i>
   </p-button>
-  <app-search />
   <p-menu
     #menu
     [model]="items"

@@ -1,7 +1,7 @@
 import { Component, inject, computed } from '@angular/core'
-import { ThemeManagerService } from '../services/theme-manager.service'
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component'
 import { DesktopMenuComponent } from './desktop-menu/desktop-menu.component'
+import { ThemeManagerService } from '../../services/theme-manager.service'
 
 @Component({
   selector: 'app-header',

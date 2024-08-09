@@ -17,6 +17,11 @@ p {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
 .main-menu {
   margin-top: 1rem !important;
   width: 100%;
@@ -38,4 +43,8 @@ p {
   color: #ffffff;
   border-color: #ffffff;
   width: 6rem;
+}
+
+.padding-5 {
+  padding: 0;
 }

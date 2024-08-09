@@ -17,6 +17,12 @@ p {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
 .login-button {
   background-color: #ffffff;
   color: #000000;
@@ -36,3 +42,6 @@ p {
   background-color: rgba(210, 1, 0, 0.8);
 }
 
+.padding-5 {
+  padding: 5px;
+}

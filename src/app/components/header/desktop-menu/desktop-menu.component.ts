@@ -5,8 +5,8 @@ import { ButtonGroupModule } from 'primeng/buttongroup'
 import { DividerModule } from 'primeng/divider'
 import { FormsModule } from '@angular/forms'
 import { DropdownModule } from 'primeng/dropdown'
-import { IThemeSelect } from '../../models/theme-select.model'
-import { ThemeManagerService } from '../../services/theme-manager.service'
+import { IThemeSelect } from '../../../models/theme-select.model'
+import { ThemeManagerService } from '../../../services/theme-manager.service'
 import { SearchComponent } from '../search/search.component'
 
 @Component({

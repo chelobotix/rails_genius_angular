@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core'
-import { MenuService } from '../services/menu.service'
+import { MenuService } from '../../services/menu.service'
 import { NgClass } from '@angular/common'
 
 @Component({

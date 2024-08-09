@@ -1,10 +1,7 @@
 import { Component, inject } from '@angular/core'
 import { DividerModule } from 'primeng/divider'
 import { Button } from 'primeng/button'
-import { MenuService } from '../../services/menu.service'
 import { ThemeButtonComponent } from './theme-button/theme-button.component'
-import { ThemeManagerService } from '../../services/theme-manager.service'
-import { ITheme } from '../../models/theme.model'
 import { SelectButtonModule } from 'primeng/selectbutton'
 import { FormsModule } from '@angular/forms'
 import { MenuModule } from 'primeng/menu'
@@ -13,6 +10,9 @@ import { Ripple } from 'primeng/ripple'
 import { NgIf } from '@angular/common'
 import { ButtonGroupModule } from 'primeng/buttongroup'
 import { SearchComponent } from '../search/search.component'
+import { MenuService } from '../../../services/menu.service'
+import { ITheme } from '../../../models/theme.model'
+import { ThemeManagerService } from '../../../services/theme-manager.service'
 
 @Component({
   selector: 'app-hamburger-menu',

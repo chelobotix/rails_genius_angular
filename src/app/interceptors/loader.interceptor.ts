@@ -10,8 +10,5 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   let cloneRequest = req.clone({
     setHeaders: { pipo: 'pipo!' },
   })
-  return next(cloneRequest).pipe(
-    delay(5000),
-    finalize(() => loaderService.hideLoader())
-  )
+  return next(req).pipe(finalize(() => loaderService.hideLoader()))
 }

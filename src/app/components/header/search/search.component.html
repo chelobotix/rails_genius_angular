@@ -1,0 +1,39 @@
+<p-button (click)="showDialog()" severity="secondary" [rounded]="true" [text]="true" styleClass="no-padding">
+  <i class="pi pi-search" style="font-size: 1.1rem"></i>
+</p-button>
+<p-dialog
+  [modal]="true"
+  draggable="false"
+  resizable="false"
+  dismissableMask="true"
+  [(visible)]="visible"
+  position="top"
+  [style]="{ width: '90%', 'max-width': '400px', 'margin-top': '150px' }"
+>
+  <ng-template pTemplate="headless">
+    <div class="flex justify-content-around p-2 align-items-center gap-2">
+      <input
+        id="searchInput"
+        #searchInput
+        type="text"
+        [(ngModel)]="searchData"
+        (input)="handleSearch()"
+        class="input"
+        autocomplete="off"
+      />
+      @if (postService.isLoading()) {
+        <div class="dot-flashing"></div>
+      }
+    </div>
+    <div>
+      <ul class="flex flex-column justify-content-center align-items-center">
+        @for (post of posts$ | async; track post.id) {
+          <li class="w-full p-2 li-result">
+            <p class="text-justify" [innerHTML]="post.title | boldTarget: searchData"></p>
+            <p class="text-sm text-gray-500" [innerHTML]="post.body | boldTarget: searchData"></p>
+          </li>
+        }
+      </ul>
+    </div>
+  </ng-template>
+</p-dialog>
