@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core'
 import { DividerModule } from 'primeng/divider'
-import { Button } from 'primeng/button'
+import { Button, ButtonDirective } from 'primeng/button'
 import { ThemeButtonComponent } from './theme-button/theme-button.component'
 import { SelectButtonModule } from 'primeng/selectbutton'
 import { FormsModule } from '@angular/forms'
@@ -37,9 +37,10 @@ import { InputGroupModule } from 'primeng/inputgroup'
     FloatLabelModule,
     InputTextModule,
     InputGroupModule,
+    ButtonDirective,
   ],
   templateUrl: './hamburger-menu.component.html',
-  styleUrl: './hamburger-menu.component.css',
+  styleUrl: './hamburger-menu.component.scss',
 })
 export class HamburgerMenuComponent {
   private menuService = inject(MenuService)

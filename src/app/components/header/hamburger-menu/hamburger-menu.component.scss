@@ -16,21 +16,13 @@ li {
   cursor: pointer;
 }
 
-.social-icons-container {
+.social-media-container {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: end;
+  background-color: rgba(143, 1, 0, 0.8);
+  padding: 10px;
   gap: 2px;
-  margin-bottom: 1rem;
-  height: 150px;
-}
-
-.social-icons-container > div {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  color: #ffffff;
 }
 
 .theme-ul {
