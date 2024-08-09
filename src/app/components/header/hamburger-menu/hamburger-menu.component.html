@@ -1,0 +1,133 @@
+<p-sidebar [(visible)]="sidebarVisible" position="right">
+  <ng-template pTemplate="headless">
+    <div class="flex flex-column align-items-center gap-2 bg-red-400 p-1 h-full">
+      <div class="align-self-end">
+        <p-button
+          (click)="sidebarVisible = false"
+          [rounded]="true"
+          severity="secondary"
+          [outlined]="true"
+          [style]="{ color: 'white', margin: '5px 0 10px 0' }"
+        >
+          <ng-template pTemplate="icon">
+            <i class="pi pi-times text-white"></i>
+          </ng-template>
+        </p-button>
+      </div>
+
+      <div class="theme-container">
+        <ul class="theme-ul">
+          <li (click)="themeChange('Light')">
+            <app-theme-button icon="pi-sun" name="Light" />
+          </li>
+          <li (click)="themeChange('Dark')">
+            <app-theme-button icon="pi-moon" name="Dark" />
+          </li>
+          <li (click)="themeChange('System')">
+            <app-theme-button icon="pi-desktop" name="System" />
+          </li>
+        </ul>
+      </div>
+
+      <div class="theme-container">
+        <p-buttonGroup>
+          <p-button label="Sign Up" severity="secondary" size="small" [raised]="true" />
+          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
+        </p-buttonGroup>
+      </div>
+
+      <div class="theme-container flex-column">
+        <a href="#" class="ml-2 text-gray-200 text-base font-normal">
+          <div class="flex gap-2 align-items-center">
+            <i class="pi pi-server text-gray-200 font-normal"></i>
+            Archive
+          </div>
+        </a>
+
+        <a href="#" class="ml-2 text-gray-200 text-base font-normal">
+          <div class="flex gap-2 align-items-center">
+            <i class="pi pi-address-book text-gray-200 font-normal"></i>
+            Archive
+          </div>
+        </a>
+      </div>
+
+      <div class="theme-container">
+        <div class="flex flex-column align-items-center">
+          <p class="text-sm text-gray-200">SUBSCRIBE TODAY</p>
+          <p class="text-l text-gray-200 font-semibold">BECOME A GENIUS IN RAILS</p>
+          <p-inputGroup>
+            <input type="text" pInputText placeholder="@email" />
+            <button type="button" label="Subscribe" pButton class="p-button-warning"></button>
+          </p-inputGroup>
+        </div>
+      </div>
+
+      <div class="social-media-container mt-auto">
+        <div class="flex justify-content-center gap-5">
+          <i class="pi pi-linkedin text-white" style="font-size: 1.3rem"></i>
+          <i class="pi pi-github text-white" style="font-size: 1.3rem"></i>
+          <i class="pi pi-envelope text-white" style="font-size: 1.3rem"></i>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
+<p-button [rounded]="true" [text]="true" severity="secondary" (onClick)="sidebarVisible = true">
+  <i class="pi pi-bars text-3xl text-gray-700"></i>
+</p-button>
+
+<!--  <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary" styleClass="no-padding">-->
+<!--    <i class="pi pi-bars text-xl"></i>-->
+<!--  </p-button>-->
+<!--  <p-menu-->
+<!--    #menu-->
+<!--    [model]="items"-->
+<!--    [popup]="true"-->
+<!--    (onShow)="handleMenuStatus('open')"-->
+<!--    (onHide)="handleMenuStatus('close')"-->
+<!--    styleClass="main-menu"-->
+<!--    showTransitionOptions=".300s cubic-bezier(0, 0, 0.2, 1)"-->
+<!--    hideTransitionOptions=".300s linear"-->
+<!--  >-->
+<!--    <ng-template pTemplate="start">-->
+<!--      <div class="flex justify-content-center">-->
+<!--        <ul class="theme-ul">-->
+<!--          <li (click)="themeChange('Light')">-->
+<!--            <app-theme-button icon="pi-sun" name="Light" />-->
+<!--          </li>-->
+<!--          <li (click)="themeChange('Dark')">-->
+<!--            <app-theme-button icon="pi-moon" name="Dark" />-->
+<!--          </li>-->
+<!--          <li (click)="themeChange('System')">-->
+<!--            <app-theme-button icon="pi-desktop" name="System" />-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--      <p-divider />-->
+<!--    </ng-template>-->
+
+<!--    <ng-template pTemplate="item" let-item>-->
+<!--      <a pRipple class="flex justify-content-center align-items-center p-0">-->
+<!--        <span class="ml-2 text-white text-l font-semibold">{{ item.label }}</span>-->
+<!--      </a>-->
+<!--    </ng-template>-->
+
+<!--    <ng-template pTemplate="end">-->
+<!--      <p-divider />-->
+<!--      <ul class="menu-ul">-->
+<!--        <p-buttonGroup>-->
+<!--          <p-button label="Sign Up" severity="danger" size="small" [raised]="true" />-->
+<!--          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />-->
+<!--        </p-buttonGroup>-->
+<!--      </ul>-->
+
+<!--      <div class="social-icons-container">-->
+<!--        <div>-->
+<!--          <i class="pi pi-linkedin" style="font-size: 1.3rem"></i>-->
+<!--          <i class="pi pi-github" style="font-size: 1.3rem"></i>-->
+<!--          <i class="pi pi-envelope" style="font-size: 1.3rem"></i>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--  </p-menu>-->

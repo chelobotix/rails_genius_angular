@@ -1,0 +1,17 @@
+p {
+  font-size: 0.7rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  color: #323232;
+}
+
+.selected {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 5px;
+}

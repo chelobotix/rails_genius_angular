@@ -1,0 +1,26 @@
+<div class="flex gap-3">
+  <a [routerLink]="['/archive']" routerLinkActive="selected" class="link text-gray-400 hover:text-gray-700">
+    Archive
+  </a>
+  <a [routerLink]="['/about']" routerLinkActive="selected" class="link text-gray-400 hover:text-gray-700">About</a>
+</div>
+
+<p-divider layout="vertical" />
+
+<p-buttonGroup>
+  <p-button label="Sign Up" severity="danger" size="small" />
+  <p-button label="Log in" severity="contrast" size="small" />
+</p-buttonGroup>
+
+<p-divider layout="vertical" />
+
+<p-dropdown [options]="themes" [(ngModel)]="selectedTheme" (onChange)="handleTheme()" optionLabel="name" placeholder="">
+  <ng-template let-theme pTemplate="item">
+    <i [class]="['pi', theme.icon]"></i>
+  </ng-template>
+
+  <ng-template let-theme pTemplate="selectedItem">
+    <i [class]="['pi', selectedTheme.icon]"></i>
+  </ng-template>
+</p-dropdown>
+<app-search />

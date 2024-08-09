@@ -1,0 +1,59 @@
+/*
+Error: (max-width: 999px) isn't a valid CSS value.
+        on line 46 of header.component.scss
+
+41:   .logo-text {
+42:     font-size: 2rem;
+43:   }
+44: }
+45: 
+46: @media only screen and ((min-width: 379px )and (max-width: 999px)) {
+47:   .logo-text {
+48:     font-size: 2rem;
+49:   }
+50: }
+51: 
+
+Backtrace:
+header.component.scss:46
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/script/value/map.rb:52:in `to_s'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:551:in `block in run_interp_no_strip'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:549:in `map'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:549:in `run_interp_no_strip'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:556:in `run_interp'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:521:in `visit_media'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:387:in `run'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/bin/sass:13:in `<top (required)>'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/bin/sass:23:in `load'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/bin/sass:23:in `<main>'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/bin/ruby_executable_hooks:22:in `eval'
+/Users/marceloalarcon/.rvm/gems/ruby-2.7.5/bin/ruby_executable_hooks:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: (max-width: 999px) isn't a valid CSS value.\A         on line 46 of header.component.scss\A \A 41:   .logo-text {\A 42:     font-size: 2rem;\A 43:   }\A 44: }\A 45: \A 46: @media only screen and ((min-width: 379px )and (max-width: 999px)) {\A 47:   .logo-text {\A 48:     font-size: 2rem;\A 49:   }\A 50: }\A 51: "; }

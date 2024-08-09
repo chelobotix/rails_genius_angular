@@ -1,0 +1,4 @@
+.menu-over {
+    transition: ease 0.2s;
+    filter: blur(2px);
+}

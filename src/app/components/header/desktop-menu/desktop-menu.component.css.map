@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,SAAS,EAAE,MAAM;EACjB,WAAW,EAAE,GAAG;EAChB,eAAe,EAAE,IAAI;EACrB,UAAU,EAAE,SAAS",
+"sources": ["desktop-menu.component.scss"],
+"names": [],
+"file": "desktop-menu.component.css"
+}

@@ -1,0 +1,36 @@
+li {
+  width: 80%;
+  text-align: center;
+}
+
+.theme-container {
+  display: flex;
+  justify-content: center;
+  width: 97%;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgba(143, 1, 0, 0.8);
+}
+
+.burger-wrapper {
+  cursor: pointer;
+}
+
+.social-media-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(143, 1, 0, 0.8);
+  padding: 10px;
+  gap: 2px;
+}
+
+.theme-ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0 1rem;
+  gap: 5px;
+  width: 75%;
+}

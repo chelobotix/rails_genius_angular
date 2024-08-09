@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto 2rem auto;
+  padding: 0 1rem;
+  max-width: 1200px;
+}
+
+.logo-img {
+  width: 70px;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger-container {
+  display: flex;
+  align-items: center;
+}
+
+.desktop-container {
+  display: none;
+}
+
+@media only screen and (min-width: 1000px) {
+  .hamburger-container {
+    display: none;
+  }
+
+  .desktop-container {
+    display: block;
+  }
+
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and ((min-width: 379px )and (max-width: 999px)) {
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .logo-text {
+    font-size: 1.5rem;
+    line-height: 1.2rem;
+  }
+}
