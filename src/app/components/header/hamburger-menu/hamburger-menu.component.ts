@@ -16,6 +16,7 @@ import { ThemeManagerService } from '../../../services/theme-manager.service'
 import { SidebarModule } from 'primeng/sidebar'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
+import { InputGroupModule } from 'primeng/inputgroup'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -35,6 +36,7 @@ import { InputTextModule } from 'primeng/inputtext'
     SidebarModule,
     FloatLabelModule,
     InputTextModule,
+    InputGroupModule,
   ],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: './hamburger-menu.component.css',

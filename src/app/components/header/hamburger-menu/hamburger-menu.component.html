@@ -24,18 +24,35 @@
       </div>
 
       <div class="theme-container flex-column">
-        <a href="#" class="ml-2 text-white text-l border-bottom-1">
-          <i class="pi pi-server text-white"></i>
+        <a href="#" class="ml-2 text-gray-200 text-base font-normal border-bottom-1">
+          <i class="pi pi-server text-gray-200 font-normal"></i>
           Archive
         </a>
-        <a href="#" class="ml-2 text-white text-l">
-          <i class="pi pi-address-book text-white"></i>
+        <a href="#" class="ml-2 text-gray-200 text-base font-normal">
+          <i class="pi pi-address-book text-gray-200 font-normal"></i>
           About
         </a>
       </div>
+
+      <div class="theme-container">
+        <div class="flex flex-column align-items-center">
+          <p class="text-sm text-gray-200">SUBSCRIBE TODAY</p>
+          <p class="text-l text-gray-200">BECOME A GENIUS IN RAILS</p>
+          <p-inputGroup>
+            <input type="text" pInputText placeholder="Keyword" />
+            <button type="button" pButton icon="pi pi-search" class="p-button-warning"></button>
+          </p-inputGroup>
+        </div>
+      </div>
+
+      <div class="theme-container">
+        <p-buttonGroup>
+          <p-button label="Sign Up" severity="secondary" size="small" [raised]="true" />
+          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
+        </p-buttonGroup>
+      </div>
     </div>
   </ng-template>
-  hdfgd
 </p-sidebar>
 <p-button [rounded]="true" [text]="true" severity="secondary" (onClick)="sidebarVisible = true">
   <i class="pi pi-bars text-3xl text-gray-700"></i>
