@@ -1,21 +1,21 @@
 /*
 Error: (max-width: 999px) isn't a valid CSS value.
-        on line 45 of header.component.scss
+        on line 46 of header.component.scss
 
-40:   .logo-text {
-41:     font-size: 2rem;
-42:   }
-43: }
-44: 
-45: @media only screen and ((min-width: 379px )and (max-width: 999px)) {
-46:   .logo-text {
-47:     font-size: 2rem;
-48:   }
-49: }
-50: 
+41:   .logo-text {
+42:     font-size: 2rem;
+43:   }
+44: }
+45: 
+46: @media only screen and ((min-width: 379px )and (max-width: 999px)) {
+47:   .logo-text {
+48:     font-size: 2rem;
+49:   }
+50: }
+51: 
 
 Backtrace:
-header.component.scss:45
+header.component.scss:46
 /Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/script/value/map.rb:52:in `to_s'
 /Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:551:in `block in run_interp_no_strip'
 /Users/marceloalarcon/.rvm/gems/ruby-2.7.5/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:549:in `map'
@@ -56,4 +56,4 @@ header.component.scss:45
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: (max-width: 999px) isn't a valid CSS value.\A         on line 45 of header.component.scss\A \A 40:   .logo-text {\A 41:     font-size: 2rem;\A 42:   }\A 43: }\A 44: \A 45: @media only screen and ((min-width: 379px )and (max-width: 999px)) {\A 46:   .logo-text {\A 47:     font-size: 2rem;\A 48:   }\A 49: }\A 50: "; }
+  content: "Error: (max-width: 999px) isn't a valid CSS value.\A         on line 46 of header.component.scss\A \A 41:   .logo-text {\A 42:     font-size: 2rem;\A 43:   }\A 44: }\A 45: \A 46: @media only screen and ((min-width: 379px )and (max-width: 999px)) {\A 47:   .logo-text {\A 48:     font-size: 2rem;\A 49:   }\A 50: }\A 51: "; }

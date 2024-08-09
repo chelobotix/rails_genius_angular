@@ -13,6 +13,9 @@ import { SearchComponent } from '../search/search.component'
 import { MenuService } from '../../../services/menu.service'
 import { ITheme } from '../../../models/theme.model'
 import { ThemeManagerService } from '../../../services/theme-manager.service'
+import { SidebarModule } from 'primeng/sidebar'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -29,6 +32,9 @@ import { ThemeManagerService } from '../../../services/theme-manager.service'
     NgIf,
     ButtonGroupModule,
     SearchComponent,
+    SidebarModule,
+    FloatLabelModule,
+    InputTextModule,
   ],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: './hamburger-menu.component.css',
@@ -36,6 +42,8 @@ import { ThemeManagerService } from '../../../services/theme-manager.service'
 export class HamburgerMenuComponent {
   private menuService = inject(MenuService)
   private themeManagerService = inject(ThemeManagerService)
+  value = ''
+  sidebarVisible: boolean = false
   items = [
     {
       label: 'Archive',

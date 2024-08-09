@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 p {
   padding: 0;
   margin: 0;
@@ -44,4 +48,9 @@ ul {
 
 .padding-5 {
   padding: 5px;
+}
+
+.menu-side-bar {
+  width: 90%;
+  max-width: 20rem;
 }

@@ -21,7 +21,8 @@
 }
 
 .hamburger-container {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .desktop-container {
