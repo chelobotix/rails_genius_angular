@@ -3,7 +3,7 @@ export interface IPost {
   title: string
   body: string
   imageUrl: string
-  tags: string
+  tags: string | string[]
   readTime: number
   published: string
   user: {

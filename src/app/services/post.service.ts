@@ -32,7 +32,10 @@ export class PostService {
           const index = post.body.toLowerCase().indexOf(query.toLowerCase())
           post.body = truncate(post.body, index, 40)
 
-          // post.title = post.title.slice(0, 15)
+          if (typeof post.tags === 'string') {
+            post.tags = post.tags.split(',')
+          }
+
           return post
         })
       }),
