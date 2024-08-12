@@ -7,11 +7,12 @@ p {
   justify-content: center;
   align-items: center;
   gap: 2px;
-  color: #323232;
+  color: #cbd5e1;
 }
 
 .selected {
   background: #ffffff;
   border-radius: 25px;
   padding: 5px;
+  color: #334155;
 }
