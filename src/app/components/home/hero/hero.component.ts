@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core'
+import { Component, inject, Input, input, OnInit, signal } from '@angular/core'
 import { PostService } from '../../../services/post.service'
 import { delay, Observable, of, Subscription, tap } from 'rxjs'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { ISinglePost } from '../../../models/single-post.model'
 import { SkeletonModule } from 'primeng/skeleton'
 import { LoaderService } from '../../../services/loader.service'
+import { IPost } from '../../../models/post.model'
 
 @Component({
   selector: 'app-hero',
@@ -14,22 +15,11 @@ import { LoaderService } from '../../../services/loader.service'
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent implements OnInit {
-  postService = inject(PostService)
-  loaderService = inject(LoaderService)
-  heroPost = signal<ISinglePost | undefined>(undefined)
-  private subscription!: Subscription
+  @Input({ required: true }) heroPost!: IPost
+  image = signal('')
 
   ngOnInit(): void {
-    this.loaderService.showLoader()
-    this.subscription = this.postService
-      .lastPost()
-      .pipe(
-        delay(3000),
-        tap((data) => {
-          this.heroPost.set(data)
-          this.loaderService.hideLoader()
-        })
-      )
-      .subscribe()
+    const id = this.heroPost.id
+    this.image.set(`/images/posts/${id}/${id}_landscape.webp`)
   }
 }

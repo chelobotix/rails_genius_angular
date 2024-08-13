@@ -1,3 +1,8 @@
-<div [ngClass]="{ 'menu-over': menuStatus() }">
-  <app-hero />
+<div>
+  @if (!loader()) {
+    @for (post of posts().posts; track post.id) {
+      {{ post.title }}
+    }
+    <app-hero [heroPost]="posts().posts[0]" />
+  }
 </div>

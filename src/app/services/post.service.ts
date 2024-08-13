@@ -12,10 +12,12 @@ import { ISinglePost } from '../models/single-post.model'
 export class PostService {
   private httpClient = inject(HttpClient)
   private base_url = 'http://localhost:3000/api/v1'
+  private posts = signal<IPosts>({ posts: [] })
+  actualPosts = this.posts.asReadonly()
 
-  lastPost(): Observable<ISinglePost> {
-    return this.getPost('/posts/last')
-  }
+  // lastPost(): Observable<ISinglePost> {
+  //   return this.getPost('/posts/last')
+  // }
 
   searchPosts(query: string) {
     // this.isLoading.set(true)
@@ -41,8 +43,12 @@ export class PostService {
     )
   }
 
-  private getPost(endpoint: string) {
-    return this.httpClient.get<ISinglePost>(`${this.base_url}${endpoint}`)
+  getPosts() {
+    return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
+  }
+
+  private getRequest<T>(endpoint: string): Observable<T> {
+    return this.httpClient.get<T>(`${this.base_url}${endpoint}`)
   }
 
   private postMethod(endpoint: string, header: {}, body: {}): Observable<IPosts> {

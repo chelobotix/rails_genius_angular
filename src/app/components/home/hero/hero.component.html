@@ -1,4 +1,8 @@
-<p>hero works!</p>
-@if (heroPost()) {
-  <p>{{ heroPost()?.post?.title }}</p>
-}
+<div class="container">
+  <img [src]="image()" alt="hero" class="hero-img" />
+  <div class="text-container">
+    <p class="hero-title">{{ heroPost.title }}</p>
+    <p class="hero-body">{{ heroPost.body.slice(0, 50) + '...' }}</p>
+    <p class="hero-read-time">{{ heroPost.readTime + ' MIN READ' }}</p>
+  </div>
+</div>
