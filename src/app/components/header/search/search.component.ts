@@ -64,11 +64,11 @@ export class SearchComponent implements AfterViewChecked, OnInit {
   }
 
   handleSearch(value: string) {
-    if (value !== '') {
-      this.posts$ = this.postService.searchPosts(value)
-    } else {
-      this.posts$ = of([])
-    }
+    // if (value !== '') {
+    //   this.posts$ = this.postService.searchPosts(value)
+    // } else {
+    //   this.posts$ = of([])
+    // }
   }
 
   handleDialogShow() {

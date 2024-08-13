@@ -4,11 +4,8 @@ import { delay, finalize } from 'rxjs'
 import { inject } from '@angular/core'
 
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
-  const loaderService = inject(LoaderService)
-  loaderService.showLoader()
-  console.log('request intercepted')
   let cloneRequest = req.clone({
     setHeaders: { pipo: 'pipo!' },
   })
-  return next(req).pipe(finalize(() => loaderService.hideLoader()))
+  return next(req)
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { SkeletonModule } from 'primeng/skeleton'
+import { LoaderService } from '../../../services/loader.service'
 
 @Component({
   selector: 'app-skeleton',
@@ -8,4 +9,7 @@ import { SkeletonModule } from 'primeng/skeleton'
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.scss',
 })
-export class SkeletonComponent {}
+export class SkeletonComponent {
+  private loaderService = inject(LoaderService)
+  loader = this.loaderService.loadingState
+}
