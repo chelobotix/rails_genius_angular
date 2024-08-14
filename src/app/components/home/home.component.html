@@ -1,4 +1,4 @@
-<div class="flex justify-content-center">
+<div class="flex flex-column align-items-center justify-content-center">
   @if (!loader()) {
     <div class="container">
       <app-hero [heroPost]="posts().posts[0]" />
@@ -10,6 +10,12 @@
           }
         }
       </div>
+    </div>
+    <div class="posts-container">
+      @for (post of posts().posts; track post.id) {
+        <app-post [post]="post" />
+        <p-divider />
+      }
     </div>
   }
 </div>
