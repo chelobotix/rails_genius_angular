@@ -1,8 +1,15 @@
-<div>
+<div class="flex justify-content-center">
   @if (!loader()) {
-    @for (post of posts().posts; track post.id) {
-      {{ post.title }}
-    }
-    <app-hero [heroPost]="posts().posts[0]" />
+    <div class="container">
+      <app-hero [heroPost]="posts().posts[0]" />
+      <div class="feature-container">
+        <p class="featured-title text-red-400">FEATURED</p>
+        @for (post of posts().posts; track post.id) {
+          @if (post.featured) {
+            <app-feature [featurePost]="post" />
+          }
+        }
+      </div>
+    </div>
   }
 </div>

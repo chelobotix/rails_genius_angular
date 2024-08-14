@@ -6,13 +6,14 @@ import { PostService } from '../../services/post.service'
 import { LoaderService } from '../../services/loader.service'
 import { delay, Subscription, tap } from 'rxjs'
 import { IPosts } from '../../models/posts.model'
+import { FeatureComponent } from './feature/feature.component'
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, HeroComponent],
+  imports: [NgClass, HeroComponent, FeatureComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   private postService = inject(PostService)
