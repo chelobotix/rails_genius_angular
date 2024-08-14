@@ -1,9 +1,9 @@
-import { AfterViewChecked, Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core'
+import { AfterViewChecked, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
 import { Button } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
-import { debounceTime, Observable, of, tap } from 'rxjs'
+import { debounceTime, Observable, of, Subscription, tap } from 'rxjs'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { ListboxModule } from 'primeng/listbox'
 import { PostService } from '../../../services/post.service'
@@ -30,19 +30,21 @@ import { ChipModule } from 'primeng/chip'
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent implements AfterViewChecked, OnInit {
+export class SearchComponent implements AfterViewChecked, OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef
-  postService = inject(PostService)
-  posts$: Observable<IPost[]> = of([])
+  private postService = inject(PostService)
+  private subscription!: Subscription
+  searchPosts = this.postService.actualSearchedPosts
   visible: boolean = false
   searchTerm: string = ''
+  isSearching = signal<boolean>(false)
 
   formData = new FormGroup({
     search: new FormControl<any>('', {}),
   })
 
   ngOnInit(): void {
-    this.formData.controls['search'].valueChanges
+    this.subscription = this.formData.controls['search'].valueChanges
       .pipe(
         debounceTime(500),
         tap((value: string) => {
@@ -59,22 +61,29 @@ export class SearchComponent implements AfterViewChecked, OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
+
   showDialog() {
     this.visible = true
   }
 
   handleSearch(value: string) {
-    // if (value !== '') {
-    //   this.posts$ = this.postService.searchPosts(value)
-    // } else {
-    //   this.posts$ = of([])
-    // }
+    if (value !== '') {
+      this.isSearching.set(true)
+      this.subscription = this.postService
+        .searchPosts(value)
+        .pipe(tap((posts) => this.isSearching.set(false)))
+        .subscribe()
+    } else {
+      this.postService.empty_searchedPosts()
+    }
   }
 
   handleDialogShow() {
     this.searchInput.nativeElement.value = ''
   }
 
-  protected readonly indexOf = indexOf
   protected readonly random = random
 }

@@ -13,18 +13,19 @@ export class PostService {
   private httpClient = inject(HttpClient)
   private base_url = 'http://localhost:3000/api/v1'
   private posts = signal<IPosts>({ posts: [] })
+  private searchedPosts = signal<IPosts>({ posts: [] })
   actualPosts = this.posts.asReadonly()
+  actualSearchedPosts = this.searchedPosts.asReadonly()
 
-  // lastPost(): Observable<ISinglePost> {
-  //   return this.getPost('/posts/last')
-  // }
+  empty_searchedPosts() {
+    this.searchedPosts.set({ posts: [] })
+  }
 
   searchPosts(query: string) {
-    // this.isLoading.set(true)
-
-    return this.postMethod(`/search_posts?q[title_or_body_or_tags_cont]=${query}`, {}, {}).pipe(
-      map((response) => {
-        return response.posts.map((post: IPost) => {
+    return this.postRequest<IPosts>(`/search_posts?q[title_or_body_or_tags_cont]=${query}`, {}, {}).pipe(
+      tap((response) => {
+        const result: IPosts = { posts: [] }
+        result.posts = response.posts.map((post: IPost) => {
           const index = post.body.toLowerCase().indexOf(query.toLowerCase())
           post.body = truncate(post.body, index, 40)
 
@@ -34,12 +35,8 @@ export class PostService {
 
           return post
         })
+        this.searchedPosts.set(result)
       })
-      // tap(() => this.isLoading.set(false)),
-      // catchError((error) => {
-      //   this.isLoading.set(false)
-      //   return of([])
-      // })
     )
   }
 
@@ -51,9 +48,10 @@ export class PostService {
     return this.httpClient.get<T>(`${this.base_url}${endpoint}`)
   }
 
-  private postMethod(endpoint: string, header: {}, body: {}): Observable<IPosts> {
+  private postRequest<T>(endpoint: string, header: {}, body: {}) {
+    console.log(endpoint)
     const headers = new HttpHeaders(header)
 
-    return this.httpClient.post<IPosts>(`${this.base_url}${endpoint}`, body, { headers: headers })
+    return this.httpClient.post<T>(`${this.base_url}${endpoint}`, body, { headers: headers })
   }
 }
