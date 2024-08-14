@@ -1,9 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { catchError, map, Observable, of, pipe, tap } from 'rxjs'
+import { catchError, delay, map, Observable, of, pipe, tap } from 'rxjs'
 import { IPost } from '../models/post.model'
 import { IPosts } from '../models/posts.model'
 import { truncate } from '../utils/truncate'
+import { ISinglePost } from '../models/single-post.model'
 
 @Injectable({
   providedIn: 'root',
@@ -11,24 +12,20 @@ import { truncate } from '../utils/truncate'
 export class PostService {
   private httpClient = inject(HttpClient)
   private base_url = 'http://localhost:3000/api/v1'
-  isLoading = signal<boolean>(false)
+  private posts = signal<IPosts>({ posts: [] })
+  private searchedPosts = signal<IPosts>({ posts: [] })
+  actualPosts = this.posts.asReadonly()
+  actualSearchedPosts = this.searchedPosts.asReadonly()
 
-  allPosts() {
-    return this.get('/posts').pipe(
-      map((response) => response.posts),
-      catchError((error) => {
-        console.error('Error fetching posts', error)
-        return of([])
-      })
-    )
+  empty_searchedPosts() {
+    this.searchedPosts.set({ posts: [] })
   }
 
   searchPosts(query: string) {
-    this.isLoading.set(true)
-
-    return this.post(`/search_posts?q[title_or_body_or_tags_cont]=${query}`, {}, {}).pipe(
-      map((response) => {
-        return response.posts.map((post: IPost) => {
+    return this.postRequest<IPosts>(`/search_posts?q[title_or_body_or_tags_cont]=${query}`, {}, {}).pipe(
+      tap((response) => {
+        const result: IPosts = { posts: [] }
+        result.posts = response.posts.map((post: IPost) => {
           const index = post.body.toLowerCase().indexOf(query.toLowerCase())
           post.body = truncate(post.body, index, 40)
 
@@ -38,22 +35,23 @@ export class PostService {
 
           return post
         })
-      }),
-      tap(() => this.isLoading.set(false)),
-      catchError((error) => {
-        this.isLoading.set(false)
-        return of([])
+        this.searchedPosts.set(result)
       })
     )
   }
 
-  private get(endpoint: string): Observable<IPosts> {
-    return this.httpClient.get<IPosts>(`${this.base_url}${endpoint}`)
+  getPosts() {
+    return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
   }
 
-  private post(endpoint: string, header: {}, body: {}): Observable<IPosts> {
+  private getRequest<T>(endpoint: string): Observable<T> {
+    return this.httpClient.get<T>(`${this.base_url}${endpoint}`)
+  }
+
+  private postRequest<T>(endpoint: string, header: {}, body: {}) {
+    console.log(endpoint)
     const headers = new HttpHeaders(header)
 
-    return this.httpClient.post<IPosts>(`${this.base_url}${endpoint}`, body, { headers: headers })
+    return this.httpClient.post<T>(`${this.base_url}${endpoint}`, body, { headers: headers })
   }
 }

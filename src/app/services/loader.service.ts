@@ -5,20 +5,20 @@ import { Injectable, signal } from '@angular/core'
 })
 export class LoaderService {
   apiCount = 0
-  private isLoading = signal<boolean>(false)
-  loaderState = this.isLoading.asReadonly()
+  private loading = signal<boolean>(false)
+  loadingState = this.loading.asReadonly()
 
   showLoader() {
-    if (this.apiCount === 0) {
-      this.isLoading.set(true)
-    }
     this.apiCount++
+    this.setLoading()
   }
 
   hideLoader() {
     this.apiCount--
-    if (this.apiCount === 0) {
-      this.isLoading.set(false)
-    }
+    this.setLoading()
+  }
+
+  private setLoading() {
+    this.loading.set(this.apiCount > 0)
   }
 }

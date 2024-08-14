@@ -1,0 +1,59 @@
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 20px;
+}
+
+.hero-img {
+  width: 300px;
+  border-radius: 5%;
+}
+
+.hero-title {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: left;
+  line-height: 2.2rem;
+}
+
+.truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
+  white-space: pre-wrap; /* let the text wrap preserving spaces */
+}
+
+.hero-body {
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: left;
+}
+
+.hero-read-time {
+  font-size: 0.8rem;
+  align-self: start;
+  color: #ff6259;
+}
+
+@media only screen and (min-width: 768px) {
+  .hero-img {
+    width: 400px;
+    border-radius: 5%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .hero-img {
+    width: 500px;
+    border-radius: 5%;
+  }
+}

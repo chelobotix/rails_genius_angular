@@ -1,24 +1,21 @@
-<div [ngClass]="{ 'menu-over': menuStatus() }">
-  <div class="px-2">
-    <p class="text-justify">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae dolorem dolores impedit minus omnis
-      placeat, ratione sint? Consequuntur harum inventore ipsa ipsam labore libero modi nam repellendus totam
-      voluptatibus?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae dolorem dolores impedit minus omnis
-      placeat, ratione sint? Consequuntur harum inventore ipsa ipsam labore libero modi nam repellendus totam
-      voluptatibus?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae dolorem dolores impedit minus omnis
-      placeat, ratione sint? Consequuntur harum inventore ipsa ipsam labore libero modi nam repellendus totam
-      voluptatibus?
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae dolorem dolores impedit minus omnis
-      placeat, ratione sint? Consequuntur harum inventore ipsa ipsam labore libero modi nam repellendus totam
-      voluptatibus?
-    </p>
-  </div>
+<div class="flex flex-column align-items-center justify-content-center">
+  @if (!loader()) {
+    <div class="container">
+      <app-hero [heroPost]="posts().posts[0]" />
+      <div class="feature-container">
+        <p class="featured-title text-red-400">FEATURED</p>
+        @for (post of posts().posts; track post.id) {
+          @if (post.featured) {
+            <app-feature [featurePost]="post" />
+          }
+        }
+      </div>
+    </div>
+    <div class="posts-container">
+      @for (post of posts().posts; track post.id) {
+        <app-post [post]="post" />
+        <p-divider />
+      }
+    </div>
+  }
 </div>

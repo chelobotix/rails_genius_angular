@@ -1,10 +1,16 @@
+<app-header />
 <div class="main-container">
-  <app-header />
   <main class="px-1">
-    @if (true) {
-      <app-skeleton />
-    } @else {
-      <app-home />
-    }
+    <app-skeleton />
+    <app-home />
+
+    <!--    <p>{{ postService.isLoading() }}</p>-->
+    <!--    <div *ngIf="postService.isLoading(); else loading">-->
+    <!--      <app-home />-->
+    <!--    </div>-->
+
+    <!--    <ng-template #loading>-->
+    <!--      <p>Loading.......</p>-->
+    <!--    </ng-template>-->
   </main>
 </div>

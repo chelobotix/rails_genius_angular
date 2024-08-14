@@ -6,6 +6,7 @@ export interface IPost {
   tags: string | string[]
   readTime: number
   published: string
+  featured: boolean
   user: {
     id: number
     email: string
