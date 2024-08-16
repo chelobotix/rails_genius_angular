@@ -1,8 +1,10 @@
 <div class="container">
-  <div class="flex align-items-center justify-content-center">
-    <img [src]="logoImage()" alt="" class="logo-img" />
-    <p class="logo-text text-neutral-800 text">Rails Genius</p>
-  </div>
+  <a [routerLink]="['/']">
+    <div class="flex align-items-center justify-content-center">
+      <img [src]="logoImage()" alt="" class="logo-img" />
+      <p class="logo-text text-neutral-800 text">Rails Genius</p>
+    </div>
+  </a>
   <div class="hamburger-container">
     <app-search />
     <app-hamburger-menu />

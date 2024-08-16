@@ -10,11 +10,13 @@ import { PostService } from './services/post.service'
 import { HeaderComponent } from './components/header/header.component'
 import { HomeComponent } from './components/home/home.component'
 import { SkeletonComponent } from './components/home/skeleton/skeleton.component'
+import { RouterOutlet } from '@angular/router'
+import { FooterComponent } from './components/footer/footer.component'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgIf, AsyncPipe, HeaderComponent, HomeComponent, SkeletonComponent],
+  imports: [NgIf, AsyncPipe, HeaderComponent, HomeComponent, SkeletonComponent, RouterOutlet, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

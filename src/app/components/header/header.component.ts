@@ -3,13 +3,14 @@ import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.componen
 import { DesktopMenuComponent } from './desktop-menu/desktop-menu.component'
 import { ThemeManagerService } from '../../services/theme-manager.service'
 import { SearchComponent } from './search/search.component'
+import { ActivatedRoute, RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [HamburgerMenuComponent, DesktopMenuComponent, SearchComponent],
+  imports: [HamburgerMenuComponent, DesktopMenuComponent, SearchComponent, RouterLink],
 })
 export class HeaderComponent {
   private themeManagerService = inject(ThemeManagerService)
