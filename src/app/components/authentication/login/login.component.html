@@ -2,8 +2,8 @@
   <p-card [style]="{ width: '100%', padding: '20px', 'margin-top': '100px' }">
     <ng-template pTemplate="header">
       <div class="flex flex-column align-items-center mt-4">
-        <p class="subtitle">Become a Rails Genius</p>
-        <p class="title">Sign Up</p>
+        <p class="subtitle">Welcome back Railer!</p>
+        <p class="title">Login</p>
       </div>
     </ng-template>
 
@@ -30,9 +30,9 @@
 
     <ng-template pTemplate="footer">
       <div class="flex flex-column align-items-center mt-5">
-        <p class="text-sm">Already have an account?</p>
-        <a [routerLink]="['/login']">
-          <p class="text-sm text-red-500">Login</p>
+        <p class="text-sm">Don't have an account yet?</p>
+        <a [routerLink]="['/signup']">
+          <p class="text-sm text-red-500">Sign up</p>
         </a>
       </div>
     </ng-template>

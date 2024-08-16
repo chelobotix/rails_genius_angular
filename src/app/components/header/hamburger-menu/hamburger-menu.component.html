@@ -40,7 +40,15 @@
               [raised]="true"
             />
           </a>
-          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
+          <a [routerLink]="['login']">
+            <p-button
+              (click)="sidebarVisible = false"
+              label="Log in"
+              severity="contrast"
+              size="small"
+              [raised]="true"
+            />
+          </a>
         </p-buttonGroup>
       </div>
 

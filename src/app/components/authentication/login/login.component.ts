@@ -1,19 +1,20 @@
 import { Component } from '@angular/core'
+import { Button } from 'primeng/button'
 import { CardModule } from 'primeng/card'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Button } from 'primeng/button'
-import { ActivatedRoute, RouterLink } from '@angular/router'
+import { PrimeTemplate } from 'primeng/api'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { RouterLink } from '@angular/router'
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-login',
   standalone: true,
-  imports: [FloatLabelModule, InputTextModule, FormsModule, Button, CardModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
+  imports: [Button, CardModule, FloatLabelModule, InputTextModule, PrimeTemplate, ReactiveFormsModule, RouterLink],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class SignupComponent {
+export class LoginComponent {
   formData = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
