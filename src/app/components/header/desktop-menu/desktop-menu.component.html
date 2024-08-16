@@ -8,8 +8,12 @@
 <p-divider layout="vertical" />
 
 <p-buttonGroup>
-  <p-button label="Sign Up" severity="danger" size="small" />
-  <p-button label="Log in" severity="contrast" size="small" />
+  <a [routerLink]="['/signup']">
+    <p-button label="Sign Up" severity="danger" size="small" />
+  </a>
+  <a [routerLink]="['/login']">
+    <p-button label="Log in" severity="contrast" size="small" />
+  </a>
 </p-buttonGroup>
 
 <p-divider layout="vertical" />

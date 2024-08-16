@@ -23,8 +23,8 @@
       </div>
 
       <div class="btn-container">
-        <p-button label="Clear" severity="secondary" [style]="{ width: '100px' }" />
-        <p-button label="Join" severity="danger" [style]="{ width: '100px' }" />
+        <p-button label="Clear" (click)="clearForm()" severity="secondary" [style]="{ width: '100px' }" />
+        <p-button type="submit" label="Join" severity="danger" [style]="{ width: '100px' }" />
       </div>
     </form>
 
