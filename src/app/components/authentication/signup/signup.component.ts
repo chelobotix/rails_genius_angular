@@ -26,4 +26,8 @@ export class SignupComponent {
   onSubmit() {
     console.log(this.formData.value.email)
   }
+
+  clearForm() {
+    this.formData.reset()
+  }
 }

@@ -27,4 +27,8 @@ export class LoginComponent {
   onSubmit() {
     console.log(this.formData.value.email)
   }
+
+  clearForm() {
+    this.formData.reset()
+  }
 }
