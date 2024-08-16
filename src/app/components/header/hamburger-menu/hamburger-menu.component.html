@@ -31,7 +31,15 @@
 
       <div class="theme-container">
         <p-buttonGroup>
-          <p-button label="Sign Up" severity="secondary" size="small" [raised]="true" />
+          <a [routerLink]="['signup']">
+            <p-button
+              (click)="sidebarVisible = false"
+              label="Sign Up"
+              severity="secondary"
+              size="small"
+              [raised]="true"
+            />
+          </a>
           <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
         </p-buttonGroup>
       </div>

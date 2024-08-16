@@ -10506,7 +10506,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  all: unset;
 }
 
 p {
