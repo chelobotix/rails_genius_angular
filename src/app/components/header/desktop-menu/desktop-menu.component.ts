@@ -35,7 +35,6 @@ export class DesktopMenuComponent implements OnInit {
   selectedTheme!: IThemeSelect
 
   handleTheme() {
-    console.log(this.selectedTheme)
     this.themeManagerService.switchTheme(this.selectedTheme.code)
   }
 

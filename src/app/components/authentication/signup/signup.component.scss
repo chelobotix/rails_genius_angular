@@ -4,7 +4,6 @@
   height: calc(100vh - 140px);
   max-width: 1200px;
   margin: auto;
-  background-color: var(--gray-100);
 }
 
 .form-container {
@@ -34,4 +33,18 @@
   font-weight: 500;
   color: var(--red-500);
   margin-bottom: -1.2rem;
+}
+
+.check-container {
+  width: 25px;
+}
+
+.valid-icon {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #22c55e;
+  border-radius: 50%;
+  color: #ffffff;
 }

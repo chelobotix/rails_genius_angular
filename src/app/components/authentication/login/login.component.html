@@ -1,4 +1,4 @@
-<div class="card-container">
+<div class="card-container surface-100">
   <p-card [style]="{ width: '100%', padding: '20px', 'margin-top': '100px' }">
     <ng-template pTemplate="header">
       <div class="flex flex-column align-items-center mt-4">
@@ -31,7 +31,7 @@
     <ng-template pTemplate="footer">
       <div class="flex flex-column align-items-center mt-5">
         <p class="text-sm">Don't have an account yet?</p>
-        <a [routerLink]="['/signup']">
+        <a [routerLink]="['/auth/signup']">
           <p class="text-sm text-red-500">Sign up</p>
         </a>
       </div>
