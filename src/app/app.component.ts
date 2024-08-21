@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true
-    this.localStorageService.exists()
+    this.localStorageService.checkLocalStorage()
     this.themeManagerService.switchTheme(this.localStorageService.actualData().theme)
   }
 }

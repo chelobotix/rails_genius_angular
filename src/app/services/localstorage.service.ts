@@ -1,39 +1,43 @@
 import { Injectable, signal } from '@angular/core'
-import { ILocalStorage } from '../models/localstorage.model'
 import { ITheme } from '../models/theme.model'
+import { ILocalStorage } from '../models/ILocalStorage.model'
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalstorageService {
-  private data = signal<ILocalStorage>({ theme: 'Light' })
+  private data = signal<ILocalStorage>({
+    theme: 'Light',
+    token: '',
+  })
+
   actualData = this.data.asReadonly()
 
   updateTheme(theme: ITheme): void {
-    this.data.update((prev: ILocalStorage) => ({ ...prev, theme }))
-    this.save()
+    this.data.set({ ...this.data(), theme: theme })
+    this.createData()
   }
 
-  exists() {
-    let value = undefined
+  updateToken(token: string): void {
+    this.data.set({ ...this.data(), token: token })
+    this.createData()
+  }
+
+  checkLocalStorage() {
     if (typeof window !== 'undefined') {
-      value = localStorage.getItem('rails_genius')
-    }
-    if (value) {
-      this.get(value)
-    } else {
-      this.save()
+      const result = localStorage.getItem('rails_genius_data')
+      if (result) {
+        this.data.set(JSON.parse(result))
+      } else {
+        this.createData()
+      }
     }
   }
 
-  private save() {
+  private createData() {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('rails_genius', JSON.stringify(this.data()))
+      console.log(this.data())
+      localStorage.setItem('rails_genius_data', JSON.stringify(this.data()))
     }
-  }
-
-  private get(value: string) {
-    const result: ILocalStorage = JSON.parse(value)
-    this.data.set(result)
   }
 }

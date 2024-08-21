@@ -1,37 +1,65 @@
-<div class="card-container">
+<div class="card-container surface-100">
   <p-card [style]="{ width: '100%', padding: '20px', 'margin-top': '100px' }">
     <ng-template pTemplate="header">
       <div class="flex flex-column align-items-center mt-4">
         <p class="subtitle">Become a Rails Genius</p>
         <p class="title">Sign Up</p>
       </div>
+
+      @if (errors()) {
+        <div class="flex flex-column align-items-center gap-1 mt-4">
+          <p class="text-sm text-red-500">Errors:</p>
+          <p class="text-sm text-red-500">{{ errors() }}</p>
+        </div>
+      }
     </ng-template>
 
     <form class="form-container" [formGroup]="formData" (ngSubmit)="onSubmit()">
       <div class="input-container">
-        <p-floatLabel>
-          <input pInputText type="text" id="email" formControlName="email" />
-          <label for="email">Email</label>
-        </p-floatLabel>
+        <div class="flex align-items-center gap-1">
+          <p-floatLabel>
+            <input pInputText type="text" id="email" formControlName="email" />
+            <label for="email">Email</label>
+          </p-floatLabel>
+
+          <div class="check-container">
+            @if (validateField('email')) {
+              <app-check />
+            }
+          </div>
+        </div>
+        @if (formData.get('email')?.dirty && formData.get('email')?.invalid) {
+          <small class="text-sm text-red-500">invalid email</small>
+        }
       </div>
 
       <div class="input-container">
-        <p-floatLabel>
-          <input pInputText type="password" id="password" formControlName="password" />
-          <label for="password">Password</label>
-        </p-floatLabel>
+        <div class="flex align-items-center gap-1">
+          <p-floatLabel>
+            <input pInputText type="password" id="password" formControlName="password" />
+            <label for="password">Password</label>
+          </p-floatLabel>
+          <div class="check-container">
+            @if (validateField('password')) {
+              <app-check />
+            }
+          </div>
+        </div>
+        @if (formData.get('password')?.dirty && formData.get('password')?.invalid) {
+          <small class="text-sm text-red-500">min-max length: 6/16</small>
+        }
       </div>
 
       <div class="btn-container">
         <p-button label="Clear" (click)="clearForm()" severity="secondary" [style]="{ width: '100px' }" />
-        <p-button type="submit" label="Join" severity="danger" [style]="{ width: '100px' }" />
+        <p-button type="submit" [loading]="loading()" label="Join" severity="danger" [style]="{ width: '100px' }" />
       </div>
     </form>
 
     <ng-template pTemplate="footer">
       <div class="flex flex-column align-items-center mt-5">
         <p class="text-sm">Already have an account?</p>
-        <a [routerLink]="['/login']">
+        <a [routerLink]="['auth/login']">
           <p class="text-sm text-red-500">Login</p>
         </a>
       </div>

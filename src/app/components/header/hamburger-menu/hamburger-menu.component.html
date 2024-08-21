@@ -31,24 +31,22 @@
 
       <div class="theme-container">
         <p-buttonGroup>
-          <a [routerLink]="['/signup']">
-            <p-button
-              (click)="sidebarVisible = false"
-              label="Sign Up"
-              severity="secondary"
-              size="small"
-              [raised]="true"
-            />
-          </a>
-          <a [routerLink]="['/login']">
-            <p-button
-              (click)="sidebarVisible = false"
-              label="Log in"
-              severity="contrast"
-              size="small"
-              [raised]="true"
-            />
-          </a>
+          <p-button
+            [routerLink]="['/auth/signup']"
+            (click)="sidebarVisible = false"
+            label="Sign Up"
+            severity="secondary"
+            size="small"
+            [raised]="true"
+          />
+          <p-button
+            [routerLink]="['/auth/login']"
+            (click)="sidebarVisible = false"
+            label="Log in"
+            severity="contrast"
+            size="small"
+            [raised]="true"
+          />
         </p-buttonGroup>
       </div>
 
