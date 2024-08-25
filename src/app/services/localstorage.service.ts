@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import { ITheme } from '../models/theme.model'
 import { ILocalStorage } from '../models/ILocalStorage.model'
+import { ICredentials } from '../models/credentials.model'
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,13 @@ import { ILocalStorage } from '../models/ILocalStorage.model'
 export class LocalstorageService {
   private data = signal<ILocalStorage>({
     theme: 'Light',
-    token: '',
+    credentials: {
+      'access-token': '',
+      'token-type': '',
+      client: '',
+      expiry: '',
+      uid: '',
+    },
   })
 
   actualData = this.data.asReadonly()
@@ -18,8 +25,8 @@ export class LocalstorageService {
     this.createData()
   }
 
-  updateToken(token: string): void {
-    this.data.set({ ...this.data(), token: token })
+  updateCredentials(credentials: ICredentials): void {
+    this.data.set({ ...this.data(), credentials: credentials })
     this.createData()
   }
 

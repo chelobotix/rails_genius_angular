@@ -30,24 +30,22 @@
       </div>
 
       <div class="theme-container">
-        <p-buttonGroup>
-          <p-button
+        @if (is_authenticated()) {
+          <p-avatar
+            icon="pi pi-user"
+            styleClass="mr-2"
+            size="large"
+            shape="circle"
+            [style]="{ 'background-color': '#ff6259', color: '#ffffff' }"
             [routerLink]="['/auth/signup']"
-            (click)="sidebarVisible = false"
-            label="Sign Up"
-            severity="secondary"
-            size="small"
-            [raised]="true"
           />
-          <p-button
-            [routerLink]="['/auth/login']"
-            (click)="sidebarVisible = false"
-            label="Log in"
-            severity="contrast"
-            size="small"
-            [raised]="true"
-          />
-        </p-buttonGroup>
+        } @else {
+          <p-buttonGroup>
+            <p-button [routerLink]="['/auth/signup']" label="Sign Up" severity="danger" size="small" />
+
+            <p-button [routerLink]="['/auth/login']" label="Log in" severity="contrast" size="small" />
+          </p-buttonGroup>
+        }
       </div>
 
       <div class="theme-container flex-column">
