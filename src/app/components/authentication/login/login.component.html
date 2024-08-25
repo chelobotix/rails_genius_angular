@@ -1,3 +1,14 @@
+@if (confirmation()) {
+  <p-messages
+    [(value)]="message"
+    [enableService]="false"
+    [closable]="true"
+    [showTransitionOptions]="'500ms'"
+    [hideTransitionOptions]="'500ms'"
+    [style]="{ width: '100%', 'max-width': '340px', margin: 'auto' }"
+  />
+}
+
 <div class="card-container surface-100">
   <p-card [style]="{ width: '100%', padding: '20px', 'margin-top': '100px' }">
     <ng-template pTemplate="header">
@@ -5,6 +16,13 @@
         <p class="subtitle">Welcome back Railer!</p>
         <p class="title">Login</p>
       </div>
+
+      @if (errors()) {
+        <div class="flex flex-column align-items-center gap-1 mt-4">
+          <p class="text-sm text-red-500">Errors:</p>
+          <p class="text-sm text-red-500">{{ errors() }}</p>
+        </div>
+      }
     </ng-template>
 
     <form class="form-container" [formGroup]="formData" (ngSubmit)="onSubmit()">
@@ -24,7 +42,7 @@
 
       <div class="btn-container">
         <p-button label="Clear" (onClick)="clearForm()" severity="secondary" [style]="{ width: '100px' }" />
-        <p-button label="Enter" severity="danger" [style]="{ width: '100px' }" />
+        <p-button type="submit" [loading]="loading()" label="Enter" severity="danger" [style]="{ width: '100px' }" />
       </div>
     </form>
 

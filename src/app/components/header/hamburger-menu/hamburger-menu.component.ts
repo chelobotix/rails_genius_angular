@@ -17,6 +17,8 @@ import { SidebarModule } from 'primeng/sidebar'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputGroupModule } from 'primeng/inputgroup'
+import { AvatarModule } from 'primeng/avatar'
+import { AuthenticatorService } from '../../../services/authenticator.service'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -38,6 +40,7 @@ import { InputGroupModule } from 'primeng/inputgroup'
     InputTextModule,
     InputGroupModule,
     ButtonDirective,
+    AvatarModule,
   ],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: './hamburger-menu.component.scss',
@@ -45,6 +48,10 @@ import { InputGroupModule } from 'primeng/inputgroup'
 export class HamburgerMenuComponent {
   private menuService = inject(MenuService)
   private themeManagerService = inject(ThemeManagerService)
+  private authenticatorService = inject(AuthenticatorService)
+
+  is_authenticated = this.authenticatorService.actualIsAuthenticated
+  credentials = this.authenticatorService.actualCredentials
   value = ''
   sidebarVisible: boolean = false
   items = [

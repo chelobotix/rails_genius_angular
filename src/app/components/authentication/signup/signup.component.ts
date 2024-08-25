@@ -32,6 +32,7 @@ export class SignupComponent {
   private router = inject(Router)
   private subscription!: Subscription
   loading = signal(false)
+  errors = signal('')
   formData = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
@@ -41,8 +42,6 @@ export class SignupComponent {
       validators: [Validators.required, Validators.minLength(6), Validators.maxLength(16)],
     }),
   })
-
-  errors = signal('')
 
   onSubmit() {
     if (this.formData.invalid) {
