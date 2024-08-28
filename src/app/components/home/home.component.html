@@ -1,6 +1,6 @@
-<div class="flex flex-column align-items-center justify-content-center">
+<article class="flex flex-column align-items-center justify-content-center">
   @if (!loader()) {
-    <div class="container">
+    <div class="container surface-100">
       <app-hero [heroPost]="posts().posts[0]" />
       <div class="feature-container">
         <p class="featured-title text-red-400">FEATURED</p>
@@ -14,8 +14,10 @@
     <div class="posts-container">
       @for (post of posts().posts; track post.id) {
         <app-post [post]="post" />
-        <p-divider />
+        <div class="lg:hidden">
+          <p-divider />
+        </div>
       }
     </div>
   }
-</div>
+</article>

@@ -1,0 +1,58 @@
+@if (confirmation()) {
+  <p-messages
+    [(value)]="message"
+    [enableService]="false"
+    [closable]="true"
+    [showTransitionOptions]="'500ms'"
+    [hideTransitionOptions]="'500ms'"
+    [style]="{ width: '100%', 'max-width': '340px', margin: 'auto' }"
+  />
+}
+
+<div class="card-container surface-100">
+  <p-card [style]="{ width: '100%', padding: '20px', 'margin-top': '100px' }">
+    <ng-template pTemplate="header">
+      <div class="flex flex-column align-items-center mt-4">
+        <p class="subtitle">Welcome back Railer!</p>
+        <p class="title">Login</p>
+      </div>
+
+      @if (errors()) {
+        <div class="flex flex-column align-items-center gap-1 mt-4">
+          <p class="text-sm text-red-500">Errors:</p>
+          <p class="text-sm text-red-500">{{ errors() }}</p>
+        </div>
+      }
+    </ng-template>
+
+    <form class="form-container" [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <div class="input-container">
+        <p-floatLabel>
+          <input pInputText type="text" id="email" formControlName="email" />
+          <label for="email">Email</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="input-container">
+        <p-floatLabel>
+          <input pInputText type="password" id="password" formControlName="password" />
+          <label for="password">Password</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="btn-container">
+        <p-button label="Clear" (onClick)="clearForm()" severity="secondary" [style]="{ width: '100px' }" />
+        <p-button type="submit" [loading]="loading()" label="Enter" severity="danger" [style]="{ width: '100px' }" />
+      </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <div class="flex flex-column align-items-center mt-5">
+        <p class="text-sm">Don't have an account yet?</p>
+        <a [routerLink]="['/auth/signup']">
+          <p class="text-sm text-red-500">Sign up</p>
+        </a>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

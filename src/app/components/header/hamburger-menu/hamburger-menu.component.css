@@ -1,7 +1,6 @@
 li {
   width: 80%;
-  text-align: center;
-}
+  text-align: center; }
 
 .theme-container {
   display: flex;
@@ -9,21 +8,18 @@ li {
   width: 97%;
   padding: 10px;
   border-radius: 15px;
-  background-color: #8c221c;
-}
+  background-color: rgba(143, 1, 0, 0.8); }
 
 .burger-wrapper {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .social-media-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #8c221c;
+  background-color: rgba(143, 1, 0, 0.8);
   padding: 10px;
-  gap: 2px;
-}
+  gap: 2px; }
 
 .theme-ul {
   display: flex;
@@ -32,12 +28,6 @@ li {
   list-style-type: none;
   padding: 0 1rem;
   gap: 5px;
-  width: 75%;
-}
+  width: 75%; }
 
-.truncate {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/*# sourceMappingURL=hamburger-menu.component.css.map */

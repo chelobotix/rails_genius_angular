@@ -1,16 +1,8 @@
 <app-header />
 <div class="main-container">
-  <main class="px-1">
-    <app-skeleton />
-    <app-home />
-
-    <!--    <p>{{ postService.isLoading() }}</p>-->
-    <!--    <div *ngIf="postService.isLoading(); else loading">-->
-    <!--      <app-home />-->
-    <!--    </div>-->
-
-    <!--    <ng-template #loading>-->
-    <!--      <p>Loading.......</p>-->
-    <!--    </ng-template>-->
+  <app-skeleton />
+  <main>
+    <router-outlet />
   </main>
 </div>
+<app-footer />

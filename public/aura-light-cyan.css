@@ -10506,7 +10506,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  all: unset;
 }
 
 p {
@@ -10546,4 +10546,37 @@ ul {
 .menu-side-bar {
   width: 90%;
   max-width: 20rem;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1000px) {
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 379px) and (max-width: 999px) {
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .logo-text {
+    font-size: 1.5rem;
+    line-height: 1.2rem;
+  }
 }

@@ -30,10 +30,22 @@
       </div>
 
       <div class="theme-container">
-        <p-buttonGroup>
-          <p-button label="Sign Up" severity="secondary" size="small" [raised]="true" />
-          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />
-        </p-buttonGroup>
+        @if (is_authenticated()) {
+          <p-avatar
+            icon="pi pi-user"
+            styleClass="mr-2"
+            size="large"
+            shape="circle"
+            [style]="{ 'background-color': '#ff6259', color: '#ffffff' }"
+            (click)="showDialog()"
+          />
+        } @else {
+          <p-buttonGroup>
+            <p-button (click)="authClick('signup')" label="Sign Up" severity="danger" size="small" />
+
+            <p-button (click)="authClick('login')" label="Log in" severity="contrast" size="small" />
+          </p-buttonGroup>
+        }
       </div>
 
       <div class="theme-container flex-column">
@@ -77,57 +89,54 @@
   <i class="pi pi-bars text-3xl text-gray-700"></i>
 </p-button>
 
-<!--  <p-button (onClick)="menu.toggle($event)" [rounded]="true" [text]="true" severity="secondary" styleClass="no-padding">-->
-<!--    <i class="pi pi-bars text-xl"></i>-->
-<!--  </p-button>-->
-<!--  <p-menu-->
-<!--    #menu-->
-<!--    [model]="items"-->
-<!--    [popup]="true"-->
-<!--    (onShow)="handleMenuStatus('open')"-->
-<!--    (onHide)="handleMenuStatus('close')"-->
-<!--    styleClass="main-menu"-->
-<!--    showTransitionOptions=".300s cubic-bezier(0, 0, 0.2, 1)"-->
-<!--    hideTransitionOptions=".300s linear"-->
-<!--  >-->
-<!--    <ng-template pTemplate="start">-->
-<!--      <div class="flex justify-content-center">-->
-<!--        <ul class="theme-ul">-->
-<!--          <li (click)="themeChange('Light')">-->
-<!--            <app-theme-button icon="pi-sun" name="Light" />-->
-<!--          </li>-->
-<!--          <li (click)="themeChange('Dark')">-->
-<!--            <app-theme-button icon="pi-moon" name="Dark" />-->
-<!--          </li>-->
-<!--          <li (click)="themeChange('System')">-->
-<!--            <app-theme-button icon="pi-desktop" name="System" />-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
-<!--      <p-divider />-->
-<!--    </ng-template>-->
+@if (is_authenticated()) {
+  <p-dialog
+    header="Header"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '18rem' }"
+    transitionOptions="400ms cubic-bezier(0, 0, 0.2, 1)"
+  >
+    <ng-template pTemplate="header"></ng-template>
+    <div class="p-2 flex flex-column align-items-center gap-4 mb-1">
+      <div class="flex flex-column align-items-center justify-content-center gap-2">
+        <p-avatar
+          [label]="credentials()['uid'][0].toUpperCase()"
+          styleClass="mr-2"
+          size="xlarge"
+          shape="circle"
+          [style]="{ 'background-color': '#ff6259', color: '#ffffff' }"
+        />
+        <span class="font-bold truncate text-gray-600">{{ credentials()['uid'] }}</span>
+      </div>
 
-<!--    <ng-template pTemplate="item" let-item>-->
-<!--      <a pRipple class="flex justify-content-center align-items-center p-0">-->
-<!--        <span class="ml-2 text-white text-l font-semibold">{{ item.label }}</span>-->
-<!--      </a>-->
-<!--    </ng-template>-->
+      <div class="flex flex-column align-items-center">
+        <span class="p-text-secondary block mb-5">Update your password.</span>
 
-<!--    <ng-template pTemplate="end">-->
-<!--      <p-divider />-->
-<!--      <ul class="menu-ul">-->
-<!--        <p-buttonGroup>-->
-<!--          <p-button label="Sign Up" severity="danger" size="small" [raised]="true" />-->
-<!--          <p-button label="Log in" severity="contrast" size="small" [raised]="true" />-->
-<!--        </p-buttonGroup>-->
-<!--      </ul>-->
+        <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="flex flex-column align-items-center gap-4">
+          <p-floatLabel>
+            <input type="password" pInputText id="newPassword" formControlName="newPassword" />
+            <label for="newPassword">New Password</label>
+          </p-floatLabel>
+          <div>
+            <p-button label="Cancel" [text]="true" severity="secondary" (onClick)="visible = false" />
+            <p-button type="submit" label="Updated" [outlined]="true" severity="secondary" />
+          </div>
+        </form>
+      </div>
 
-<!--      <div class="social-icons-container">-->
-<!--        <div>-->
-<!--          <i class="pi pi-linkedin" style="font-size: 1.3rem"></i>-->
-<!--          <i class="pi pi-github" style="font-size: 1.3rem"></i>-->
-<!--          <i class="pi pi-envelope" style="font-size: 1.3rem"></i>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--  </p-menu>-->
+      <p-button label="Go to your Favorites" severity="warning" icon="pi pi-star-fill" />
+      <p-button (click)="handleLogout()" label="Logout" severity="danger" icon="pi pi-sign-out" />
+    </div>
+  </p-dialog>
+}
+@if (message) {
+  <p-messages
+    [(value)]="message"
+    [enableService]="false"
+    [closable]="true"
+    [showTransitionOptions]="'500ms'"
+    [hideTransitionOptions]="'500ms'"
+    [style]="{ width: '100%', 'max-width': '340px', margin: 'auto' }"
+  />
+}
