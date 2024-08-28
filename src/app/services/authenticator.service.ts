@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core'
 import { LocalstorageService } from './localstorage.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ICredentials } from '../models/credentials.model'
-import { catchError, map, Observable, of } from 'rxjs'
+import { catchError, map, Observable, of, tap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +47,24 @@ export class AuthenticatorService {
     return this.httpClient.post(`${this.base_url}/auth/sign_in`, body, { headers: headers, observe: 'response' })
   }
 
+  logout() {
+    this.is_authenticated.set(false)
+    return this.httpClient
+      .delete(`${this.base_url}/auth/sign_out`, { headers: this.include_credentials_headers() })
+      .pipe(
+        tap(() => {
+          this.localstorageService.updateCredentials({
+            'access-token': '',
+            'token-type': '',
+            client: '',
+            expiry: '',
+            uid: '',
+          })
+          this.is_authenticated.set(false)
+        })
+      )
+  }
+
   changePassword(password: string) {
     const body = {
       password: password,
@@ -83,6 +101,7 @@ export class AuthenticatorService {
     const url = `${this.base_url}/auth/validate_token?uid=${this.credentials()['uid']}&client=${this.credentials()['client']}&access-token=${this.credentials()['access-token']}`
     return this.httpClient.get(url).pipe(
       map(() => {
+        console.log('mappp')
         this.is_authenticated.set(true)
         return true
       }),

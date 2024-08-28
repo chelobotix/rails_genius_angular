@@ -34,3 +34,10 @@ li {
   gap: 5px;
   width: 75%;
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
