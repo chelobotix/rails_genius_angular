@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core'
 import { Button } from 'primeng/button'
-import { RouterLink, RouterLinkActive } from '@angular/router'
+import { Router, RouterLink, RouterLinkActive } from '@angular/router'
 import { ButtonGroupModule } from 'primeng/buttongroup'
 import { DividerModule } from 'primeng/divider'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
@@ -15,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { MessagesModule } from 'primeng/messages'
 import { Message } from 'primeng/api'
+import { LocalstorageService } from '../../../services/localstorage.service'
 
 @Component({
   selector: 'app-desktop-menu',
@@ -41,6 +42,7 @@ import { Message } from 'primeng/api'
 export class DesktopMenuComponent implements OnInit {
   private themeManagerService = inject(ThemeManagerService)
   private authenticatorService = inject(AuthenticatorService)
+  private router = inject(Router)
 
   is_authenticated = this.authenticatorService.actualIsAuthenticated
   credentials = this.authenticatorService.actualCredentials
@@ -55,6 +57,35 @@ export class DesktopMenuComponent implements OnInit {
       validators: [Validators.required, Validators.minLength(6)],
     }),
   })
+
+  themes: IThemeSelect[] = [
+    { name: 'Light', code: 'Light', icon: 'pi-sun' },
+    { name: 'Dark', code: 'Dark', icon: 'pi-moon' },
+    { name: 'System', code: 'System', icon: 'pi-desktop' },
+  ]
+  selectedTheme!: IThemeSelect
+
+  ngOnInit(): void {
+    if (this.themeManagerService.actualTheme() === 'Light') {
+      this.selectedTheme = this.themes[0]
+    } else if (this.themeManagerService.actualTheme() === 'Dark') {
+      this.selectedTheme = this.themes[1]
+    } else if (this.themeManagerService.actualTheme() === 'System') {
+      this.selectedTheme = this.themes[2]
+    }
+  }
+
+  handleLogout() {
+    this.authenticatorService.logout().subscribe({
+      next: (response) => {
+        console.log(response)
+        this.router.navigate(['/'])
+      },
+      error: (error) => {
+        console.log(error)
+      },
+    })
+  }
 
   onSubmit() {
     console.log(this.formData.value.actualPassword)
@@ -73,29 +104,8 @@ export class DesktopMenuComponent implements OnInit {
     }
   }
 
-  onReset() {
-    this.formData.reset()
-  }
-
-  themes: IThemeSelect[] = [
-    { name: 'Light', code: 'Light', icon: 'pi-sun' },
-    { name: 'Dark', code: 'Dark', icon: 'pi-moon' },
-    { name: 'System', code: 'System', icon: 'pi-desktop' },
-  ]
-  selectedTheme!: IThemeSelect
-
   handleTheme() {
     this.themeManagerService.switchTheme(this.selectedTheme.code)
-  }
-
-  ngOnInit(): void {
-    if (this.themeManagerService.actualTheme() === 'Light') {
-      this.selectedTheme = this.themes[0]
-    } else if (this.themeManagerService.actualTheme() === 'Dark') {
-      this.selectedTheme = this.themes[1]
-    } else if (this.themeManagerService.actualTheme() === 'System') {
-      this.selectedTheme = this.themes[2]
-    }
   }
 
   showDialog() {
