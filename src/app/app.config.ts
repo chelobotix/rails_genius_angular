@@ -5,8 +5,8 @@ import { routes } from './app.routes'
 import { provideClientHydration } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http'
-import { loaderInterceptor } from './interceptors/loader.interceptor'
 import { JwtModule } from '@auth0/angular-jwt'
+import { provideQuillConfig } from 'ngx-quill'
 
 export function tokenGetter() {
   return '69*'
@@ -35,5 +35,14 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: 'always',
       })
     ),
+    provideQuillConfig({
+      modules: {
+        syntax: false,
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          ['blockquote', 'code-block'],
+        ],
+      },
+    }),
   ],
 }

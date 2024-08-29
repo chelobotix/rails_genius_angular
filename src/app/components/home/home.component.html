@@ -13,7 +13,7 @@
     </div>
     <div class="posts-container">
       @for (post of posts().posts; track post.id) {
-        <app-post [post]="post" />
+        <app-post-holder [post]="post" />
         <div class="lg:hidden">
           <p-divider />
         </div>
@@ -21,3 +21,5 @@
     </div>
   }
 </article>
+
+<app-post />
