@@ -7,13 +7,14 @@ import { LoaderService } from '../../services/loader.service'
 import { delay, Subscription, tap } from 'rxjs'
 import { IPosts } from '../../models/posts.model'
 import { FeatureComponent } from './feature/feature.component'
-import { PostComponent } from '../post/post.component'
 import { DividerModule } from 'primeng/divider'
+import { PostHolderComponent } from './post-holder/post-holder.component'
+import { PostComponent } from '../posts/post/post.component'
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, HeroComponent, FeatureComponent, PostComponent, DividerModule],
+  imports: [NgClass, HeroComponent, FeatureComponent, PostComponent, DividerModule, PostHolderComponent, PostComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
