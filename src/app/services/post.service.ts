@@ -1,16 +1,18 @@
 import { inject, Injectable, signal } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { catchError, delay, map, Observable, of, pipe, tap } from 'rxjs'
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http'
+import { catchError, delay, EMPTY, map, Observable, of, pipe, tap } from 'rxjs'
 import { IPost } from '../models/post.model'
 import { IPosts } from '../models/posts.model'
 import { truncate } from '../utils/truncate'
 import { ISinglePost } from '../models/single-post.model'
+import { AuthenticatorService } from './authenticator.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
   private httpClient = inject(HttpClient)
+  private authenticatorService = inject(AuthenticatorService)
   private base_url = 'http://localhost:3000/api/v1'
   private posts = signal<IPosts>({ posts: [] })
   private searchedPosts = signal<IPosts>({ posts: [] })
@@ -38,6 +40,11 @@ export class PostService {
         this.searchedPosts.set(result)
       })
     )
+  }
+
+  newPost(formData: FormData) {
+    const headers = this.authenticatorService.include_credentials_headers()
+    return this.httpClient.post(`${this.base_url}/posts`, formData, { headers: headers })
   }
 
   getPosts() {

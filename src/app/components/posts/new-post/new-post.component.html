@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="container">
+  <h2>New Post</h2>
+
+  <p-floatLabel>
+    <input pInputText id="title" formControlName="title" />
+    <label for="title">Title</label>
+  </p-floatLabel>
+
+  <p-floatLabel>
+    <p-chips id="chips" formControlName="tags" />
+    <label for="chips">Tags</label>
+  </p-floatLabel>
+
+  <div class="flex align-items-center">
+    <p-checkbox formControlName="featured" label="Featured" name="pizza" value="Cheese" />
+  </div>
+
+  <div class="flex align-items-center">
+    <p-checkbox formControlName="published" label="Published" name="pizza" value="Cheese" />
+  </div>
+
+  <div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  </div>
+
+  <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
+
+  <div>
+    <quill-editor formControlName="editorContent" class="quill_class"></quill-editor>
+  </div>
+
+  <button type="submit" class="button">Login</button>
+</form>

@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/authentication/login/login.component'
 import { SuccessComponent } from './components/authentication/success/success.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
+import { NewPostComponent } from './components/posts/new-post/new-post.component'
+import { PostComponent } from './components/posts/post/post.component'
 
 export const routes: Routes = [
   {
@@ -29,6 +31,21 @@ export const routes: Routes = [
         path: 'success',
         component: SuccessComponent,
         title: 'Success',
+      },
+    ],
+  },
+  {
+    path: 'posts',
+    children: [
+      {
+        path: 'new',
+        component: NewPostComponent,
+        title: 'New Post',
+      },
+      {
+        path: ':id',
+        component: PostComponent,
+        title: 'Rails Genius',
       },
     ],
   },
