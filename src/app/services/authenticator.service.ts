@@ -87,7 +87,6 @@ export class AuthenticatorService {
 
   include_credentials_headers() {
     return new HttpHeaders({
-      'Content-Type': 'application/json',
       'access-token': this.credentials()['access-token'],
       'token-type': this.credentials()['token-type'],
       client: this.credentials()['client'],
