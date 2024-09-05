@@ -10,6 +10,7 @@ import { FloatLabelModule } from 'primeng/floatlabel'
 import { ChipsModule } from 'primeng/chips'
 import { NgIf } from '@angular/common'
 import { AuthenticatorService } from '../../../services/authenticator.service'
+import { EditorComponent } from '@tinymce/tinymce-angular'
 
 @Component({
   selector: 'app-new-post',
@@ -24,6 +25,7 @@ import { AuthenticatorService } from '../../../services/authenticator.service'
     FloatLabelModule,
     ChipsModule,
     NgIf,
+    EditorComponent,
   ],
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.scss',
@@ -32,6 +34,17 @@ export class NewPostComponent {
   private sanitizer = inject(DomSanitizer)
   private postService = inject(PostService)
   private authenticatorService = inject(AuthenticatorService)
+
+  init: EditorComponent['init'] = {
+    height: 1500,
+    weight: 1500,
+    resize: true,
+    plugins: 'lists link image table code help wordcount codesample',
+    toolbar:
+      'undo redo | formatselect | bold italic underline | \
+      alignleft aligncenter alignright alignjustify | \
+      bullist numlist outdent indent | removeformat | link image code codesample',
+  }
 
   imagePreview: string | ArrayBuffer | null = null
 
@@ -45,7 +58,7 @@ export class NewPostComponent {
   })
 
   onSubmit() {
-    console.log(this.form.value.editorContent)
+    console.log(this.form.value)
     const formData = new FormData()
 
     if (this.form.valid && this.authenticatorService.actualIsAuthenticated()) {

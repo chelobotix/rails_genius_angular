@@ -25,8 +25,8 @@
 
   <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
 
-  <div>
-    <quill-editor formControlName="editorContent" class="quill_class"></quill-editor>
+  <div class="container-editor">
+    <editor [init]="init" formControlName="editorContent" />
   </div>
 
   <button type="submit" class="button">Login</button>
