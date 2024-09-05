@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
     this.subscription = this.postService
       .getPosts()
       .pipe(
-        delay(500),
         tap((data) => {
           this.loaderService.hideLoader()
         })

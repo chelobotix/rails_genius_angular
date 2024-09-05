@@ -10,7 +10,8 @@ import { catchError, map, Observable, of, tap } from 'rxjs'
 export class AuthenticatorService {
   private localstorageService = inject(LocalstorageService)
   private httpClient = inject(HttpClient)
-  private base_url = 'http://127.0.0.1:3000'
+  // private base_url = 'http://127.0.0.1:3000'
+  private base_url = 'https://rails-genius.fly.dev'
   private credentials = signal<ICredentials>({
     'access-token': '',
     'token-type': '',
@@ -100,7 +101,6 @@ export class AuthenticatorService {
     const url = `${this.base_url}/auth/validate_token?uid=${this.credentials()['uid']}&client=${this.credentials()['client']}&access-token=${this.credentials()['access-token']}`
     return this.httpClient.get(url).pipe(
       map(() => {
-        console.log('mappp')
         this.is_authenticated.set(true)
         return true
       }),

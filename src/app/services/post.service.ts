@@ -13,7 +13,8 @@ import { AuthenticatorService } from './authenticator.service'
 export class PostService {
   private httpClient = inject(HttpClient)
   private authenticatorService = inject(AuthenticatorService)
-  private base_url = 'http://localhost:3000/api/v1'
+  // private base_url = 'http://localhost:3000/api/v1'
+  private base_url = 'https://rails-genius.fly.dev/api/v1'
   private posts = signal<IPosts>({ posts: [] })
   private searchedPosts = signal<IPosts>({ posts: [] })
   actualPosts = this.posts.asReadonly()
@@ -49,6 +50,10 @@ export class PostService {
 
   getPosts() {
     return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
+  }
+
+  getPost(id: string) {
+    return this.getRequest<any>(`/posts/${id}`)
   }
 
   private getRequest<T>(endpoint: string): Observable<T> {

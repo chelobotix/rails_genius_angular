@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http'
 import { JwtModule } from '@auth0/angular-jwt'
 import { provideQuillConfig } from 'ngx-quill'
+import { provideMarkdown } from 'ngx-markdown'
 
 export function tokenGetter() {
   return '69*'
@@ -50,5 +51,6 @@ export const appConfig: ApplicationConfig = {
         ],
       },
     }),
+    provideMarkdown(),
   ],
 }

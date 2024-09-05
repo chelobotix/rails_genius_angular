@@ -1,19 +1,51 @@
-import { Component } from '@angular/core'
-import { QuillEditorComponent } from 'ngx-quill'
-import { EditorModule } from 'primeng/editor'
-import { FormsModule } from '@angular/forms'
+import { AfterViewChecked, Component, inject, OnInit, signal } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { PostService } from '../../../services/post.service'
+import { IPost } from '../../../models/post.model'
+import { LoaderService } from '../../../services/loader.service'
+import { AvatarModule } from 'primeng/avatar'
+import { MarkdownModule } from 'ngx-markdown'
+import { AuthenticatorService } from '../../../services/authenticator.service'
+
+declare var lightbox: any
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [QuillEditorComponent, EditorModule, FormsModule],
+  imports: [AvatarModule, MarkdownModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
-export class PostComponent {
-  content = ''
+export class PostComponent implements OnInit {
+  private route = inject(ActivatedRoute)
+  private postService = inject(PostService)
+  private loaderService = inject(LoaderService)
+  private as = inject(AuthenticatorService)
 
-  logContent() {
-    console.log(this.content)
+  postId: string | null = null
+  post = signal<IPost | null>(null)
+  loader = this.loaderService.loadingState
+
+  ngOnInit() {
+    console.log(this.as.actualIsAuthenticated())
+    lightbox.option({
+      resizeDuration: 200,
+      wrapAround: true,
+      fitImagesInViewport: false,
+      disableScrolling: true,
+    })
+    this.loaderService.showLoader()
+    this.postId = this.route.snapshot.paramMap.get('id')
+    if (this.postId) {
+      this.postService.getPost(this.postId).subscribe({
+        next: (response) => {
+          this.post.set(response.post)
+          this.loaderService.hideLoader()
+        },
+        error: (error) => {
+          console.log(error)
+        },
+      })
+    }
   }
 }
