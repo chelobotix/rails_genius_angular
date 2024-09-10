@@ -58,16 +58,14 @@ export class NewPostComponent {
   })
 
   onSubmit() {
-    console.log(this.form.value)
     const formData = new FormData()
 
     if (this.form.valid && this.authenticatorService.actualIsAuthenticated()) {
       const sanitizedTitle = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.title as string)
       const sanitizedTags = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.tags as string)
-      const sanitizedEditor = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.editorContent as string)
 
-      formData.append('post[title]', this.form.value.title as string)
-      formData.append('post[tags]', this.form.value.tags as string)
+      formData.append('post[title]', sanitizedTitle as string)
+      formData.append('post[tags]', sanitizedTags as string)
       formData.append('post[body]', this.form.value.editorContent as string)
       formData.append('post[featured]', this.form.value.featured ? 'true' : 'false')
       formData.append('post[published]', this.form.value.published ? 'true' : 'false')
@@ -76,7 +74,7 @@ export class NewPostComponent {
         formData.append('post[image]', this.form.value.image, this.form.value.image.name)
       }
 
-      this.postService.newPost(formData).subscribe({
+      this.postService.newPost(formData as FormData).subscribe({
         next: (response) => {
           console.log(response)
         },
@@ -84,8 +82,6 @@ export class NewPostComponent {
           console.log(error)
         },
       })
-    } else {
-      console.log('nola')
     }
   }
 

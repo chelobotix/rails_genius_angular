@@ -51,6 +51,10 @@ export class PostService {
     return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
   }
 
+  getPost(id: string) {
+    return this.getRequest<IPost>(`/posts/${id}`)
+  }
+
   private getRequest<T>(endpoint: string): Observable<T> {
     return this.httpClient.get<T>(`${this.base_url}${endpoint}`)
   }

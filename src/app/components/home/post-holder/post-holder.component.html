@@ -1,5 +1,7 @@
 <div class="container">
-  <img class="shadow-7" src="/images/posts/40/40_landscape.webp" alt="" />
+  <a [routerLink]="['/posts', post.id]" class="cursor">
+    <img class="shadow-7" src="/images/posts/40/40_landscape.webp" alt="" />
+  </a>
   <p class="title">{{ post.title }}</p>
   <div class="truncate">
     <p class="hero-body">{{ post.body }}</p>
