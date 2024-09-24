@@ -52,7 +52,7 @@ export class PostService {
   }
 
   getPost(id: string) {
-    return this.getRequest<IPost>(`/posts/${id}`)
+    return this.getRequest<any>(`/posts/${id}`)
   }
 
   private getRequest<T>(endpoint: string): Observable<T> {

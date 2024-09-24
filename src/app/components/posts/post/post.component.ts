@@ -4,11 +4,12 @@ import { PostService } from '../../../services/post.service'
 import { IPost } from '../../../models/post.model'
 import { catchError, filter, of, switchMap } from 'rxjs'
 import { LoaderService } from '../../../services/loader.service'
+import { AvatarModule } from 'primeng/avatar'
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [],
+  imports: [AvatarModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
@@ -27,7 +28,7 @@ export class PostComponent implements OnInit {
     if (this.postId) {
       this.postService.getPost(this.postId).subscribe({
         next: (response) => {
-          this.post.set(response)
+          this.post.set(response.post)
           this.loaderService.hideLoader()
         },
         error: (error) => {

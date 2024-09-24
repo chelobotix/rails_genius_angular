@@ -1,2 +1,7 @@
-<p>post works!</p>
-// TODO: Ahora aca pon el post
+<div class="post-container">
+  @if (post()) {
+    <img [src]="post()?.imageUrl" alt="" class="main-img" />
+    <h1 class="text-red-400">{{ post()?.title }}</h1>
+    <div [innerHTML]="post()?.body"></div>
+  }
+</div>
