@@ -36,6 +36,7 @@
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/quill/dist/quill.bubble.css",
+              "node_modules/lightbox2/dist/css/lightbox.min.css",
               {
                 "input": "src/themes/theme-aura-light-cyan.scss",
                 "bundleName": "aura-light-cyan",
@@ -52,7 +53,10 @@
                 "inject": false
               }
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/lightbox2/dist/js/lightbox.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {

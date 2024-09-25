@@ -65,6 +65,14 @@ ul {
   color: #000000;
 }
 
+.post-container-inner > p {
+  margin: 25px 0;
+}
+
+.post-container-inner > p > img {
+  width: 200px;
+}
+
 @media only screen and (min-width: 1000px) {
   .logo-text {
     font-size: 2rem;
