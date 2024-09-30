@@ -1,17 +1,17 @@
-import { Component, inject, OnInit, signal } from '@angular/core'
+import { AfterViewChecked, Component, inject, OnInit, signal } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PostService } from '../../../services/post.service'
 import { IPost } from '../../../models/post.model'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { LoaderService } from '../../../services/loader.service'
 import { AvatarModule } from 'primeng/avatar'
+import { MarkdownModule } from 'ngx-markdown'
 
 declare var lightbox: any
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [AvatarModule],
+  imports: [AvatarModule, MarkdownModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
@@ -19,8 +19,6 @@ export class PostComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private postService = inject(PostService)
   private loaderService = inject(LoaderService)
-  private sanitizer = inject(DomSanitizer)
-  public safeHtmlBody: SafeHtml = ''
 
   postId: string | null = null
   post = signal<IPost | null>(null)
@@ -39,7 +37,6 @@ export class PostComponent implements OnInit {
       this.postService.getPost(this.postId).subscribe({
         next: (response) => {
           this.post.set(response.post)
-          this.safeHtmlBody = this.sanitizer.bypassSecurityTrustHtml(this.post()?.body as string)
           this.loaderService.hideLoader()
         },
         error: (error) => {

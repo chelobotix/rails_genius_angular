@@ -7,10 +7,13 @@
     alt="Image description"
   />
 </a>
+
 @if (post()) {
   <div class="post-container">
     <img [src]="post()?.imageUrl" alt="" class="main-img" />
     <h1 class="text-red-400">{{ post()?.title }}</h1>
   </div>
-  <div class="post-container-inner" [innerHTML]="safeHtmlBody"></div>
+  <div class="post-container-inner">
+    <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+  </div>
 }
