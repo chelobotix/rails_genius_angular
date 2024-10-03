@@ -47,14 +47,17 @@ export class NewPostComponent {
   }
 
   imagePreview: string | ArrayBuffer | null = null
+  thumbnailPreview: string | ArrayBuffer | null = null
 
   form = new FormGroup({
     title: new FormControl('', { validators: [Validators.required] }),
+    description: new FormControl('', { validators: [Validators.required] }),
     tags: new FormControl('', { validators: [Validators.required] }),
     editorContent: new FormControl('', { validators: [Validators.required] }),
     featured: new FormControl('', { validators: [Validators.required] }),
     published: new FormControl('', { validators: [Validators.required] }),
     image: new FormControl<File | null>(null, { validators: [Validators.required] }),
+    thumbnail: new FormControl<File | null>(null, { validators: [Validators.required] }),
   })
 
   onSubmit() {
@@ -62,9 +65,11 @@ export class NewPostComponent {
 
     if (this.form.valid && this.authenticatorService.actualIsAuthenticated()) {
       const sanitizedTitle = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.title as string)
+      const sanitizedDescription = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.description as string)
       const sanitizedTags = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.tags as string)
 
       formData.append('post[title]', sanitizedTitle as string)
+      formData.append('post[description]', sanitizedDescription as string)
       formData.append('post[tags]', sanitizedTags as string)
       formData.append('post[body]', this.form.value.editorContent as string)
       formData.append('post[featured]', this.form.value.featured ? 'true' : 'false')
@@ -72,6 +77,10 @@ export class NewPostComponent {
 
       if (this.form.value.image && this.form.value.image instanceof File) {
         formData.append('post[image]', this.form.value.image, this.form.value.image.name)
+      }
+
+      if (this.form.value.thumbnail && this.form.value.thumbnail instanceof File) {
+        formData.append('post[thumbnail]', this.form.value.thumbnail, this.form.value.thumbnail.name)
       }
 
       this.postService.newPost(formData as FormData).subscribe({
@@ -85,6 +94,7 @@ export class NewPostComponent {
     }
   }
 
+  // Configura para que con este metodo se vea el thubnail y la imagen
   onFileSelected(event: any) {
     const file: File = event.target.files[0]
     if (file) {

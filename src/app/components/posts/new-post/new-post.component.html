@@ -22,7 +22,11 @@
   <div>
     <input type="file" (change)="onFileSelected($event)" accept="image/*" />
   </div>
+  <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
 
+  <div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  </div>
   <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
 
   <div class="container-editor">
