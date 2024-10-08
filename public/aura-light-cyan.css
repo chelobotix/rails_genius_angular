@@ -10570,6 +10570,19 @@ ul {
   width: 100%;
 }
 
+.post-img {
+  width: 90%;
+  max-width: 400px;
+}
+
+.favorite-card {
+  background-color: var(--surface-0);
+}
+
+.favorite-card:hover {
+  background-color: var(--surface-50);
+}
+
 @media only screen and (min-width: 1000px) {
   .logo-text {
     font-size: 2rem;

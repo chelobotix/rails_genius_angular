@@ -16,10 +16,8 @@ import { IPost } from '../../../models/post.model'
 })
 export class HeroComponent implements OnInit {
   @Input({ required: true }) heroPost!: IPost
-  image = signal('')
 
   ngOnInit(): void {
-    const id = this.heroPost.id
-    this.image.set(`/images/posts/${id}/${id}_landscape.webp`)
+    // console.log(this.heroPost)
   }
 }

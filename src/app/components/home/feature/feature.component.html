@@ -1,7 +1,9 @@
-<div class="container">
-  <img class="shadow-7" src="/images/posts/40/40_landscape.webp" alt="" />
+<div class="container surface-0">
+  <div class="tag-container">
+    <p-tag severity="danger" icon="pi pi-sparkles" value="featured" />
+  </div>
+  <img [src]="featurePost.thumbnail_url" alt="" />
   <div class="feature-data">
     <p class="title">{{ featurePost.title }}</p>
-    <p class="hero-read-time">{{ featurePost.readTime + ' MIN READ' }}</p>
   </div>
 </div>

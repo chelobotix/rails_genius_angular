@@ -1,19 +1,25 @@
-<a
-  href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1727267071/Cookies_casos_de_la_vida_real_3_er8kcf.png"
-  data-lightbox="image-1"
->
-  <img
-    src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1727267071/Cookies_casos_de_la_vida_real_3_er8kcf.png"
-    alt="Image description"
-  />
-</a>
-
 @if (post()) {
   <div class="post-container">
-    <img [src]="post()?.imageUrl" alt="" class="main-img" />
+    <div class="favorite">
+      @if (isAuthenticated()) {
+        @if (favorite()) {
+          <i
+            class="pi pi-bookmark-fill cursor"
+            (click)="toggleFavorite(true)"
+            style="font-size: 1.5rem; color: #ffc107"
+          ></i>
+        } @else {
+          <i class="pi pi-bookmark cursor" (click)="toggleFavorite(false)" style="font-size: 1.5rem"></i>
+        }
+      }
+    </div>
+    <img [src]="post()?.image_url" alt="" class="main-img" />
     <h1 class="text-red-400">{{ post()?.title }}</h1>
-  </div>
-  <div class="post-container-inner">
-    <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+    <div class="post-container-inner">
+      <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+    </div>
+    <app-comments [comments]="post()?.comments!" [post_id]="post()?.id!" />
+
+    <app-new-comment title="Post a new comment. It's cool!" innerText="Post a comment" [post_id]="post()?.id!" />
   </div>
 }

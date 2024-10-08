@@ -1,6 +1,10 @@
 .foot-container {
   display: flex;
-  height: 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
   background-color: var(--red-400);
   color: #ffffff;
 }

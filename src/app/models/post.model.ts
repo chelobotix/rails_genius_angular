@@ -1,14 +1,17 @@
+import { IComment } from './comment.model'
+
 export interface IPost {
   id: number
   title: string
   body: string
   description: string
-  imageUrl: string
-  thumbnailUrl: string
+  image_url: string
+  thumbnail_url: string
   tags: string | string[]
-  readTime: number
+  read_time: number
   published: string
   featured: boolean
+  comments: IComment[]
   user: {
     id: number
     email: string

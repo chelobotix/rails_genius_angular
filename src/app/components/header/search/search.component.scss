@@ -9,12 +9,17 @@ form {
 }
 
 .input:focus-visible {
-  color: #64748b;
+  color: #a2a6ab;
   outline: none;
 }
 
 .li-result:first-child {
   background-color: #e2e8f0;
+}
+
+.li-result:hover {
+  background-color: #a2a6ab;
+  color: #fff;
 }
 
 /**

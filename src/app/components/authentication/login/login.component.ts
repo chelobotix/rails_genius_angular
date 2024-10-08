@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loading.set(true)
       this.subscription = this.authenticatorService
         .login(this.formData.value.email, this.formData.value.password)
-        .pipe(tap((response) => console.log(response)))
         .subscribe({
           next: (response) => {
             if (response.status == 200) {
@@ -82,7 +81,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   checkQueryParams() {
     this.subscription = this.activatedRoute.queryParams.subscribe((res) => {
-      console.log(res)
       if (res['account_confirmation_success'] === 'true') {
         this.confirmation.set(true)
       }

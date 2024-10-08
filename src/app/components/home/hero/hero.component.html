@@ -1,7 +1,8 @@
 <div class="hero-container">
-  <img [src]="heroPost.imageUrl" alt="hero" class="hero-img shadow-7" />
+  <img [src]="heroPost.image_url" alt="hero" class="hero-img shadow-7" />
   <div class="text-container">
     <p class="hero-title">{{ heroPost.title }}</p>
-    <p class="hero-read-time">{{ heroPost.readTime + ' MIN READ' }}</p>
+    <p class="description">{{ heroPost.description }}</p>
+    <p class="hero-read-time">{{ heroPost.read_time + ' MIN READ' }}</p>
   </div>
 </div>

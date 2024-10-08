@@ -8,6 +8,7 @@ import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi 
 import { JwtModule } from '@auth0/angular-jwt'
 import { provideQuillConfig } from 'ngx-quill'
 import { provideMarkdown } from 'ngx-markdown'
+import { provideToastr } from 'ngx-toastr'
 
 export function tokenGetter() {
   return '69*'
@@ -52,5 +53,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideMarkdown(),
+    provideToastr(),
   ],
 }

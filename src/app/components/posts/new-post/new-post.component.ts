@@ -11,6 +11,7 @@ import { ChipsModule } from 'primeng/chips'
 import { NgIf } from '@angular/common'
 import { AuthenticatorService } from '../../../services/authenticator.service'
 import { EditorComponent } from '@tinymce/tinymce-angular'
+import { InputTextareaModule } from 'primeng/inputtextarea'
 
 @Component({
   selector: 'app-new-post',
@@ -26,6 +27,7 @@ import { EditorComponent } from '@tinymce/tinymce-angular'
     ChipsModule,
     NgIf,
     EditorComponent,
+    InputTextareaModule,
   ],
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.scss',
@@ -82,7 +84,7 @@ export class NewPostComponent {
       if (this.form.value.thumbnail && this.form.value.thumbnail instanceof File) {
         formData.append('post[thumbnail]', this.form.value.thumbnail, this.form.value.thumbnail.name)
       }
-      
+
       this.postService.newPost(formData as FormData).subscribe({
         next: (response) => {
           console.log(response)

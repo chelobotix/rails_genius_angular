@@ -1,5 +1,5 @@
 img {
-  width: 100%;
+  width: 250px;
   max-width: 350px;
   height: auto;
   border-radius: 5px;
@@ -7,11 +7,13 @@ img {
 
 .container {
   width: 100%;
+  height: 500px;
   max-width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 0 5px;
 }
 
 .title {
@@ -19,26 +21,30 @@ img {
   font-weight: 500;
   line-height: 1.7rem;
   text-align: center;
-}
-
-.truncate {
+  height: 50px;
   overflow: hidden;
   display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de líneas a mostrar */
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
-  white-space: pre-wrap; /* let the text wrap preserving spaces */
 }
 
-.hero-body {
+.hero-description {
   font-size: 1rem;
   font-weight: 300;
-  text-align: left;
+  text-align: center;
+  height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de líneas a mostrar */
+  -webkit-box-orient: vertical;
 }
 
 .hero-read-time {
+  width: 95%;
   font-size: 0.8rem;
   align-self: start;
   color: #ff6259;
+  text-align: right;
 }
 
 @media only screen and (min-width: 1024px) {

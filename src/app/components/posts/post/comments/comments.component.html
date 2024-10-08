@@ -1,0 +1,96 @@
+@for (comment of localComments(); track comment.id) {
+  <div class="container">
+    <p-panel [toggleable]="true">
+      <ng-template pTemplate="header">
+        <div class="flex justify-content-between align-items-center gap-2 w-full">
+          <div>
+            <p-avatar
+              [label]="comment.user_email.charAt(0).toUpperCase()"
+              size="large"
+              shape="circle"
+              [style]="avatar_color()"
+            />
+            <span class="font-bold"> {{ comment.user_email.slice(0, 12) }}...</span>
+          </div>
+          @if (comment.user_email === user_uid) {
+            <div class="flex gap-2">
+              <i (click)="edit(comment.id)" class="pi pi-pencil cursor" style=""></i>
+              <i (click)="delete(comment.id, comment.post_id)" class="pi pi-trash cursor" style=""></i>
+            </div>
+          } @else {
+            <div class="flex gap-2">
+              <i (click)="replyToComment()" class="pi pi-reply cursor" style=""></i>
+            </div>
+          }
+        </div>
+      </ng-template>
+
+      <div class="w-full">
+        @if (!showEdit() || actualOpen !== comment.id) {
+          <p class="m-0">{{ comment.body }}</p>
+        } @else if (showEdit() && actualOpen === comment.id) {
+          <app-edit-comment
+            [commentId]="comment.id"
+            [commentPostId]="comment.post_id"
+            [commentBody]="comment.body"
+            (showEdit)="edit(comment.id)"
+          />
+        }
+
+        <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+          <span class="p-text-secondary"> {{ comment.created_at | timeAgo }} </span>
+        </div>
+      </div>
+
+      <div>
+        @if (showReplyToComment()) {
+          <app-new-comment title="Reply..." innerText="Your reply..." [comment_id]="comment.id" [post_id]="post_id" />
+        }
+      </div>
+
+      <ng-template pTemplate="footer">
+        <p>Reply({{ comment.replies.length }})</p>
+        @for (reply of comment.replies; track reply.id) {
+          <p-panel [toggleable]="true">
+            <ng-template pTemplate="header">
+              <div class="flex justify-content-between w-full align-items-center gap-2">
+                <div>
+                  <p-avatar
+                    [label]="reply.user_email.charAt(0).toUpperCase()"
+                    size="large"
+                    shape="circle"
+                    [style]="avatar_color()"
+                  />
+                  <span class="font-bold"> {{ reply.user_email.slice(0, 12) }}...</span>
+                </div>
+                @if (reply.user_email === user_uid) {
+                  <div class="flex gap-2">
+                    <i (click)="editReply(reply.id)" class="pi pi-pencil cursor" style=""></i>
+                    <i (click)="delete(reply.id, comment.post_id)" class="pi pi-trash cursor" style=""></i>
+                  </div>
+                }
+              </div>
+            </ng-template>
+
+            <div>
+              @if (!showReplyEdit() || actualReplyOpen !== reply.id) {
+                <p class="m-0">{{ reply.body }}</p>
+              } @else if (showReplyEdit() && actualReplyOpen === reply.id) {
+                <app-edit-comment
+                  [commentId]="reply.id"
+                  [commentPostId]="reply.post_id"
+                  [commentBody]="reply.body"
+                  (showEdit)="editReply(reply.id)"
+                />
+              }
+
+              <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+                <span class="p-text-secondary"> {{ reply.created_at | timeAgo }} </span>
+              </div>
+            </div>
+          </p-panel>
+        }
+      </ng-template>
+    </p-panel>
+  </div>
+}

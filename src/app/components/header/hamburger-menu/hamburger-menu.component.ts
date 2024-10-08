@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, signal } from '@angular/core'
 import { DividerModule } from 'primeng/divider'
 import { Button, ButtonDirective } from 'primeng/button'
 import { ThemeButtonComponent } from './theme-button/theme-button.component'
@@ -23,6 +23,10 @@ import { Router } from '@angular/router'
 import { Message } from 'primeng/api'
 import { DialogModule } from 'primeng/dialog'
 import { MessagesModule } from 'primeng/messages'
+import { FavoriteService } from '../../../services/favorite.service'
+import { UserFavorites } from '../../../models/user-favorites.model'
+import { random } from 'lodash'
+import { CardModule } from 'primeng/card'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -48,6 +52,7 @@ import { MessagesModule } from 'primeng/messages'
     DialogModule,
     MessagesModule,
     ReactiveFormsModule,
+    CardModule,
   ],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: './hamburger-menu.component.scss',
@@ -57,6 +62,7 @@ export class HamburgerMenuComponent {
   private themeManagerService = inject(ThemeManagerService)
   private authenticatorService = inject(AuthenticatorService)
   private router = inject(Router)
+  private favoriteService = inject(FavoriteService)
 
   is_authenticated = this.authenticatorService.actualIsAuthenticated
   credentials = this.authenticatorService.actualCredentials
@@ -64,6 +70,8 @@ export class HamburgerMenuComponent {
   visible = false
   value = ''
   sidebarVisible: boolean = false
+  favoriteVisible: boolean = false
+  userFavorites = signal<UserFavorites>({ posts: [] })
 
   items = [
     {
@@ -90,7 +98,6 @@ export class HamburgerMenuComponent {
   handleLogout() {
     this.authenticatorService.logout().subscribe({
       next: (response) => {
-        console.log(response)
         this.router.navigate(['/'])
       },
       error: (error) => {
@@ -104,7 +111,6 @@ export class HamburgerMenuComponent {
     if (this.formData.value.newPassword) {
       this.authenticatorService.changePassword(this.formData.value.newPassword).subscribe({
         next: (response) => {
-          console.log(response)
           this.message = [{ severity: 'success', detail: 'Password updated.' }]
           this.visible = false
         },
@@ -133,5 +139,19 @@ export class HamburgerMenuComponent {
   themeChange(new_theme: ITheme): void {
     this.themeManagerService.switchTheme(new_theme)
     console.log(this.themeManagerService.actualTheme())
+  }
+
+  handleFavorites() {
+    this.favoriteService.getFavorites().subscribe({
+      next: (response) => {
+        this.userFavorites.set(response as UserFavorites)
+        this.favoriteVisible = true
+        this.visible = false
+      },
+    })
+  }
+
+  handleFavoritesClick() {
+    this.favoriteVisible = false
   }
 }

@@ -1,11 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core'
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http'
-import { catchError, delay, EMPTY, map, Observable, of, pipe, tap } from 'rxjs'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable, tap } from 'rxjs'
 import { IPost } from '../models/post.model'
 import { IPosts } from '../models/posts.model'
 import { truncate } from '../utils/truncate'
-import { ISinglePost } from '../models/single-post.model'
 import { AuthenticatorService } from './authenticator.service'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,7 @@ import { AuthenticatorService } from './authenticator.service'
 export class PostService {
   private httpClient = inject(HttpClient)
   private authenticatorService = inject(AuthenticatorService)
-  // private base_url = 'http://localhost:3000/api/v1'
-  private base_url = 'https://rails-genius.fly.dev/api/v1'
+  private base_url = environment.base_url
   private posts = signal<IPosts>({ posts: [] })
   private searchedPosts = signal<IPosts>({ posts: [] })
   actualPosts = this.posts.asReadonly()
@@ -45,11 +44,14 @@ export class PostService {
 
   newPost(formData: FormData) {
     const headers = this.authenticatorService.include_credentials_headers()
-    return this.httpClient.post(`${this.base_url}/posts`, formData, { headers: headers })
+    return this.httpClient.post(`${this.base_url}/api/v1/posts`, formData, { headers: headers })
   }
 
   getPosts() {
-    return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
+    return this.getRequest<IPosts>('/posts').pipe(
+      tap((data) => {
+        this.posts.set(data)
+      }))
   }
 
   getPost(id: string) {
@@ -57,13 +59,12 @@ export class PostService {
   }
 
   private getRequest<T>(endpoint: string): Observable<T> {
-    return this.httpClient.get<T>(`${this.base_url}${endpoint}`)
+    return this.httpClient.get<T>(`${this.base_url}/api/v1${endpoint}`)
   }
 
   private postRequest<T>(endpoint: string, header: {}, body: {}) {
-    console.log(endpoint)
     const headers = new HttpHeaders(header)
 
-    return this.httpClient.post<T>(`${this.base_url}${endpoint}`, body, { headers: headers })
+    return this.httpClient.post<T>(`${this.base_url}/api/v1${endpoint}`, body, { headers: headers })
   }
 }

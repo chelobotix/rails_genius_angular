@@ -35,7 +35,8 @@
   <img [src]="thumbnailPreview" *ngIf="thumbnailPreview" alt="preview" />
 
   <div class="container-editor">
-    <editor [init]="init" formControlName="editorContent" />
+    <!--    <editor [init]="init" formControlName="editorContent" />-->
+    <textarea rows="5" cols="30" pInputTextarea formControlName="editorContent"></textarea>
   </div>
 
   <button type="submit" class="button">Login</button>
