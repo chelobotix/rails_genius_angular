@@ -5,6 +5,7 @@ import { IPost } from '../../../models/post.model'
 import { LoaderService } from '../../../services/loader.service'
 import { AvatarModule } from 'primeng/avatar'
 import { MarkdownModule } from 'ngx-markdown'
+import { AuthenticatorService } from '../../../services/authenticator.service'
 
 declare var lightbox: any
 
@@ -19,12 +20,14 @@ export class PostComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private postService = inject(PostService)
   private loaderService = inject(LoaderService)
+  private as = inject(AuthenticatorService)
 
   postId: string | null = null
   post = signal<IPost | null>(null)
   loader = this.loaderService.loadingState
 
   ngOnInit() {
+    console.log(this.as.actualIsAuthenticated())
     lightbox.option({
       resizeDuration: 200,
       wrapAround: true,
