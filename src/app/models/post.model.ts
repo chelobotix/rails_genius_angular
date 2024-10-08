@@ -1,8 +1,10 @@
 export interface IPost {
   id: number
   title: string
-  imageUrl: string
   body: string
+  description: string
+  imageUrl: string
+  thumbnailUrl: string
   tags: string | string[]
   readTime: number
   published: string

@@ -52,8 +52,8 @@ export class NewPostComponent {
   form = new FormGroup({
     title: new FormControl('', { validators: [Validators.required] }),
     description: new FormControl('', { validators: [Validators.required] }),
-    tags: new FormControl('', { validators: [Validators.required] }),
     editorContent: new FormControl('', { validators: [Validators.required] }),
+    tags: new FormControl('', { validators: [Validators.required] }),
     featured: new FormControl('', { validators: [Validators.required] }),
     published: new FormControl('', { validators: [Validators.required] }),
     image: new FormControl<File | null>(null, { validators: [Validators.required] }),
@@ -82,7 +82,7 @@ export class NewPostComponent {
       if (this.form.value.thumbnail && this.form.value.thumbnail instanceof File) {
         formData.append('post[thumbnail]', this.form.value.thumbnail, this.form.value.thumbnail.name)
       }
-
+      
       this.postService.newPost(formData as FormData).subscribe({
         next: (response) => {
           console.log(response)
@@ -95,16 +95,27 @@ export class NewPostComponent {
   }
 
   // Configura para que con este metodo se vea el thubnail y la imagen
-  onFileSelected(event: any) {
+  onFileSelected(event: any, type: string): void {
     const file: File = event.target.files[0]
     if (file) {
-      this.form.patchValue({
-        image: file,
-      })
+      if (type === 'image') {
+        this.form.patchValue({
+          image: file,
+        })
+      } else if (type == 'thumbnail') {
+        this.form.patchValue({
+          thumbnail: file,
+        })
+      }
+
       // Opcional: si quieres mostrar una vista previa de la imagen
       const reader = new FileReader()
       reader.onload = (e: any) => {
-        this.imagePreview = e.target.result
+        if (type == 'image') {
+          this.imagePreview = e.target.result
+        } else if (type == 'thumbnail') {
+          this.thumbnailPreview = e.target.result
+        }
       }
       reader.readAsDataURL(file)
     }

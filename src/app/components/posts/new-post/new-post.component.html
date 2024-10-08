@@ -11,6 +11,11 @@
     <label for="chips">Tags</label>
   </p-floatLabel>
 
+  <p-floatLabel>
+    <input pInputText id="description" formControlName="description" />
+    <label for="description">Description</label>
+  </p-floatLabel>
+
   <div class="flex align-items-center">
     <p-checkbox formControlName="featured" label="Featured" name="pizza" value="Cheese" />
   </div>
@@ -20,14 +25,14 @@
   </div>
 
   <div>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <input type="file" (change)="onFileSelected($event, 'image')" accept="image/*" />
   </div>
   <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
 
   <div>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <input type="file" (change)="onFileSelected($event, 'thumbnail')" accept="image/*" />
   </div>
-  <img [src]="imagePreview" *ngIf="imagePreview" alt="preview" />
+  <img [src]="thumbnailPreview" *ngIf="thumbnailPreview" alt="preview" />
 
   <div class="container-editor">
     <editor [init]="init" formControlName="editorContent" />
