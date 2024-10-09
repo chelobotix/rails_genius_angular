@@ -1,10 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core'
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http'
-import { catchError, delay, EMPTY, map, Observable, of, pipe, tap } from 'rxjs'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable, tap } from 'rxjs'
 import { IPost } from '../models/post.model'
 import { IPosts } from '../models/posts.model'
 import { truncate } from '../utils/truncate'
-import { ISinglePost } from '../models/single-post.model'
 import { AuthenticatorService } from './authenticator.service'
 
 @Injectable({
