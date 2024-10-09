@@ -14,15 +14,17 @@
   align-items: center;
   gap: 15px;
   margin-top: 50px;
+  margin-bottom: 25px;
 }
 
 .posts-container {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding: 20px 5px;
+  gap: 60px;
+  margin-top: 50px;
+  padding: 15px 5px;
 }
 
 .featured-title {
@@ -61,8 +63,8 @@
   }
 
   .posts-container {
-    width: 100%;
-    max-width: 1000px;
+    width: 90%;
+    max-width: 1200px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

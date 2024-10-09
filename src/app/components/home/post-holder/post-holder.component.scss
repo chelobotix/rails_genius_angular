@@ -1,5 +1,5 @@
 img {
-  width: 100%;
+  width: 250px;
   max-width: 350px;
   height: auto;
   border-radius: 5px;
@@ -12,6 +12,7 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 0 5px;
 }
 
 .title {
@@ -32,13 +33,15 @@ img {
 .hero-body {
   font-size: 1rem;
   font-weight: 300;
-  text-align: left;
+  text-align: center;
 }
 
 .hero-read-time {
+  width: 95%;
   font-size: 0.8rem;
   align-self: start;
   color: #ff6259;
+  text-align: right;
 }
 
 @media only screen and (min-width: 1024px) {

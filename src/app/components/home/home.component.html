@@ -10,13 +10,10 @@
         }
       </div>
     </div>
-    <!--    <div class="posts-container">-->
-    <!--      @for (post of posts().posts; track post.id) {-->
-    <!--        <app-post-holder [post]="post" />-->
-    <!--        <div class="lg:hidden">-->
-    <!--          <p-divider />-->
-    <!--        </div>-->
-    <!--      }-->
-    <!--    </div>-->
+    <div class="posts-container surface-100">
+      @for (post of posts().posts; track post.id) {
+        <app-post-holder [post]="post" />
+      }
+    </div>
   }
 </article>
