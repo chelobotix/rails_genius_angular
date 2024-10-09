@@ -12,7 +12,6 @@ import { AuthenticatorService } from './authenticator.service'
 export class PostService {
   private httpClient = inject(HttpClient)
   private authenticatorService = inject(AuthenticatorService)
-  // private base_url = 'http://localhost:3000/api/v1'
   private base_url = 'https://rails-genius.fly.dev/api/v1'
   private posts = signal<IPosts>({ posts: [] })
   private searchedPosts = signal<IPosts>({ posts: [] })

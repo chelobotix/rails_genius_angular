@@ -10,7 +10,6 @@ import { catchError, map, Observable, of, tap } from 'rxjs'
 export class AuthenticatorService {
   private localstorageService = inject(LocalstorageService)
   private httpClient = inject(HttpClient)
-  // private base_url = 'http://127.0.0.1:3000'
   private base_url = 'https://rails-genius.fly.dev'
   private credentials = signal<ICredentials>({
     'access-token': '',
