@@ -59,4 +59,9 @@ ul {
   cursor: pointer;
 }
 
+.post-img {
+  width: 90%;
+  max-width: 400px;
+}
+
 /*# sourceMappingURL=theme-aura-light-cyan.css.map */
