@@ -1,8 +1,11 @@
 <app-header />
 <div class="main-container">
-  <app-skeleton />
-  <main>
-    <router-outlet />
-  </main>
+  @if (isAuthenticationChecked()) {
+    <main>
+      <router-outlet />
+    </main>
+    <app-footer />
+  } @else {
+    <app-skeleton />
+  }
 </div>
-<app-footer />

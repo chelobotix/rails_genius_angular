@@ -10,6 +10,7 @@ import { RouterOutlet } from '@angular/router'
 import { FooterComponent } from './components/footer/footer.component'
 import { AuthenticatorService } from './services/authenticator.service'
 import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular'
+import { LoaderService } from './services/loader.service'
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,8 @@ export class AppComponent implements OnInit {
   private localStorageService = inject(LocalstorageService)
   private themeManagerService = inject(ThemeManagerService)
   private authenticatorService = inject(AuthenticatorService)
+
+  isAuthenticationChecked = this.authenticatorService.actualIsAuthenticationChecked
 
   ngOnInit(): void {
     this.primengConfig.ripple = true

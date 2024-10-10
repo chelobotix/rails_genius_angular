@@ -2,16 +2,19 @@ import { inject, Injectable, signal } from '@angular/core'
 import { LocalstorageService } from './localstorage.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ICredentials } from '../models/credentials.model'
-import { catchError, map, Observable, of, tap } from 'rxjs'
+import { catchError, finalize, map, Observable, of, tap } from 'rxjs'
+import { LoaderService } from './loader.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticatorService {
   private localstorageService = inject(LocalstorageService)
+  private loaderService = inject(LoaderService)
   private httpClient = inject(HttpClient)
-  // private base_url = 'http://127.0.0.1:3000'
-  private base_url = 'https://rails-genius.fly.dev'
+  private base_url = 'http://127.0.0.1:3000'
+  // private base_url = 'https://rails-genius.fly.dev'
+
   private credentials = signal<ICredentials>({
     'access-token': '',
     'token-type': '',
@@ -20,8 +23,15 @@ export class AuthenticatorService {
     uid: '',
   })
   actualCredentials = this.credentials.asReadonly()
-  private is_authenticated = signal(false)
-  actualIsAuthenticated = this.is_authenticated.asReadonly()
+
+  private isAuthenticated = signal(false)
+  actualIsAuthenticated = this.isAuthenticated.asReadonly()
+
+  private isAuthenticationChecked = signal(false)
+  actualIsAuthenticationChecked = this.isAuthenticationChecked.asReadonly()
+
+  private headers = signal({})
+  actualHeaders = this.headers.asReadonly()
 
   signup(email: string, password: string) {
     const headers = new HttpHeaders({
@@ -49,7 +59,7 @@ export class AuthenticatorService {
   }
 
   logout() {
-    this.is_authenticated.set(false)
+    this.isAuthenticated.set(false)
     return this.httpClient
       .delete(`${this.base_url}/auth/sign_out`, { headers: this.include_credentials_headers() })
       .pipe(
@@ -61,7 +71,7 @@ export class AuthenticatorService {
             expiry: '',
             uid: '',
           })
-          this.is_authenticated.set(false)
+          this.isAuthenticated.set(false)
         })
       )
   }
@@ -82,7 +92,7 @@ export class AuthenticatorService {
       expiry: authHeader.get('expiry') as string,
       uid: authHeader.get('uid') as string,
     })
-    this.is_authenticated.set(true)
+    this.isAuthenticated.set(true)
     this.localstorageService.updateCredentials(this.credentials() as ICredentials)
   }
 
@@ -101,13 +111,17 @@ export class AuthenticatorService {
     const url = `${this.base_url}/auth/validate_token?uid=${this.credentials()['uid']}&client=${this.credentials()['client']}&access-token=${this.credentials()['access-token']}`
     return this.httpClient.get(url).pipe(
       map(() => {
-        this.is_authenticated.set(true)
+        this.isAuthenticated.set(true)
+        this.loaderService.hideLoader()
         return true
       }),
       catchError((error) => {
         console.log(error)
-        this.is_authenticated.set(false)
+        this.isAuthenticated.set(false)
         return of(false)
+      }),
+      finalize(() => {
+        this.isAuthenticationChecked.set(true)
       })
     )
   }
