@@ -134,4 +134,8 @@ export class HamburgerMenuComponent {
     this.themeManagerService.switchTheme(new_theme)
     console.log(this.themeManagerService.actualTheme())
   }
+
+  handleFavorites() {
+    das
+  }
 }

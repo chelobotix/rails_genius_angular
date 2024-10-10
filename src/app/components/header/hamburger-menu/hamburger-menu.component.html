@@ -125,8 +125,20 @@
         </form>
       </div>
 
-      <p-button label="Go to your Favorites" severity="warning" icon="pi pi-star-fill" />
-      <p-button (click)="handleLogout()" label="Logout" severity="danger" icon="pi pi-sign-out" />
+      <p-button
+        label="Favorites"
+        (click)="handleFavorites()"
+        severity="warning"
+        icon="pi pi-star-fill"
+        [style]="{ width: '130px' }"
+      />
+      <p-button
+        (click)="handleLogout()"
+        label="Logout"
+        severity="danger"
+        icon="pi pi-sign-out"
+        [style]="{ width: '130px' }"
+      />
     </div>
   </p-dialog>
 }
