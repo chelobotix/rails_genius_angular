@@ -23,6 +23,7 @@ import { Router } from '@angular/router'
 import { Message } from 'primeng/api'
 import { DialogModule } from 'primeng/dialog'
 import { MessagesModule } from 'primeng/messages'
+import { FavoriteService } from '../../../services/favorite.service'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -57,6 +58,7 @@ export class HamburgerMenuComponent {
   private themeManagerService = inject(ThemeManagerService)
   private authenticatorService = inject(AuthenticatorService)
   private router = inject(Router)
+  private favoriteService = inject(FavoriteService)
 
   is_authenticated = this.authenticatorService.actualIsAuthenticated
   credentials = this.authenticatorService.actualCredentials
@@ -136,6 +138,10 @@ export class HamburgerMenuComponent {
   }
 
   handleFavorites() {
-    das
+    this.favoriteService.getFavorites().subscribe({
+      next: ((response) => {
+        console.log(response)
+      })
+    })
   }
 }

@@ -29,6 +29,7 @@ export class PostComponent implements OnInit {
   post = signal<IPost | null>(null)
   loader = this.loaderService.loadingState
   favorite = signal(false)
+  isAuthenticated = this.authenticatorService.actualIsAuthenticated
 
   ngOnInit() {
     lightbox.option({
