@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, signal } from '@angular/core'
 import { DividerModule } from 'primeng/divider'
 import { Button, ButtonDirective } from 'primeng/button'
 import { ThemeButtonComponent } from './theme-button/theme-button.component'
@@ -24,6 +24,9 @@ import { Message } from 'primeng/api'
 import { DialogModule } from 'primeng/dialog'
 import { MessagesModule } from 'primeng/messages'
 import { FavoriteService } from '../../../services/favorite.service'
+import { UserFavorites } from '../../../models/user-favorites.model'
+import { random } from 'lodash'
+import { CardModule } from 'primeng/card'
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -49,6 +52,7 @@ import { FavoriteService } from '../../../services/favorite.service'
     DialogModule,
     MessagesModule,
     ReactiveFormsModule,
+    CardModule,
   ],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: './hamburger-menu.component.scss',
@@ -66,6 +70,8 @@ export class HamburgerMenuComponent {
   visible = false
   value = ''
   sidebarVisible: boolean = false
+  favoriteVisible: boolean = false
+  userFavorites = signal<UserFavorites>({ posts: [] })
 
   items = [
     {
@@ -139,9 +145,16 @@ export class HamburgerMenuComponent {
 
   handleFavorites() {
     this.favoriteService.getFavorites().subscribe({
-      next: ((response) => {
+      next: (response) => {
         console.log(response)
-      })
+        this.userFavorites.set(response as UserFavorites)
+        this.favoriteVisible = true
+        this.visible = false
+      },
     })
+  }
+
+  handleFavoritesClick() {
+    this.favoriteVisible = false
   }
 }
