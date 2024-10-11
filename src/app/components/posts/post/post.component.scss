@@ -20,6 +20,14 @@ h1 {
   padding: 0 30px;
 }
 
+.favorite {
+  display: flex;
+  justify-content: end;
+  width: 80%;
+  max-width: 850px;
+  padding: 15px 5px;
+}
+
 .main-img {
   width: 70%;
 }

@@ -16,6 +16,9 @@ import { FloatLabelModule } from 'primeng/floatlabel'
 import { MessagesModule } from 'primeng/messages'
 import { Message } from 'primeng/api'
 import { LocalstorageService } from '../../../services/localstorage.service'
+import { UserFavorites } from '../../../models/user-favorites.model'
+import { CardModule } from 'primeng/card'
+import { FavoriteService } from '../../../services/favorite.service'
 
 @Component({
   selector: 'app-desktop-menu',
@@ -35,6 +38,7 @@ import { LocalstorageService } from '../../../services/localstorage.service'
     FloatLabelModule,
     ReactiveFormsModule,
     MessagesModule,
+    CardModule,
   ],
   templateUrl: './desktop-menu.component.html',
   styleUrl: './desktop-menu.component.scss',
@@ -43,11 +47,14 @@ export class DesktopMenuComponent implements OnInit {
   private themeManagerService = inject(ThemeManagerService)
   private authenticatorService = inject(AuthenticatorService)
   private router = inject(Router)
+  private favoriteService = inject(FavoriteService)
 
   is_authenticated = this.authenticatorService.actualIsAuthenticated
   credentials = this.authenticatorService.actualCredentials
   message: Message[] = []
   visible = false
+  favoriteVisible: boolean = false
+  userFavorites = signal<UserFavorites>({ posts: [] })
 
   formData = new FormGroup({
     actualPassword: new FormControl('', {
@@ -110,5 +117,20 @@ export class DesktopMenuComponent implements OnInit {
 
   showDialog() {
     this.visible = true
+  }
+
+  handleFavorites() {
+    this.favoriteService.getFavorites().subscribe({
+      next: (response) => {
+        console.log(response)
+        this.userFavorites.set(response as UserFavorites)
+        this.favoriteVisible = true
+        this.visible = false
+      },
+    })
+  }
+
+  handleFavoritesClick() {
+    this.favoriteVisible = false
   }
 }

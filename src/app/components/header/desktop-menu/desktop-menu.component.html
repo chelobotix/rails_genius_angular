@@ -73,7 +73,7 @@
         </form>
       </div>
 
-      <p-button label="Go to your Favorites" severity="warning" icon="pi pi-star-fill" />
+      <p-button (click)="handleFavorites()" label="Favorites" severity="warning" icon="pi pi-star-fill" />
       <p-button (click)="handleLogout()" label="Logout" severity="danger" icon="pi pi-sign-out" />
     </div>
   </p-dialog>
@@ -88,3 +88,31 @@
     [style]="{ width: '100%', 'max-width': '340px', margin: 'auto' }"
   />
 }
+
+<p-dialog
+  header="Header"
+  [modal]="true"
+  [(visible)]="favoriteVisible"
+  position="bottom"
+  [style]="{ width: '25rem' }"
+  transitionOptions="400ms cubic-bezier(0, 0, 0.2, 1)"
+>
+  <ng-template pTemplate="header">
+    <p class="text-xl font-semibold text-orange-500">Favorites</p>
+  </ng-template>
+  <div class="p-2 flex flex-column align-items-center gap-4 mb-1">
+    @if (userFavorites().posts.length > 0) {
+      @for (userFavorite of userFavorites().posts; track userFavorite.id) {
+        <a class="cursor" (click)="handleFavoritesClick()" [routerLink]="['/posts', userFavorite.id]">
+          <p-card styleClass="favorite-card">
+            <i class="pi pi-bookmark-fill" style="font-size: 1.5rem; color: #ffc107"></i>
+            <p class="text-red-300 font-semibold">{{ userFavorite.title }}</p>
+          </p-card>
+        </a>
+      }
+    } @else {
+      <p class="bold">¯\_(ツ)_/¯</p>
+      <p>No favorites yet</p>
+    }
+  </div>
+</p-dialog>

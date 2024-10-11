@@ -9,7 +9,4 @@ import { LoaderService } from '../../../services/loader.service'
   templateUrl: './skeleton.component.html',
   styleUrl: './skeleton.component.scss',
 })
-export class SkeletonComponent {
-  private loaderService = inject(LoaderService)
-  loader = this.loaderService.loadingState
-}
+export class SkeletonComponent {}
