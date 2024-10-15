@@ -1,0 +1,25 @@
+@for (comment of comments; track comment.id) {
+  <p-panel [toggleable]="true">
+    <ng-template pTemplate="header">
+      <div class="flex align-items-center gap-2">
+        <p-avatar [label]="comment.userEmail.charAt(0).toUpperCase()" size="large" shape="circle" />
+        <span class="font-bold"> {{ comment.userEmail.slice(0, 12) }}...</span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+        <div class="flex align-items-center gap-2">
+          <p-button icon="pi pi-user" rounded="true" text="true" />
+          <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true" />
+        </div>
+        <span class="p-text-secondary"> {{ comment.created_at | timeAgo }} </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="icons">
+      <button class="p-panel-header-icon p-link mr-2">
+        <span class="pi pi-cog"></span>
+      </button>
+    </ng-template>
+    <p class="m-0">{{ comment.body }}</p>
+  </p-panel>
+}
