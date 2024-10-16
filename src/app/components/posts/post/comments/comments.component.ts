@@ -16,5 +16,29 @@ import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe'
 export class CommentsComponent implements OnInit {
   @Input({ required: true }) comments!: IComment[]
 
-  ngOnInit(): void {}
+  colors = [
+    { 'background-color': '#FF5733', color: '#FFFFFF' },
+    { 'background-color': '#33FF57', color: '#000000' },
+    { 'background-color': '#3357FF', color: '#FFFFFF' },
+    { 'background-color': '#FF33A1', color: '#FFFFFF' },
+    { 'background-color': '#FFD700', color: '#000000' },
+    { 'background-color': '#8E44AD', color: '#FFFFFF' },
+  ]
+
+  ngOnInit(): void {
+    console.log(this.comments)
+  }
+
+  avatar_color() {
+    const colors = [
+      { 'background-color': '#FF5733', color: '#FFFFFF' },
+      { 'background-color': '#33FF57', color: '#000000' },
+      { 'background-color': '#3357FF', color: '#FFFFFF' },
+      { 'background-color': '#FF33A1', color: '#FFFFFF' },
+      { 'background-color': '#FFD700', color: '#000000' },
+      { 'background-color': '#8E44AD', color: '#FFFFFF' },
+    ]
+
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
 }

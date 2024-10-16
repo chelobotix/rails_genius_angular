@@ -1,0 +1,12 @@
+<div class="w-full">
+  <p-panel header="Post a new comment. It's cool!" [toggleable]="true">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <p-floatLabel>
+        <textarea id="float-input" rows="5" [style]="{ width: '100%' }" pInputTextarea formControlName="body">
+        </textarea>
+        <label for="float-input">Your comment</label>
+      </p-floatLabel>
+      <p-button type="submit" (click)="new_comment()" label="Leave a comment" severity="danger" />
+    </form>
+  </p-panel>
+</div>

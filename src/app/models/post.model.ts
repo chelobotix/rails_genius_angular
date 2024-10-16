@@ -1,3 +1,5 @@
+import { IComment } from './comment.model'
+
 export interface IPost {
   id: number
   title: string
@@ -9,6 +11,7 @@ export interface IPost {
   readTime: number
   published: string
   featured: boolean
+  comments: IComment[]
   user: {
     id: number
     email: string
