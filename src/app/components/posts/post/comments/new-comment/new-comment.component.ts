@@ -8,6 +8,7 @@ import { CommentService } from '../../../../../services/comment.service'
 import { tap } from 'rxjs'
 import { AuthenticatorService } from '../../../../../services/authenticator.service'
 import { ActivatedRoute, RouterLink } from '@angular/router'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-new-comment',
@@ -23,6 +24,8 @@ export class NewCommentComponent implements OnInit {
   private commentService = inject(CommentService)
 
   commentDisable = signal(true)
+
+  constructor(private toastr: ToastrService) {}
 
   formData = new FormGroup({
     body: new FormControl('', {
@@ -43,6 +46,7 @@ export class NewCommentComponent implements OnInit {
         .new(this.formData.value.body!, this.post_id)
         .pipe(
           tap((response) => {
+            this.toastr.success('created, pending of moderation!')
             console.log(response)
           })
         )

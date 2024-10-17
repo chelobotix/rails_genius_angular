@@ -6,7 +6,7 @@
           @if (comment.user_email === user_uid) {
             <i (click)="edit(comment.body)" class="pi pi-pen-to-square cursor" style=""></i>
           }
-
+          //TODO: ahora a los replis para que puedan editar, estamos cerca.
           <div>
             <p-avatar
               [label]="comment.user_email.charAt(0).toUpperCase()"
