@@ -49,6 +49,4 @@ export class NewCommentComponent implements OnInit {
         .subscribe()
     }
   }
-
-  new_comment() {}
 }

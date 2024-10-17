@@ -1,20 +1,47 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, inject, Input, OnInit, signal } from '@angular/core'
 import { TreeModule } from 'primeng/tree'
 import { Button } from 'primeng/button'
 import { PanelModule } from 'primeng/panel'
 import { AvatarModule } from 'primeng/avatar'
 import { IComment } from '../../../../models/comment.model'
 import { TimeAgoPipe } from '../../../../pipes/time-ago.pipe'
+import { AuthenticatorService } from '../../../../services/authenticator.service'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextareaModule } from 'primeng/inputtextarea'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { tap } from 'rxjs'
+import { CommentService } from '../../../../services/comment.service'
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [TreeModule, Button, PanelModule, AvatarModule, TimeAgoPipe],
+  imports: [
+    TreeModule,
+    Button,
+    PanelModule,
+    AvatarModule,
+    TimeAgoPipe,
+    FloatLabelModule,
+    InputTextareaModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss',
 })
 export class CommentsComponent implements OnInit {
   @Input({ required: true }) comments!: IComment[]
+
+  private authenticatorService = inject(AuthenticatorService)
+  private commentService = inject(CommentService)
+
+  user_uid = this.authenticatorService.actualCredentials().uid
+  show_edit = signal(false)
+
+  formData = new FormGroup({
+    body: new FormControl('', {
+      validators: [Validators.required],
+    }),
+  })
 
   colors = [
     { 'background-color': '#FF5733', color: '#FFFFFF' },
@@ -27,6 +54,7 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.comments)
+    console.log(this.user_uid)
   }
 
   avatar_color() {
@@ -40,5 +68,28 @@ export class CommentsComponent implements OnInit {
     ]
 
     return colors[Math.floor(Math.random() * colors.length)]
+  }
+
+  edit(commentBody: string) {
+    this.formData.patchValue({
+      body: commentBody,
+    })
+    this.show_edit.set(true)
+  }
+
+  onSubmit(commentId: number, postId: number) {
+    console.log(this.formData.value.body)
+    console.log(commentId)
+    if (this.formData.valid) {
+      this.commentService
+        .edit(this.formData.value.body!, postId, commentId)
+        .pipe(
+          tap((response) => {
+            console.log(response)
+            this.show_edit.set(false)
+          })
+        )
+        .subscribe()
+    }
   }
 }

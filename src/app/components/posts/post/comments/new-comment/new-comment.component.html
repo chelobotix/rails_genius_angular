@@ -13,13 +13,14 @@
           />
           <label for="float-input1">Log in to post a comment</label>
         </p-floatLabel>
-        <p-button type="submit" (click)="new_comment()" label="Leave a comment" severity="danger" disabled="true" />
+        <p-button type="submit" label="Leave a comment" severity="danger" disabled="true" />
       } @else {
         <p-floatLabel>
-          <textarea id="float-input2" rows="5" [style]="{ width: '100%' }" pInputTextarea> </textarea>
+          <textarea id="float-input2" rows="5" [style]="{ width: '100%' }" pInputTextarea formControlName="body">
+          </textarea>
           <label for="float-input2">Post a comment</label>
         </p-floatLabel>
-        <p-button type="submit" (click)="new_comment()" label="Leave a comment" severity="danger" />
+        <p-button type="submit" label="Leave a comment" severity="danger" />
       }
     </form>
   </p-panel>

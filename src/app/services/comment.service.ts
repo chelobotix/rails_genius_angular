@@ -24,4 +24,16 @@ export class CommentService {
 
     return this.httpClient.post<any>(`${this.base_url}/posts/${post_id}/comments`, body, { headers: headers })
   }
+
+  edit(content: string, postId: number, commentId: number) {
+    const headers = this.authenticatorService.include_credentials_headers()
+
+    const body = {
+      body: content,
+    }
+
+    return this.httpClient.patch<any>(`${this.base_url}/posts/${postId}/comments/${commentId}`, body, {
+      headers: headers,
+    })
+  }
 }
