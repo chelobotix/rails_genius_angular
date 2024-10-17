@@ -9,8 +9,9 @@ import { AuthenticatorService } from '../../../../services/authenticator.service
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { tap } from 'rxjs'
+import { catchError, of, tap } from 'rxjs'
 import { CommentService } from '../../../../services/comment.service'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-comments',
@@ -33,6 +34,8 @@ export class CommentsComponent implements OnInit {
 
   private authenticatorService = inject(AuthenticatorService)
   private commentService = inject(CommentService)
+
+  constructor(private toastr: ToastrService) {}
 
   user_uid = this.authenticatorService.actualCredentials().uid
   show_edit = signal(false)
@@ -86,7 +89,14 @@ export class CommentsComponent implements OnInit {
         .pipe(
           tap((response) => {
             console.log(response)
+            this.toastr.success('updated, pending of moderation!')
             this.show_edit.set(false)
+          }),
+          catchError((error) => {
+            console.log(error)
+            this.toastr.error('Not updated')
+            this.show_edit.set(false)
+            return of([])
           })
         )
         .subscribe()
