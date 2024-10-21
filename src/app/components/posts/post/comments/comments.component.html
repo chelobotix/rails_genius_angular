@@ -2,10 +2,7 @@
   <div class="container">
     <p-panel [toggleable]="true">
       <ng-template pTemplate="header">
-        <div class="flex flex-column gap-2">
-          @if (comment.user_email === user_uid) {
-            <i (click)="edit(comment.id)" class="pi pi-pen-to-square cursor" style=""></i>
-          }
+        <div class="flex justify-content-between align-items-center gap-2 w-full">
           <div>
             <p-avatar
               [label]="comment.user_email.charAt(0).toUpperCase()"
@@ -15,6 +12,12 @@
             />
             <span class="font-bold"> {{ comment.user_email.slice(0, 12) }}...</span>
           </div>
+          @if (comment.user_email === user_uid) {
+            <div class="flex gap-2">
+              <i (click)="edit(comment.id)" class="pi pi-pencil cursor" style=""></i>
+              <i (click)="edit(comment.id)" class="pi pi-trash cursor" style=""></i>
+            </div>
+          }
         </div>
       </ng-template>
 
@@ -40,10 +43,7 @@
         @for (reply of comment.replies; track reply.id) {
           <p-panel [toggleable]="true">
             <ng-template pTemplate="header">
-              <div class="flex align-items-center gap-2">
-                @if (reply.user_email === user_uid) {
-                  <i (click)="editReply(reply.id)" class="pi pi-pen-to-square cursor" style=""></i>
-                }
+              <div class="flex justify-content-between w-full align-items-center gap-2">
                 <div>
                   <p-avatar
                     [label]="reply.user_email.charAt(0).toUpperCase()"
@@ -53,6 +53,12 @@
                   />
                   <span class="font-bold"> {{ reply.user_email.slice(0, 12) }}...</span>
                 </div>
+                @if (reply.user_email === user_uid) {
+                  <div class="flex gap-2">
+                    <i (click)="editReply(reply.id)" class="pi pi-pencil cursor" style=""></i>
+                    <i (click)="edit(comment.id)" class="pi pi-trash cursor" style=""></i>
+                  </div>
+                }
               </div>
             </ng-template>
 
