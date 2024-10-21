@@ -44,4 +44,24 @@ export class CommentService {
       headers: headers,
     })
   }
+
+  pendingModeration() {
+    const headers = this.authenticatorService.include_credentials_headers()
+
+    return this.httpClient.get<any>(`${this.base_url}/unapproved_comments`, {
+      headers: headers,
+    })
+  }
+
+  handleModeration(postId: number, commentId: number, status: string) {
+    const headers = this.authenticatorService.include_credentials_headers()
+
+    const body = {
+      status: status,
+    }
+
+    return this.httpClient.post<any>(`${this.base_url}/posts/${postId}/comments/${commentId}/approve`, body, {
+      headers: headers,
+    })
+  }
 }
