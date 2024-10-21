@@ -35,12 +35,12 @@ export class PostComponent implements OnInit {
   isAuthenticated = this.authenticatorService.actualIsAuthenticated
 
   ngOnInit() {
-    lightbox.option({
-      resizeDuration: 200,
-      wrapAround: true,
-      fitImagesInViewport: false,
-      disableScrolling: true,
-    })
+    // lightbox.option({
+    //   resizeDuration: 200,
+    //   wrapAround: true,
+    //   fitImagesInViewport: false,
+    //   disableScrolling: true,
+    // })
 
     // this.loaderService.hideLoader()
     this.loaderService.showLoader()

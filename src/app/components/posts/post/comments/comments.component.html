@@ -4,9 +4,8 @@
       <ng-template pTemplate="header">
         <div class="flex flex-column gap-2">
           @if (comment.user_email === user_uid) {
-            <i (click)="edit(comment.body)" class="pi pi-pen-to-square cursor" style=""></i>
+            <i (click)="edit(comment.id)" class="pi pi-pen-to-square cursor" style=""></i>
           }
-          //TODO: ahora a los replis para que puedan editar, estamos cerca.
           <div>
             <p-avatar
               [label]="comment.user_email.charAt(0).toUpperCase()"
@@ -20,27 +19,15 @@
       </ng-template>
 
       <div class="w-full">
-        @if (!show_edit()) {
+        @if (!showEdit() || actualOpen !== comment.id) {
           <p class="m-0">{{ comment.body }}</p>
-        } @else {
-          <div class="w-full">
-            <p-panel header="Edit your comment..." [toggleable]="true">
-              <form [formGroup]="formData" (ngSubmit)="onSubmit(comment.id, comment.post_id)">
-                <p-floatLabel>
-                  <textarea
-                    id="float-input2"
-                    rows="5"
-                    [style]="{ width: '100%' }"
-                    pInputTextarea
-                    formControlName="body"
-                  >
-                  </textarea>
-                  <label for="float-input2">Post a comment</label>
-                </p-floatLabel>
-                <p-button type="submit" label="Update" severity="danger" />
-              </form>
-            </p-panel>
-          </div>
+        } @else if (showEdit() && actualOpen === comment.id) {
+          <app-edit-comment
+            [commentId]="comment.id"
+            [commentPostId]="comment.post_id"
+            [commentBody]="comment.body"
+            (showEdit)="edit(comment.id)"
+          />
         }
 
         <div class="flex flex-wrap align-items-center justify-content-between gap-3">
@@ -54,6 +41,9 @@
           <p-panel [toggleable]="true">
             <ng-template pTemplate="header">
               <div class="flex align-items-center gap-2">
+                @if (reply.user_email === user_uid) {
+                  <i (click)="editReply(reply.id)" class="pi pi-pen-to-square cursor" style=""></i>
+                }
                 <div>
                   <p-avatar
                     [label]="reply.user_email.charAt(0).toUpperCase()"
@@ -67,7 +57,17 @@
             </ng-template>
 
             <div>
-              <p class="m-0">{{ reply.body }}</p>
+              @if (!showReplyEdit() || actualReplyOpen !== reply.id) {
+                <p class="m-0">{{ reply.body }}</p>
+              } @else if (showReplyEdit() && actualReplyOpen === reply.id) {
+                <app-edit-comment
+                  [commentId]="reply.id"
+                  [commentPostId]="reply.post_id"
+                  [commentBody]="reply.body"
+                  (showEdit)="editReply(reply.id)"
+                />
+              }
+
               <div class="flex flex-wrap align-items-center justify-content-between gap-3">
                 <span class="p-text-secondary"> {{ reply.created_at | timeAgo }} </span>
               </div>
