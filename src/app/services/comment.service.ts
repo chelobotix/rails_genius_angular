@@ -36,4 +36,12 @@ export class CommentService {
       headers: headers,
     })
   }
+
+  delete(postId: number, commentId: number) {
+    const headers = this.authenticatorService.include_credentials_headers()
+
+    return this.httpClient.delete<any>(`${this.base_url}/posts/${postId}/comments/${commentId}`, {
+      headers: headers,
+    })
+  }
 }

@@ -1,4 +1,4 @@
-@for (comment of comments; track comment.id) {
+@for (comment of localComments(); track comment.id) {
   <div class="container">
     <p-panel [toggleable]="true">
       <ng-template pTemplate="header">
@@ -15,7 +15,7 @@
           @if (comment.user_email === user_uid) {
             <div class="flex gap-2">
               <i (click)="edit(comment.id)" class="pi pi-pencil cursor" style=""></i>
-              <i (click)="edit(comment.id)" class="pi pi-trash cursor" style=""></i>
+              <i (click)="delete(comment.id, comment.post_id)" class="pi pi-trash cursor" style=""></i>
             </div>
           }
         </div>
@@ -56,7 +56,7 @@
                 @if (reply.user_email === user_uid) {
                   <div class="flex gap-2">
                     <i (click)="editReply(reply.id)" class="pi pi-pencil cursor" style=""></i>
-                    <i (click)="edit(comment.id)" class="pi pi-trash cursor" style=""></i>
+                    <i (click)="delete(reply.id, comment.post_id)" class="pi pi-trash cursor" style=""></i>
                   </div>
                 }
               </div>

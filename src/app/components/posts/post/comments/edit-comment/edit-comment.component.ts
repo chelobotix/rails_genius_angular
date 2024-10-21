@@ -8,8 +8,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { catchError, finalize, of, tap } from 'rxjs'
 import { CommentService } from '../../../../../services/comment.service'
 import { ToastrService } from 'ngx-toastr'
-import { response } from 'express'
-import { error } from 'jquery'
 
 @Component({
   selector: 'app-edit-comment',

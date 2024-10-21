@@ -9,7 +9,7 @@ import { AuthenticatorService } from '../../../../services/authenticator.service
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { catchError, of, tap } from 'rxjs'
+import { catchError, finalize, of, tap } from 'rxjs'
 import { CommentService } from '../../../../services/comment.service'
 import { ToastrService } from 'ngx-toastr'
 import { EditCommentComponent } from './edit-comment/edit-comment.component'
@@ -31,12 +31,17 @@ import { EditCommentComponent } from './edit-comment/edit-comment.component'
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss',
 })
-export class CommentsComponent implements OnInit {
-  @Input({ required: true }) comments!: IComment[]
+export class CommentsComponent {
+  @Input({ required: true }) set comments(value: IComment[]) {
+    this.localComments.set(value)
+  }
+
+  constructor(private toastr: ToastrService) {}
 
   private authenticatorService = inject(AuthenticatorService)
   private commentService = inject(CommentService)
 
+  localComments = signal<IComment[]>([])
   user_uid = this.authenticatorService.actualCredentials().uid
   showEdit = signal(false)
   actualOpen = 0
@@ -58,15 +63,10 @@ export class CommentsComponent implements OnInit {
     { 'background-color': '#8E44AD', color: '#FFFFFF' },
   ]
 
-  ngOnInit(): void {
-    console.log(this.comments)
-    console.log(this.user_uid)
-  }
-
   avatar_color() {
     const colors = [
       { 'background-color': '#FF5733', color: '#FFFFFF' },
-      { 'background-color': '#33FF57', color: '#000000' },
+      { 'background-color': '#29d547', color: '#000000' },
       { 'background-color': '#3357FF', color: '#FFFFFF' },
       { 'background-color': '#FF33A1', color: '#FFFFFF' },
       { 'background-color': '#FFD700', color: '#000000' },
@@ -84,5 +84,22 @@ export class CommentsComponent implements OnInit {
   editReply(replyId: number) {
     this.actualReplyOpen = replyId
     this.showReplyEdit.set(!this.showReplyEdit())
+  }
+
+  delete(commentId: number, commentPostId: number) {
+    this.commentService
+      .delete(commentPostId, commentId)
+      .pipe(
+        tap((response) => {
+          this.localComments.set(this.localComments().filter((comment) => comment.id !== commentId))
+          this.toastr.success('deleted!')
+        }),
+        catchError((error) => {
+          console.log(error)
+          this.toastr.error('Not deleted')
+          return of([])
+        })
+      )
+      .subscribe()
   }
 }
