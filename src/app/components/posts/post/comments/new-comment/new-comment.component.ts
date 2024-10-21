@@ -47,7 +47,7 @@ export class NewCommentComponent implements OnInit {
         .pipe(
           tap((response) => {
             this.toastr.success('created, pending of moderation!')
-            console.log(response)
+            this.formData.reset()
           })
         )
         .subscribe()
