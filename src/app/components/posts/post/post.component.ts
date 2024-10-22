@@ -1,16 +1,16 @@
-import { AfterViewChecked, Component, inject, OnInit, signal } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { PostService } from '../../../services/post.service'
-import { IPost } from '../../../models/post.model'
-import { LoaderService } from '../../../services/loader.service'
-import { AvatarModule } from 'primeng/avatar'
-import { MarkdownModule } from 'ngx-markdown'
-import { AuthenticatorService } from '../../../services/authenticator.service'
-import { FavoriteService } from '../../../services/favorite.service'
-import { catchError, concatMap, map, of, switchMap } from 'rxjs'
-import { CommentsComponent } from './comments/comments.component'
-import { Button } from 'primeng/button'
-import { NewCommentComponent } from './comments/new-comment/new-comment.component'
+import {AfterViewChecked, Component, inject, OnInit, signal} from '@angular/core'
+import {ActivatedRoute} from '@angular/router'
+import {PostService} from '../../../services/post.service'
+import {IPost} from '../../../models/post.model'
+import {LoaderService} from '../../../services/loader.service'
+import {AvatarModule} from 'primeng/avatar'
+import {MarkdownModule} from 'ngx-markdown'
+import {AuthenticatorService} from '../../../services/authenticator.service'
+import {FavoriteService} from '../../../services/favorite.service'
+import {catchError, concatMap, map, of, switchMap} from 'rxjs'
+import {CommentsComponent} from './comments/comments.component'
+import {Button} from 'primeng/button'
+import {NewCommentComponent} from './comments/new-comment/new-comment.component'
 
 declare var lightbox: any
 
@@ -51,6 +51,7 @@ export class PostComponent implements OnInit {
         .getPost(this.postId)
         .pipe(
           concatMap((response) => {
+            console.log(response.posts[0])
             this.post.set(response.posts[0])
             if (this.authenticatorService.actualIsAuthenticated()) {
               return this.favoriteService.check(response.posts[0].id).pipe(
