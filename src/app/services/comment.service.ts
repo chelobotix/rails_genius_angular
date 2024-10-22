@@ -3,6 +3,7 @@ import { IPosts } from '../models/posts.model'
 import { tap } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { AuthenticatorService } from './authenticator.service'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,7 @@ import { AuthenticatorService } from './authenticator.service'
 export class CommentService {
   private httpClient = inject(HttpClient)
   private authenticatorService = inject(AuthenticatorService)
-  private base_url = 'http://localhost:3000/api/v1'
-
-  // private base_url = 'https://rails-genius.fly.dev/api/v1'
+  private base_url = environment.base_url
 
   new(content: string, post_id: number) {
     const headers = this.authenticatorService.include_credentials_headers()
@@ -22,7 +21,7 @@ export class CommentService {
       parent_comment_id: null,
     }
 
-    return this.httpClient.post<any>(`${this.base_url}/posts/${post_id}/comments`, body, { headers: headers })
+    return this.httpClient.post<any>(`${this.base_url}/api/v1/posts/${post_id}/comments`, body, { headers: headers })
   }
 
   edit(content: string, postId: number, commentId: number) {
@@ -32,7 +31,7 @@ export class CommentService {
       body: content,
     }
 
-    return this.httpClient.patch<any>(`${this.base_url}/posts/${postId}/comments/${commentId}`, body, {
+    return this.httpClient.patch<any>(`${this.base_url}/api/v1/posts/${postId}/comments/${commentId}`, body, {
       headers: headers,
     })
   }
@@ -40,7 +39,7 @@ export class CommentService {
   delete(postId: number, commentId: number) {
     const headers = this.authenticatorService.include_credentials_headers()
 
-    return this.httpClient.delete<any>(`${this.base_url}/posts/${postId}/comments/${commentId}`, {
+    return this.httpClient.delete<any>(`${this.base_url}/api/v1/posts/${postId}/comments/${commentId}`, {
       headers: headers,
     })
   }
@@ -48,7 +47,7 @@ export class CommentService {
   pendingModeration() {
     const headers = this.authenticatorService.include_credentials_headers()
 
-    return this.httpClient.get<any>(`${this.base_url}/unapproved_comments`, {
+    return this.httpClient.get<any>(`${this.base_url}/api/v1/unapproved_comments`, {
       headers: headers,
     })
   }
@@ -60,7 +59,7 @@ export class CommentService {
       status: status,
     }
 
-    return this.httpClient.post<any>(`${this.base_url}/posts/${postId}/comments/${commentId}/approve`, body, {
+    return this.httpClient.post<any>(`${this.base_url}/api/v1/posts/${postId}/comments/${commentId}/approve`, body, {
       headers: headers,
     })
   }

@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { AuthenticatorService } from './authenticator.service'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +10,7 @@ export class FavoriteService {
   private httpClient = inject(HttpClient)
   private authenticatorService = inject(AuthenticatorService)
 
-  private base_url = 'http://127.0.0.1:3000'
-
-  // private base_url = 'https://rails-genius.fly.dev/api/v1'
+  private base_url = environment.base_url
 
   check(post_id: number) {
     const headers = this.authenticatorService.include_credentials_headers()

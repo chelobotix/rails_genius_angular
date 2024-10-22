@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
           concatMap((response) => {
             this.post.set(response.posts[0])
             if (this.authenticatorService.actualIsAuthenticated()) {
-              return this.favoriteService.check(response.post.id).pipe(
+              return this.favoriteService.check(response.posts[0].id).pipe(
                 map((response) => {
                   this.favorite.set(response.favorite)
                 })
