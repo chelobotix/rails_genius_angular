@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ICredentials } from '../models/credentials.model'
 import { catchError, finalize, map, Observable, of, tap } from 'rxjs'
 import { LoaderService } from './loader.service'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,7 @@ export class AuthenticatorService {
   private localstorageService = inject(LocalstorageService)
   private loaderService = inject(LoaderService)
   private httpClient = inject(HttpClient)
-  private base_url = 'http://127.0.0.1:3000'
-  // private base_url = 'https://rails-genius.fly.dev'
+  private base_url = environment.base_url
 
   private credentials = signal<ICredentials>({
     'access-token': '',

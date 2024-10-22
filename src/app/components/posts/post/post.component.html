@@ -15,8 +15,11 @@
     </div>
     <img [src]="post()?.imageUrl" alt="" class="main-img" />
     <h1 class="text-red-400">{{ post()?.title }}</h1>
-  </div>
-  <div class="post-container-inner">
-    <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+    <div class="post-container-inner">
+      <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+    </div>
+    <app-comments [comments]="post()?.comments!" />
+
+    <app-new-comment [post_id]="post()?.id!" />
   </div>
 }

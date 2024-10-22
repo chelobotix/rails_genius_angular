@@ -8,13 +8,16 @@ import { MarkdownModule } from 'ngx-markdown'
 import { AuthenticatorService } from '../../../services/authenticator.service'
 import { FavoriteService } from '../../../services/favorite.service'
 import { catchError, concatMap, map, of, switchMap } from 'rxjs'
+import { CommentsComponent } from './comments/comments.component'
+import { Button } from 'primeng/button'
+import { NewCommentComponent } from './comments/new-comment/new-comment.component'
 
 declare var lightbox: any
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [AvatarModule, MarkdownModule],
+  imports: [AvatarModule, MarkdownModule, CommentsComponent, Button, NewCommentComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
@@ -32,12 +35,12 @@ export class PostComponent implements OnInit {
   isAuthenticated = this.authenticatorService.actualIsAuthenticated
 
   ngOnInit() {
-    lightbox.option({
-      resizeDuration: 200,
-      wrapAround: true,
-      fitImagesInViewport: false,
-      disableScrolling: true,
-    })
+    // lightbox.option({
+    //   resizeDuration: 200,
+    //   wrapAround: true,
+    //   fitImagesInViewport: false,
+    //   disableScrolling: true,
+    // })
 
     // this.loaderService.hideLoader()
     this.loaderService.showLoader()
@@ -48,9 +51,9 @@ export class PostComponent implements OnInit {
         .getPost(this.postId)
         .pipe(
           concatMap((response) => {
-            this.post.set(response.post)
+            this.post.set(response.posts[0])
             if (this.authenticatorService.actualIsAuthenticated()) {
-              return this.favoriteService.check(response.post.id).pipe(
+              return this.favoriteService.check(response.posts[0].id).pipe(
                 map((response) => {
                   this.favorite.set(response.favorite)
                 })
@@ -71,5 +74,9 @@ export class PostComponent implements OnInit {
         },
       })
     }
+  }
+
+  new_comment() {
+    console.log('')
   }
 }

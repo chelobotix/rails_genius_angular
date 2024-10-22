@@ -7,6 +7,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { NewPostComponent } from './components/posts/new-post/new-post.component'
 import { PostComponent } from './components/posts/post/post.component'
 import { NewPostGuard } from './guards/new-post.guard'
+import { ModerateCommentsComponent } from './components/moderate-comments/moderate-comments.component'
 
 export const routes: Routes = [
   {
@@ -49,6 +50,12 @@ export const routes: Routes = [
         title: 'Rails Genius',
       },
     ],
+  },
+  {
+    path: 'moderate_comments',
+    component: ModerateCommentsComponent,
+    title: 'Moderate',
+    canActivate: [NewPostGuard],
   },
   {
     path: '**',

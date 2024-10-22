@@ -1,0 +1,21 @@
+<div class="card">
+  <p-table [value]="comments()" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Post</th>
+        <th>Comment</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-comment>
+      <tr>
+        <td>{{ comment.post_title }}</td>
+        <td>{{ comment.body }}</td>
+        <td>
+          <p-button (click)="handleComment(comment.post_id, comment.id, 'approved')" label="Approve" />
+          <p-button (click)="handleComment(comment.post_id, comment.id, 'destroy')" label="Delete" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

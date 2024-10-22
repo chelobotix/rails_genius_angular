@@ -39,6 +39,7 @@
               "node_modules/lightbox2/dist/css/lightbox.min.css",
               "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
+              "node_modules/ngx-toastr/toastr.css",
               {
                 "input": "src/themes/theme-aura-light-cyan.scss",
                 "bundleName": "aura-light-cyan",
