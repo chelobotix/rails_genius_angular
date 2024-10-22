@@ -7,6 +7,7 @@ img {
 
 .container {
   width: 100%;
+  height: 500px;
   max-width: 350px;
   display: flex;
   flex-direction: column;
@@ -20,20 +21,22 @@ img {
   font-weight: 500;
   line-height: 1.7rem;
   text-align: center;
-}
-
-.truncate {
+  height: 50px;
   overflow: hidden;
   display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de líneas a mostrar */
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
-  white-space: pre-wrap; /* let the text wrap preserving spaces */
 }
 
-.hero-body {
+.hero-description {
   font-size: 1rem;
   font-weight: 300;
   text-align: center;
+  height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de líneas a mostrar */
+  -webkit-box-orient: vertical;
 }
 
 .hero-read-time {

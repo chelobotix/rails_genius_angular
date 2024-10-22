@@ -51,6 +51,7 @@ export class PostComponent implements OnInit {
         .getPost(this.postId)
         .pipe(
           concatMap((response) => {
+            console.log(response)
             this.post.set(response.posts[0])
             if (this.authenticatorService.actualIsAuthenticated()) {
               return this.favoriteService.check(response.posts[0].id).pipe(

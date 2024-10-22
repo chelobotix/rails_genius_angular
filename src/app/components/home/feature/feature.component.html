@@ -1,10 +1,9 @@
 <div class="container surface-0">
   <div class="tag-container">
-    <p-tag severity="danger" icon="pi pi-sparkles" value="featured"/>
+    <p-tag severity="danger" icon="pi pi-sparkles" value="featured" />
   </div>
-  <img class="shadow-7" [src]="featurePost.thumbnailUrl" alt=""/>
+  <img [src]="featurePost.thumbnailUrl" alt="" />
   <div class="feature-data">
     <p class="title">{{ featurePost.title }}</p>
-    <p class="hero-read-time">{{ featurePost.readTime + ' MIN READ' }}</p>
   </div>
 </div>

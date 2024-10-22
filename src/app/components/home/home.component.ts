@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core'
+import { Component, computed, inject, OnInit, signal } from '@angular/core'
 import { MenuService } from '../../services/menu.service'
 import { NgClass } from '@angular/common'
 import { HeroComponent } from './hero/hero.component'
@@ -10,6 +10,7 @@ import { FeatureComponent } from './feature/feature.component'
 import { DividerModule } from 'primeng/divider'
 import { PostHolderComponent } from './post-holder/post-holder.component'
 import { PostComponent } from '../posts/post/post.component'
+import { IPost } from '../../models/post.model'
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   private subscription!: Subscription
   loader = this.loaderService.loadingState
   posts = this.postService.actualPosts
+  featurePosts: IPost[] = []
 
   ngOnInit(): void {
     this.loaderService.showLoader()
@@ -31,9 +33,23 @@ export class HomeComponent implements OnInit {
       .getPosts()
       .pipe(
         tap((data) => {
+          this.selectFeaturePosts()
           this.loaderService.hideLoader()
         })
       )
       .subscribe()
+  }
+
+  selectFeaturePosts() {
+    let counter = 0
+    let i = 0
+
+    while (counter < 3) {
+      if (this.posts().posts[i].featured) {
+        this.featurePosts.push(this.posts().posts[i])
+        i++
+        counter++
+      }
+    }
   }
 }

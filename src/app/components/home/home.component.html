@@ -3,10 +3,8 @@
     <div class="container surface-100">
       <app-hero [heroPost]="posts().posts[0]" />
       <div class="feature-container">
-        @for (post of posts().posts; track post.id) {
-          @if (post.featured) {
-            <app-feature [featurePost]="post" />
-          }
+        @for (featurePost of featurePosts; track featurePost.id) {
+          <app-feature [featurePost]="featurePost" />
         }
       </div>
     </div>
