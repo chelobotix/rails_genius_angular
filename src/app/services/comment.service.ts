@@ -13,15 +13,15 @@ export class CommentService {
   private authenticatorService = inject(AuthenticatorService)
   private base_url = environment.base_url
 
-  new(content: string, post_id: number) {
+  new(content: string, postId: number, commentId: number = 0) {
     const headers = this.authenticatorService.include_credentials_headers()
 
     const body = {
       body: content,
-      parent_comment_id: null,
+      parent_comment_id: commentId == 0 ? null : commentId,
     }
 
-    return this.httpClient.post<any>(`${this.base_url}/api/v1/posts/${post_id}/comments`, body, { headers: headers })
+    return this.httpClient.post<any>(`${this.base_url}/api/v1/posts/${postId}/comments`, body, { headers: headers })
   }
 
   edit(content: string, postId: number, commentId: number) {

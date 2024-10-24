@@ -18,8 +18,8 @@
     <div class="post-container-inner">
       <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
     </div>
-    <app-comments [comments]="post()?.comments!" />
+    <app-comments [comments]="post()?.comments!" [post_id]="post()?.id!" />
 
-    <app-new-comment [post_id]="post()?.id!" />
+    <app-new-comment title="Post a new comment. It's cool!" innerText="Post a comment" [post_id]="post()?.id!" />
   </div>
 }
