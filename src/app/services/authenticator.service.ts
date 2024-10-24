@@ -116,7 +116,6 @@ export class AuthenticatorService {
         return true
       }),
       catchError((error) => {
-        console.log(error)
         this.isAuthenticated.set(false)
         return of(false)
       }),

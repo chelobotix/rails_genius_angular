@@ -64,7 +64,6 @@ export class PostService {
   }
 
   private postRequest<T>(endpoint: string, header: {}, body: {}) {
-    console.log(endpoint)
     const headers = new HttpHeaders(header)
 
     return this.httpClient.post<T>(`${this.base_url}/api/v1${endpoint}`, body, { headers: headers })

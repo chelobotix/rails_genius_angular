@@ -53,10 +53,8 @@ export class SignupComponent {
       this.loading.set(true)
       this.subscription = this.authenticatorService
         .signup(this.formData.value.email, this.formData.value.password)
-        .pipe(tap((response) => console.log(response)))
         .subscribe({
           next: (response) => {
-            console.log(response)
             if (response.status == 200) {
               this.loading.set(false)
               this.router.navigate(['auth/success'], {

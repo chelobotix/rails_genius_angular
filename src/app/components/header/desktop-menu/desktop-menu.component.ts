@@ -85,7 +85,6 @@ export class DesktopMenuComponent implements OnInit {
   handleLogout() {
     this.authenticatorService.logout().subscribe({
       next: (response) => {
-        console.log(response)
         this.router.navigate(['/'])
       },
       error: (error) => {
@@ -99,7 +98,6 @@ export class DesktopMenuComponent implements OnInit {
     if (this.formData.value.newPassword) {
       this.authenticatorService.changePassword(this.formData.value.newPassword).subscribe({
         next: (response) => {
-          console.log(response)
           this.message = [{ severity: 'success', detail: 'Password updated.' }]
           this.visible = false
         },
@@ -122,7 +120,6 @@ export class DesktopMenuComponent implements OnInit {
   handleFavorites() {
     this.favoriteService.getFavorites().subscribe({
       next: (response) => {
-        console.log(response)
         this.userFavorites.set(response as UserFavorites)
         this.favoriteVisible = true
         this.visible = false

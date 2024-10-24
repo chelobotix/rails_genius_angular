@@ -4,7 +4,6 @@ import {delay, finalize} from 'rxjs'
 import {inject} from '@angular/core'
 
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('intercepted')
   let cloneRequest = req.clone({
     setHeaders: {pipo: 'pipo!'},
   })
