@@ -25,15 +25,17 @@
     <div>
       <ul class="flex flex-column justify-content-center align-items-center">
         @for (post of searchPosts().posts; track post.id) {
-          <li class="w-full p-2 li-result">
-            <p class="text-justify" [innerHTML]="post.title | boldTarget: searchTerm"></p>
-            <p class="text-sm text-gray-500" [innerHTML]="post.body | boldTarget: searchTerm"></p>
-            <div class="flex gap-1">
-              @for (tag of post.tags; track random(1, 100)) {
-                <p-chip [label]="tag" styleClass="p-1 text-xs border-gray-500 border-1" />
-              }
-            </div>
-          </li>
+          <a class="cursor w-full link-hover" [routerLink]="['/posts', post.id]">
+            <li class="w-full p-2 li-result">
+              <p class="text-justify" [innerHTML]="post.title | boldTarget: searchTerm"></p>
+              <p class="text-sm text-gray-500" [innerHTML]="post.body | boldTarget: searchTerm"></p>
+              <div class="flex gap-1">
+                @for (tag of post.tags; track random(1, 100)) {
+                  <p-chip [label]="tag" styleClass="p-1 text-xs border-gray-500 border-1" />
+                }
+              </div>
+            </li>
+          </a>
         }
       </ul>
     </div>

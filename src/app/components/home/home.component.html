@@ -1,12 +1,14 @@
 <article class="flex flex-column align-items-center justify-content-center">
   @if (!loader()) {
     <div class="container surface-100">
-      <app-hero [heroPost]="posts().posts[0]" />
+      <a class="cursor" [routerLink]="['/posts', posts().posts[0].id]">
+        <app-hero [heroPost]="posts().posts[0]" />
+      </a>
       <div class="feature-container">
-        @for (post of posts().posts; track post.id) {
-          @if (post.featured) {
-            <app-feature [featurePost]="post" />
-          }
+        @for (featurePost of featurePosts; track featurePost.id) {
+          <a class="cursor" [routerLink]="['/posts', featurePost.id]">
+            <app-feature [featurePost]="featurePost" />
+          </a>
         }
       </div>
     </div>

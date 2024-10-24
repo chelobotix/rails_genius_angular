@@ -1,5 +1,5 @@
 <div class="w-full">
-  <p-panel header="Post a new comment. It's cool!" [toggleable]="true">
+  <p-panel [header]="title" [toggleable]="true">
     <form [formGroup]="formData" (ngSubmit)="onSubmit()">
       @if (commentDisable()) {
         <p-floatLabel>
@@ -18,9 +18,9 @@
         <p-floatLabel>
           <textarea id="float-input2" rows="5" [style]="{ width: '100%' }" pInputTextarea formControlName="body">
           </textarea>
-          <label for="float-input2">Post a comment</label>
+          <label for="float-input2">{{ innerText }}</label>
         </p-floatLabel>
-        <p-button type="submit" label="Leave a comment" severity="danger" />
+        <p-button type="submit" label="Done" severity="danger" />
       }
     </form>
   </p-panel>

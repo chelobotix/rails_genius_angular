@@ -1,4 +1,14 @@
-import { AfterViewChecked, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core'
 import { Button } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -8,7 +18,7 @@ import { AsyncPipe, NgIf } from '@angular/common'
 import { ListboxModule } from 'primeng/listbox'
 import { PostService } from '../../../services/post.service'
 import { BoldTargetPipe } from '../../../pipes/bold-target.pipe'
-import { IPost } from '../../../models/post.model'
+import { RouterLink } from '@angular/router'
 import { indexOf, random } from 'lodash'
 import { ChipModule } from 'primeng/chip'
 
@@ -26,6 +36,7 @@ import { ChipModule } from 'primeng/chip'
     NgIf,
     ChipModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -42,6 +53,18 @@ export class SearchComponent implements AfterViewChecked, OnInit, OnDestroy {
   formData = new FormGroup({
     search: new FormControl<any>('', {}),
   })
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+      event.preventDefault()
+      this.visible = true
+    }
+
+    if (event.key === 'Escape' && this.visible) {
+      this.visible = false
+    }
+  }
 
   ngOnInit(): void {
     this.subscription = this.formData.controls['search'].valueChanges

@@ -13,6 +13,7 @@ import { catchError, finalize, of, tap } from 'rxjs'
 import { CommentService } from '../../../../services/comment.service'
 import { ToastrService } from 'ngx-toastr'
 import { EditCommentComponent } from './edit-comment/edit-comment.component'
+import { NewCommentComponent } from './new-comment/new-comment.component'
 
 @Component({
   selector: 'app-comments',
@@ -27,11 +28,14 @@ import { EditCommentComponent } from './edit-comment/edit-comment.component'
     InputTextareaModule,
     ReactiveFormsModule,
     EditCommentComponent,
+    NewCommentComponent,
   ],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss',
 })
 export class CommentsComponent {
+  @Input({ required: true }) post_id!: number
+
   @Input({ required: true }) set comments(value: IComment[]) {
     this.localComments.set(value)
   }
@@ -42,10 +46,11 @@ export class CommentsComponent {
   private commentService = inject(CommentService)
 
   localComments = signal<IComment[]>([])
-  user_uid = this.authenticatorService.actualCredentials().uid
   showEdit = signal(false)
-  actualOpen = 0
   showReplyEdit = signal(false)
+  showReplyToComment = signal(false)
+  user_uid = this.authenticatorService.actualCredentials().uid
+  actualOpen = 0
   actualReplyOpen = 0
 
   formData = new FormGroup({
@@ -101,5 +106,9 @@ export class CommentsComponent {
         })
       )
       .subscribe()
+  }
+
+  replyToComment() {
+    this.showReplyToComment.set(!this.showReplyToComment())
   }
 }
