@@ -49,7 +49,10 @@ export class PostService {
   }
 
   getPosts() {
-    return this.getRequest<IPosts>('/posts').pipe(tap((data) => this.posts.set(data)))
+    return this.getRequest<IPosts>('/posts').pipe(
+      tap((data) => {
+        this.posts.set(data)
+      }))
   }
 
   getPost(id: string) {

@@ -39,13 +39,12 @@ export class HomeComponent implements OnInit {
     this.loaderService.showLoader()
     this.subscription = this.postService
       .getPosts()
-      .pipe(
-        tap((data) => {
+      .subscribe({
+        next: data => {
           this.selectFeaturePosts()
           this.loaderService.hideLoader()
-        })
-      )
-      .subscribe()
+        }
+      })
   }
 
   selectFeaturePosts() {
@@ -57,6 +56,9 @@ export class HomeComponent implements OnInit {
         this.featurePosts.push(this.posts().posts[i])
         i++
         counter++
+        if (counter === this.posts().posts.length){
+          counter = 3
+        }
       }
     }
   }

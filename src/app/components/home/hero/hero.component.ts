@@ -14,11 +14,6 @@ import {IPost} from '../../../models/post.model'
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
-export class HeroComponent implements OnInit {
+export class HeroComponent {
   @Input({required: true}) heroPost!: IPost
-
-
-  ngOnInit(): void {
-    console.log(this.heroPost)
-  }
 }

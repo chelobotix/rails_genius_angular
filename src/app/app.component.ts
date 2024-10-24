@@ -9,8 +9,7 @@ import { SkeletonComponent } from './components/home/skeleton/skeleton.component
 import { RouterOutlet } from '@angular/router'
 import { FooterComponent } from './components/footer/footer.component'
 import { AuthenticatorService } from './services/authenticator.service'
-import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular'
-import { LoaderService } from './services/loader.service'
+import { EditorComponent } from '@tinymce/tinymce-angular'
 
 @Component({
   selector: 'app-root',

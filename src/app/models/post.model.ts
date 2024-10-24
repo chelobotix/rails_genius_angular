@@ -8,7 +8,7 @@ export interface IPost {
   image_url: string
   thumbnail_url: string
   tags: string | string[]
-  readTime: number
+  read_time: number
   published: string
   featured: boolean
   comments: IComment[]
