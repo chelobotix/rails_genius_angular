@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, inject, OnInit, signal } from '@angular/core'
+import { AfterViewChecked, Component, inject, OnInit, signal, ViewContainerRef } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PostService } from '../../../services/post.service'
 import { IPost } from '../../../models/post.model'
@@ -11,38 +11,36 @@ import { catchError, concatMap, map, of, switchMap } from 'rxjs'
 import { CommentsComponent } from './comments/comments.component'
 import { Button } from 'primeng/button'
 import { NewCommentComponent } from './comments/new-comment/new-comment.component'
+import {
+  CookiesCasosDeLaVidaRealComponent
+} from './2024/espanol/1/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
+import { CommonModule } from '@angular/common';
 
 declare var lightbox: any
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [AvatarModule, MarkdownModule, CommentsComponent, Button, NewCommentComponent],
-  templateUrl: './post.component.html',
-  styleUrl: './post.component.scss',
+  imports: [AvatarModule, MarkdownModule, CommentsComponent, Button, NewCommentComponent, CommonModule],
+  templateUrl: './post-content.component.html',
+  styleUrl: './post-content.component.scss',
 })
-export class PostComponent implements OnInit {
+export class PostContentComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private postService = inject(PostService)
   private authenticatorService = inject(AuthenticatorService)
   private loaderService = inject(LoaderService)
   private favoriteService = inject(FavoriteService)
+  private viewContainerRef = inject(ViewContainerRef);
 
   postId: string | null = null
   post = signal<IPost | null>(null)
   loader = this.loaderService.loadingState
   favorite = signal(false)
   isAuthenticated = this.authenticatorService.actualIsAuthenticated
+  currentComponent: any;
 
   ngOnInit() {
-    // lightbox.option({
-    //   resizeDuration: 200,
-    //   wrapAround: true,
-    //   fitImagesInViewport: false,
-    //   disableScrolling: true,
-    // })
-
-    // this.loaderService.hideLoader()
     this.loaderService.showLoader()
     this.postId = this.route.snapshot.paramMap.get('id')
 
@@ -53,6 +51,9 @@ export class PostComponent implements OnInit {
           concatMap((response) => {
             console.log(response)
             this.post.set(response.post)
+            if(this.postId !== null){
+              this.mapPost(this.postId)
+            }
             if (this.authenticatorService.actualIsAuthenticated()) {
               return this.favoriteService.check(response.post.id).pipe(
                 map((response) => {
@@ -79,5 +80,14 @@ export class PostComponent implements OnInit {
 
   new_comment() {
     console.log('')
+  }
+
+  mapPost(id: string){
+    console.log(id)
+    const componentMap: { [key: string]: any } = {
+        '1': CookiesCasosDeLaVidaRealComponent,
+      }
+
+    this.currentComponent = componentMap[id] || CookiesCasosDeLaVidaRealComponent;
   }
 }

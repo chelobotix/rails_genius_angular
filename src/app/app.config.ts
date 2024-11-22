@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt'
 import { provideQuillConfig } from 'ngx-quill'
 import { provideMarkdown } from 'ngx-markdown'
 import { provideToastr } from 'ngx-toastr'
+import { provideHighlightOptions } from 'ngx-highlightjs'
 
 export function tokenGetter() {
   return '69*'
@@ -54,5 +55,13 @@ export const appConfig: ApplicationConfig = {
     }),
     provideMarkdown(),
     provideToastr(),
+    provideHighlightOptions({
+      coreLibraryLoader: () => import('highlight.js/lib/core'),
+      lineNumbersLoader: () => import('ngx-highlightjs/line-numbers'), // Optional, add line numbers if needed
+      languages: {
+        css: () => import('highlight.js/lib/languages/css'),
+        ruby: () => import('highlight.js/lib/languages/ruby'),
+      }
+    })
   ],
 }

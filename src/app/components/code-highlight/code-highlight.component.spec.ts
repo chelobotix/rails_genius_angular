@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostComponent } from './post.component';
+import { CodeHighlightComponent } from './code-highlight.component';
 
-describe('PostComponent', () => {
-  let component: PostComponent;
-  let fixture: ComponentFixture<PostComponent>;
+describe('CodeHighlightComponent', () => {
+  let component: CodeHighlightComponent;
+  let fixture: ComponentFixture<CodeHighlightComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PostComponent]
+      imports: [CodeHighlightComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PostComponent);
+    fixture = TestBed.createComponent(CodeHighlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

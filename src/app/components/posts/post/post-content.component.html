@@ -16,7 +16,7 @@
     <img [src]="post()?.image_url" alt="" class="main-img" />
     <h1 class="text-red-400">{{ post()?.title }}</h1>
     <div class="post-container-inner">
-      <markdown emoji lineHighlight lineNumbers [data]="post()?.body"></markdown>
+      <ng-container *ngComponentOutlet="currentComponent"></ng-container>
     </div>
     <app-comments [comments]="post()?.comments!" [post_id]="post()?.id!" />
 

@@ -5,7 +5,7 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { SuccessComponent } from './components/authentication/success/success.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { NewPostComponent } from './components/posts/new-post/new-post.component'
-import { PostComponent } from './components/posts/post/post.component'
+import { PostContentComponent } from './components/posts/post/post-content.component'
 import { NewPostGuard } from './guards/new-post.guard'
 import { ModerateCommentsComponent } from './components/moderate-comments/moderate-comments.component'
 
@@ -46,7 +46,7 @@ export const routes: Routes = [
       },
       {
         path: ':id',
-        component: PostComponent,
+        component: PostContentComponent,
         title: 'Rails Genius',
       },
     ],
