@@ -31,7 +31,6 @@ export class PostContentComponent implements OnInit {
   private authenticatorService = inject(AuthenticatorService)
   private loaderService = inject(LoaderService)
   private favoriteService = inject(FavoriteService)
-  private viewContainerRef = inject(ViewContainerRef);
 
   postId: string | null = null
   post = signal<IPost | null>(null)
