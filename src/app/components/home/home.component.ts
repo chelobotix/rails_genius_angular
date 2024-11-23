@@ -7,7 +7,7 @@ import { Subscription, tap } from 'rxjs'
 import { FeatureComponent } from './feature/feature.component'
 import { DividerModule } from 'primeng/divider'
 import { PostHolderComponent } from './post-holder/post-holder.component'
-import { PostComponent } from '../posts/post/post.component'
+import { PostContentComponent } from '../posts/post/post-content.component'
 import { IPost } from '../../models/post.model'
 import { RouterLink } from '@angular/router'
 
@@ -18,10 +18,10 @@ import { RouterLink } from '@angular/router'
     NgClass,
     HeroComponent,
     FeatureComponent,
-    PostComponent,
+    PostContentComponent,
     DividerModule,
     PostHolderComponent,
-    PostComponent,
+    PostContentComponent,
     RouterLink,
   ],
   templateUrl: './home.component.html',

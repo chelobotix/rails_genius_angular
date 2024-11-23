@@ -10520,6 +10520,42 @@ ul {
   list-style-type: none;
 }
 
+.post-title {
+  color: #ff6259;
+  text-align: center;
+  padding: 0 10px;
+  line-height: 40px;
+}
+
+.post-h2 {
+  color: #ff6259;
+  line-height: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-h3 {
+  color: #ff6259;
+  line-height: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-img {
+  width: 90%;
+  max-width: 400px;
+}
+
+.post-p {
+  margin: 20px 0;
+}
+
+.post-span {
+  background-color: #e2e8f0;
+  border-radius: 1rem;
+  padding: 0 5px;
+}
+
 .login-button {
   background-color: #ffffff;
   color: #000000;
@@ -10568,11 +10604,6 @@ ul {
 
 .post-container-inner > p > img {
   width: 100%;
-}
-
-.post-img {
-  width: 90%;
-  max-width: 400px;
 }
 
 .favorite-card {

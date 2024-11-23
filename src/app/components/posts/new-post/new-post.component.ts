@@ -54,6 +54,9 @@ export class NewPostComponent {
   form = new FormGroup({
     title: new FormControl('', { validators: [Validators.required] }),
     description: new FormControl('', { validators: [Validators.required] }),
+    year: new FormControl('', { validators: [Validators.required] }),
+    language: new FormControl('', { validators: [Validators.required] }),
+    identifier: new FormControl('', { validators: [Validators.required] }),
     editorContent: new FormControl('', { validators: [Validators.required] }),
     tags: new FormControl('', { validators: [Validators.required] }),
     featured: new FormControl('', { validators: [Validators.required] }),
@@ -68,10 +71,16 @@ export class NewPostComponent {
     if (this.form.valid && this.authenticatorService.actualIsAuthenticated()) {
       const sanitizedTitle = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.title as string)
       const sanitizedDescription = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.description as string)
+      const sanitizedYear = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.year as string)
+      const sanitizedLanguage = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.language as string)
+      const sanitizedIdentifier = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.identifier as string)
       const sanitizedTags = this.sanitizer.sanitize(SecurityContext.HTML, this.form.value.tags as string)
 
       formData.append('post[title]', sanitizedTitle as string)
       formData.append('post[description]', sanitizedDescription as string)
+      formData.append('post[year]', sanitizedYear as string)
+      formData.append('post[language]', sanitizedLanguage as string)
+      formData.append('post[identifier]', sanitizedIdentifier as string)
       formData.append('post[tags]', sanitizedTags as string)
       formData.append('post[body]', this.form.value.editorContent as string)
       formData.append('post[featured]', this.form.value.featured ? 'true' : 'false')
