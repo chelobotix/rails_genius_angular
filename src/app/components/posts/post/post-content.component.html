@@ -14,7 +14,6 @@
       }
     </div>
     <img [src]="post()?.image_url" alt="" class="main-img" />
-    <h1 class="text-red-400">{{ post()?.title }}</h1>
     <div class="post-container-inner">
       <ng-container *ngComponentOutlet="currentComponent"></ng-container>
     </div>
