@@ -50,8 +50,11 @@ export class PostContentComponent implements OnInit {
           concatMap((response) => {
             console.log(response)
             this.post.set(response.post)
-            if(this.postId !== null){
-              this.mapPost(this.postId)
+            if(this.post() && this.post()?.identifier){
+              const identifier = this.post()?.identifier;
+              if(this.post()?.identifier){
+                this.mapPost(this.post()?.identifier!)
+              }
             }
             if (this.authenticatorService.actualIsAuthenticated()) {
               return this.favoriteService.check(response.post.id).pipe(
@@ -81,12 +84,12 @@ export class PostContentComponent implements OnInit {
     console.log('')
   }
 
-  mapPost(id: string){
-    console.log(id)
+  mapPost(identifier: string){
+    console.log(identifier)
     const componentMap: { [key: string]: any } = {
-        '1': CookiesCasosDeLaVidaRealComponent,
+        'cookies-casos-de-la-vida-real': CookiesCasosDeLaVidaRealComponent,
       }
 
-    this.currentComponent = componentMap[id] || CookiesCasosDeLaVidaRealComponent;
+    this.currentComponent = componentMap[identifier] || CookiesCasosDeLaVidaRealComponent;
   }
 }
