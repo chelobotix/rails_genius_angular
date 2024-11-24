@@ -25,7 +25,10 @@
     <div>
       <ul class="flex flex-column justify-content-center align-items-center">
         @for (post of searchPosts().posts; track post.id) {
-          <a class="cursor w-full link-hover" [routerLink]="['/posts', post.id]">
+          <a
+            class="cursor w-full link-hover"
+            [routerLink]="['/posts', post.id, post.year, post.language, post.identifier]"
+          >
             <li class="w-full p-2 li-result">
               <p class="text-justify" [innerHTML]="post.title | boldTarget: searchTerm"></p>
               <p class="text-sm text-gray-500" [innerHTML]="post.body | boldTarget: searchTerm"></p>

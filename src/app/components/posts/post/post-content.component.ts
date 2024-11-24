@@ -11,7 +11,7 @@ import { concatMap, map, of } from 'rxjs'
 import { CommentsComponent } from './comments/comments.component'
 import { Button } from 'primeng/button'
 import { NewCommentComponent } from './comments/new-comment/new-comment.component'
-import { CookiesCasosDeLaVidaRealComponent } from './2024/espanol/1/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
+import { CookiesCasosDeLaVidaRealComponent } from './2024/espanol/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
 import { CommonModule } from '@angular/common'
 import { NotFoundComponent } from '../../not-found/not-found.component'
 
@@ -77,7 +77,7 @@ export class PostContentComponent implements OnInit {
   mapPost(identifier: string) {
     console.log(identifier)
     const componentMap: { [key: string]: any } = {
-      'cookies_casos_de_la_vida_real': CookiesCasosDeLaVidaRealComponent,
+      cookies_casos_de_la_vida_real: CookiesCasosDeLaVidaRealComponent,
     }
 
     this.currentComponent = componentMap[identifier] || NotFoundComponent

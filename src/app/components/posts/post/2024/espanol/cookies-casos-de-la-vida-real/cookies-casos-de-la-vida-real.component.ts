@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { CodeHighlightComponent } from '../../../../../../code-highlight/code-highlight.component'
+import { CodeHighlightComponent } from '../../../../../code-highlight/code-highlight.component'
 import { CardModule } from 'primeng/card'
 import { TagModule } from 'primeng/tag'
 import { DividerModule } from 'primeng/divider'
