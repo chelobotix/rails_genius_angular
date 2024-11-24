@@ -45,7 +45,7 @@ export const routes: Routes = [
         canActivate: [NewPostGuard],
       },
       {
-        path: ':id',
+        path: ':id/:year/:language/:identifier',
         component: PostContentComponent,
         title: 'Rails Genius',
       },

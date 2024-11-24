@@ -1,5 +1,5 @@
 <div class="container">
-  <a [routerLink]="['/posts', post.id]" class="cursor">
+  <a [routerLink]="['/posts', post.id, post.year, post.language, post.identifier]" class="cursor">
     <img class="shadow-7" [src]="post.thumbnail_url" alt="" />
   </a>
   <p class="title">{{ post.title }}</p>
