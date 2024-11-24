@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, inject, OnInit, signal, ViewContainerRef } from '@angular/core'
+import { Component, inject, OnInit, signal, ViewContainerRef } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PostService } from '../../../services/post.service'
 import { IPost } from '../../../models/post.model'
@@ -7,16 +7,13 @@ import { AvatarModule } from 'primeng/avatar'
 import { MarkdownModule } from 'ngx-markdown'
 import { AuthenticatorService } from '../../../services/authenticator.service'
 import { FavoriteService } from '../../../services/favorite.service'
-import { catchError, concatMap, map, of, switchMap } from 'rxjs'
+import { concatMap, map, of } from 'rxjs'
 import { CommentsComponent } from './comments/comments.component'
 import { Button } from 'primeng/button'
 import { NewCommentComponent } from './comments/new-comment/new-comment.component'
-import {
-  CookiesCasosDeLaVidaRealComponent
-} from './2024/espanol/1/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
-import { CommonModule } from '@angular/common';
-
-declare var lightbox: any
+import { CookiesCasosDeLaVidaRealComponent } from './2024/espanol/1/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
+import { CommonModule } from '@angular/common'
+import { NotFoundComponent } from '../../not-found/not-found.component'
 
 @Component({
   selector: 'app-post',
@@ -37,7 +34,7 @@ export class PostContentComponent implements OnInit {
   loader = this.loaderService.loadingState
   favorite = signal(false)
   isAuthenticated = this.authenticatorService.actualIsAuthenticated
-  currentComponent: any;
+  currentComponent: any
 
   ngOnInit() {
     this.loaderService.showLoader()
@@ -50,11 +47,8 @@ export class PostContentComponent implements OnInit {
           concatMap((response) => {
             console.log(response)
             this.post.set(response.post)
-            if(this.post() && this.post()?.identifier){
-              const identifier = this.post()?.identifier;
-              if(this.post()?.identifier){
-                this.mapPost(this.post()?.identifier!)
-              }
+            if (this.post()) {
+              this.mapPost(this.post()?.identifier!)
             }
             if (this.authenticatorService.actualIsAuthenticated()) {
               return this.favoriteService.check(response.post.id).pipe(
@@ -80,16 +74,12 @@ export class PostContentComponent implements OnInit {
     }
   }
 
-  new_comment() {
-    console.log('')
-  }
-
-  mapPost(identifier: string){
+  mapPost(identifier: string) {
     console.log(identifier)
     const componentMap: { [key: string]: any } = {
-        'cookies-casos-de-la-vida-real': CookiesCasosDeLaVidaRealComponent,
-      }
+      '1': CookiesCasosDeLaVidaRealComponent,
+    }
 
-    this.currentComponent = componentMap[identifier] || CookiesCasosDeLaVidaRealComponent;
+    this.currentComponent = componentMap[identifier] || NotFoundComponent
   }
 }

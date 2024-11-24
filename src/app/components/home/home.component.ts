@@ -10,6 +10,7 @@ import { PostHolderComponent } from './post-holder/post-holder.component'
 import { PostContentComponent } from '../posts/post/post-content.component'
 import { IPost } from '../../models/post.model'
 import { RouterLink } from '@angular/router'
+import { RomeComponent } from '../rome/rome.component'
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ import { RouterLink } from '@angular/router'
     PostHolderComponent,
     PostContentComponent,
     RouterLink,
+    RomeComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

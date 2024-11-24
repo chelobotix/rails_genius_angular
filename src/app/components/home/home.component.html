@@ -1,12 +1,30 @@
 <article class="flex flex-column align-items-center justify-content-center">
   @if (!loader() && posts().posts.length > 0) {
     <div class="container surface-100">
-      <a class="cursor" [routerLink]="['/posts', posts().posts[0].id]">
+      <a
+        class="cursor"
+        [routerLink]="[
+          '/posts',
+          posts().posts[0].id,
+          posts().posts[0].year,
+          posts().posts[0].language,
+          posts().posts[0].identifier,
+        ]"
+      >
         <app-hero [heroPost]="posts().posts[0]" />
       </a>
       <div class="feature-container">
         @for (featurePost of featurePosts; track featurePost.id) {
-          <a class="cursor" [routerLink]="['/posts', featurePost.id]">
+          <a
+            class="cursor"
+            [routerLink]="[
+              '/posts',
+              posts().posts[0].id,
+              posts().posts[0].year,
+              posts().posts[0].language,
+              posts().posts[0].identifier,
+            ]"
+          >
             <app-feature [featurePost]="featurePost" />
           </a>
         }
@@ -19,3 +37,4 @@
     </div>
   }
 </article>
+<app-rome />
