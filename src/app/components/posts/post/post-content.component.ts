@@ -77,7 +77,7 @@ export class PostContentComponent implements OnInit {
   mapPost(identifier: string) {
     console.log(identifier)
     const componentMap: { [key: string]: any } = {
-      '1': CookiesCasosDeLaVidaRealComponent,
+      cookies_casos_de_la_vida_real: CookiesCasosDeLaVidaRealComponent,
     }
 
     this.currentComponent = componentMap[identifier] || NotFoundComponent
