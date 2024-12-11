@@ -1,0 +1,353 @@
+<h1 class="post-title">Cookies in Real Life</h1>
+<article>
+  <p class="post-p">
+    One month ago, I’ve been diving into a Ruby on Rails project that presented some unique challenges, particularly around the
+    different ways cookies can be utilized. Exploring this topic has been a valuable learning experience, especially
+    when it comes to understanding how cookies are configured and behave in various scenarios.
+
+    Since detailed resources on this subject seem to be limited, I’ve decided to compile my findings into a comprehensive
+    guide. My goal is to create a resource that not only helps others but also serves as a handy reference for myself in
+    the future.
+
+    This tutorial is geared towards developers who are already familiar with creating controllers and actions in Rails.
+    Let’s get started!
+  </p>
+
+  <h2 class="post-h2">What are cookies?</h2>
+  <p class="post-p">
+    Cookies are small text files that are saved in the browser and can be accessed from the Front-end
+    or sent to the Back-end.
+  </p>
+
+  <h2 class="post-h2">What are they used for?</h2>
+  <p class="post-p">
+    Let me break it down for you in the simplest way: The HTTP protocol, which manages communication between the
+    front-end and back-end, is stateless. This means it doesn’t retain any memory of previous interactions. For
+    instance, when you're on a web page and click a link or button to send data to the back-end, the server treats your
+    next action as an entirely new request, with no context of what happened before. Here’s an example to make it
+    clearer:
+  </p>
+  <p>Click on the steps:</p>
+
+  <!-- The rest of the HTML structure remains the same, just translate the text content -->
+
+  <p-stepper orientation="vertical">
+    <p-stepperPanel header="Front-end">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+        <p class="post-p">
+          You fill out the login form on your favorite Rails programming website.
+        </p>
+        <a
+          href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1729603300/dsa%20dsadasdass/lijzvxqpir3dxvpoqtyb.png"
+          data-lightbox="roadtrip"
+          class="cursor justify-items-center"
+        ><img
+          src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1729603300/dsa%20dsadasdass/lijzvxqpir3dxvpoqtyb.png"
+          alt=""
+        /></a>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Front-end">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+        <p class="post-p">
+          You are on the main page and you see your name up there as an authenticated user and you click on a
+          link that says: Latest Ruby on Rails updates.
+        </p>
+        <a
+          href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1729601883/dasd/g7z4db4wzxptpdfxtfnk.jpg"
+          data-lightbox="roadtrip"
+          class="cursor justify-items-center"
+        ><img
+          src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1729601883/dasd/g7z4db4wzxptpdfxtfnk.jpg"
+          alt=""
+        /></a>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Front-end Back-end">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+        <p class="post-p">
+          You decide to navigate to another page within the website and click on a link. The request to open
+          the new page is sent, but it's verified that this page is only accessible to authenticated users.
+        </p>
+        <p class="post-p">
+          The front-end asks the back-end: Is there any authenticated user? and the back-end responds: I don't know! 🤔
+          all requests come to me as if they were new ones (stateless). I have no way of knowing if one request is
+          related to another.
+        </p>
+
+        <p class="post-p">
+          Did you understand the problem? That's what cookies are for 😏. When you log into a website, at that moment
+          a cookie is created (session cookie). That cookie will be automatically sent by the browser in all
+          future requests made by the front-end until the cookie expires.
+        </p>
+        <a
+          href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1729601883/dasd/g7z4db4wzxptpdfxtfnk.jpg"
+          data-lightbox="roadtrip"
+          class="cursor justify-items-center"
+        ><img
+          src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1729601883/dasd/g7z4db4wzxptpdfxtfnk.jpg"
+          alt=""
+        /></a>
+
+        <p class="post-p">
+          Cookies are used to store important data that you want to preserve between requests.
+        </p>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+
+  <p>Is it clear to you? If not, read it again because to understand what's coming next, the concept must be clear to you.</p>
+  <h2 class="post-h2">Setting up a cookie</h2>
+  <p class="post-p">
+    Let's get into action. Open: <span class="post-span">app / controllers / application_controller.rb</span> in your Ruby on Rails app and write the following:
+  </p>
+  <app-code-highlight [code]="code_array[0]" language="ruby" />
+  <p class="post-p">
+    Let's understand the code above: All you're doing is creating a callback so that the <span class="post-span">set_cookie</span> method is called before any other action. Inside the method, we create the new cookie with the name <span>"my_first_cookie"</span> and then assign it a value of 'Learning cookies with Rails Genius'. That's it, your cookie is created. Now let's start our Rails server with the command <span class="post-span">rails server</span> and visit the address <span class="post-span">localhost:3000</span> in our browser. We open the main page in our browser and we can see it in the apps tab of the developer tools (You can press f9 to open it)
+  </p>
+  <a
+    href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1727267071/Cookies_casos_de_la_vida_real_3_er8kcf.png"
+    data-lightbox="roadtrip"
+    class="cursor justify-items-center">
+
+  <img
+    src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1727267071/Cookies_casos_de_la_vida_real_3_er8kcf.png"
+    alt=""
+  /></a>
+
+  <h2 class="post-h2">Cookie Properties</h2>
+  <app-code-highlight [code]="code_array[1]" language="ruby" />
+  <h3 class="post-h3">my_cookie:</h3>
+  <p class="post-p">
+    The name of your cookie. Name it as the name of the girl who rejected you for being a programmer 😅. A good
+    practice is to use an intuitive name that starts with an underscore: <span class="post-span">_mysite_session</span>
+  </p>
+  <h3 class="post-h3">value:</h3>
+  <p class="post-p">
+    It's the value you want to give to your cookie. Don't put complex things like active record models, it's better
+    to keep the value as simple as possible. For example, if you want to store an active record model, just store its id
+    and then look it up with that
+  </p>
+  <h3 class="post-h3">domain:</h3>
+  <p class="post-p">
+    The domain property tells us which domain or subdomain can access (read) the cookie. Let's look at some examples:
+  </p>
+
+  <p class="post-p">
+    Our Domain will be:
+    <p-tag severity="success" value="ruby_latam.com" />
+    <br />
+    The subdomain that created the cookie will be
+    <p-tag severity="info" value="news.ruby_latam.com" />
+  </p>
+
+  <p class="post-p font-semibold font-italic">Without setting the domain property</p>
+  <p class="post-p">It will only send the cookie to the subdomain that created it and to no other.</p>
+  <p-card [style]="{ margin: '20px' }">
+    <ul>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="news.ruby_latam.com" />
+          WILL be able to read the cookie
+        </p>
+      </li>
+      <li>
+        <p class="post-p">
+          ❌
+          <p-tag severity="danger" value="jobs.ruby_latam.com" />
+          WILL NOT be able to read the cookie.
+        </p>
+      </li>
+    </ul>
+  </p-card>
+
+  <p-divider />
+  <p class="post-p font-semibold font-italic">domain: .ruby_latam.com</p>
+  <p class="post-p">It will send to all subdomains.</p>
+  <p-card [style]="{ margin: '20px' }">
+    <ul>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="news.ruby_latam.com" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="jobs.ruby_latam.com" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+    </ul>
+  </p-card>
+
+  <p-divider />
+
+  <p class="post-p font-semibold font-italic">domain: :all</p>
+  <p class="post-p">It will send to all subdomains.</p>
+  <p-card [style]="{ margin: '20px' }">
+    <ul>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="news.ruby_latam.com" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="jobs.ruby_latam.com" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+    </ul>
+  </p-card>
+
+  <p-divider />
+
+  <p class="post-p font-semibold font-italic">domain: %w(.ruby_latam.com .ruby_europe.org)</p>
+  <p class="post-p">It will send to different domains.</p>
+  <p-card [style]="{ margin: '20px' }">
+    <ul>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="news.ruby_latam.com" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+      <li>
+        <p class="post-p">
+          ✅
+          <p-tag severity="success" value="jobs.ruby_europe.org" />
+          WILL be able to read the cookie.
+        </p>
+      </li>
+    </ul>
+  </p-card>
+
+  <h3 class="post-h3">secure:</h3>
+  <p class="post-p">
+    If set to true, it means the cookie will only be transmitted from websites that have
+    <span class="post-span">https</span>. If you're testing on localhost, set it to false.
+  </p>
+  <p class="post-p">
+    Tip: with the following command, it will be set to false if you're in development and true if you're in production:
+  </p>
+  <app-code-highlight [code]="code_array[2]" language="ruby" />
+
+  <h3 class="post-h3">http_only:</h3>
+  <p class="post-p">
+    If this option is set to true, the Front-end will NOT be able to read the cookie; only the Back-end will be able to decrypt it.
+  </p>
+
+  <h3 class="post-h3">expire_after:</h3>
+  <p class="post-p">
+    The time after which the cookie expires once it has no activity. If you set it to one hour, with each new request it will be updated for another hour.
+  </p>
+
+  <h3 class="post-h3">same_site:</h3>
+  <p class="post-p">
+    <span class="font-semibold">none:</span> Allows the cookie to be sent from any external site. This can lead to hacking through a Cross Site Request Forgery attack. I have a post where I explain how it works:
+  </p>
+  <a
+    href="https://medium.com/@marceloalarconbarrenechea/entendiendo-como-funciona-el-csfr-en-ruby-on-rails-cf2ed4c45447"
+  >Understanding how CSRF works in Ruby on Rails</a
+  >
+  <p class="post-p">
+    <span class="font-semibold">lax:</span> This value is a good default option, as it allows cookies
+    to be sent in most top-level navigation requests, but blocks them in cross-site contexts in certain cases,
+    such as POST forms submitted from other sites. In other words, it will accept GET requests from other sites.
+  </p>
+
+  <p class="post-p">
+    <span class="font-semibold">strict:</span> In this case, the cookie will only be sent from the domain that created it.
+    For example, if the cookie was created on <span class="post-span">blog.ruby_latam.com</span>, the front-end must also
+    be on <span class="post-span">blog.ruby_latam.com</span>, otherwise it won't be sent. For example, if your front-end
+    is on <span class="post-span">front_end.ruby_latam.com</span>, the cookie will NOT be sent.
+  </p>
+
+  <h2 class="post-h2">Becoming a Ruby on Rails Cookie Genius 🤯</h2>
+  <p class="post-p">
+    Let's practice everything we already know: Create a new Rails app and then generate a controller in your terminal like this:
+  </p>
+
+  <app-code-highlight [code]="code_array[3]" language="shell" />
+
+  <p class="post-p">Open your new controller and in the set_cookies action we'll create our new cookie:</p>
+  <app-code-highlight [code]="code_array[4]" language="ruby" />
+  <a
+    href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1727698911/Cookies_casos_de_la_vida_real_4_zug0o2.png"
+    data-lightbox="roadtrip"
+    class="cursor justify-items-center"
+  ><img
+    src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1727698911/Cookies_casos_de_la_vida_real_4_zug0o2.png"
+    alt=""
+  /></a>
+
+  <p class="post-p">
+    As you can see, the cookie is there and ready to be read. Now let's go to our next action and put the following:
+  </p>
+  <app-code-highlight [code]="code_array[5]" language="ruby" />
+
+  <p class="post-p">
+    Open the corresponding view at <span class="post-span">app/views/handle_cookies/set_cookie.html.erb</span> and add the following:
+  </p>
+  <app-code-highlight [code]="code_array[6]" language="ruby"></app-code-highlight>
+
+  <p class="post-p">You can see the result by navigating to the following URL:</p>
+  <a
+    href="https://res.cloudinary.com/dsqwyfxat/image/upload/v1727699202/Cookies_casos_de_la_vida_real_5_io41tm.png"
+    data-lightbox="roadtrip"
+    class="cursor justify-items-center"
+  >
+    <img
+      src="https://res.cloudinary.com/dsqwyfxat/image/upload/c_thumb,w_200,g_face/v1727699202/Cookies_casos_de_la_vida_real_5_io41tm.png"
+      alt=""
+    />
+  </a>
+
+  <p class="post-p">
+    Note that we set the expiration time to 5 minutes. If you take too long to complete the process, the cookie might expire. To regenerate it, simply visit the first action again. That's it 🎉🎉🎉🎉
+  </p>
+
+  <h2 class="post-h2">Leaving Junior Level Behind 🏋️🥇</h2>
+  <p class="post-p">Now, let's explore some more advanced cases.</p>
+
+  <h3 class="post-h3">Signed Cookie</h3>
+  <p class="post-p">
+    Suppose you want to send a cookie to the frontend so it can read the information, but you don't want a malicious actor to modify it. For this, there are `cookies.signed`. This will send the information to the frontend, but signed with a key that only the backend knows. If the information is altered at any point, the cookie will become invalid and return nil.
+  </p>
+
+  <p class="post-p">Creating:</p>
+  <app-code-highlight [code]="code_array[7]" language="ruby"></app-code-highlight>
+
+  <p class="post-p">Retrieving:</p>
+  <app-code-highlight [code]="code_array[8]" language="ruby"></app-code-highlight>
+
+  <h3 class="post-h3">Encrypted Cookie</h3>
+  <p class="post-p">
+    Similar to the signed cookie, this one will also be signed but with the additional difference that the data will be encrypted, so the frontend won't be able to read it.
+  </p>
+
+  <app-code-highlight [code]="code_array[9]" language="ruby" />
+  <h3 class="post-h3">Permanent Cookie</h3>
+  <p class="post-p">
+    This cookie will be valid for 20 years. Use it if you want the data to be accessible for a long period of time
+  </p>
+  <app-code-highlight [code]="code_array[10]" language="ruby" />
+  <p class="post-p">Tip: All these methods can be chained:</p>
+  <app-code-highlight [code]="code_array[11]" language="ruby" />
+  <p class="post-p">
+    I hope you have managed to understand how cookies work. Don't forget that this is just the beginning and you should
+    delve into other aspects later on your own.
+  </p>
+  <p class="bg-red-400 text-white p-2 border-round">
+    Ruby on Rails is a wonderful framework that promotes rapid creation and its community firmly believes that there are
+    ways to advance in technology without having to destroy each other. Best regards and see you next time.
+  </p>
+</article>

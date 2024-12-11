@@ -12,6 +12,7 @@ import { CommentsComponent } from './comments/comments.component'
 import { Button } from 'primeng/button'
 import { NewCommentComponent } from './comments/new-comment/new-comment.component'
 import { CookiesCasosDeLaVidaRealComponent } from './2024/espanol/cookies-casos-de-la-vida-real/cookies-casos-de-la-vida-real.component'
+import { CookiesInRealLifeComponent } from './2024/english/cookies-in-real-life/cookies-in-real-life.component'
 import { CommonModule } from '@angular/common'
 import { NotFoundComponent } from '../../not-found/not-found.component'
 
@@ -78,6 +79,7 @@ export class PostContentComponent implements OnInit {
     console.log(identifier)
     const componentMap: { [key: string]: any } = {
       cookies_casos_de_la_vida_real: CookiesCasosDeLaVidaRealComponent,
+      cookies_in_real_life: CookiesInRealLifeComponent
     }
 
     this.currentComponent = componentMap[identifier] || NotFoundComponent
